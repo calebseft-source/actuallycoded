@@ -475,6 +475,88 @@ a { color: inherit; }
   margin-bottom: 0.3rem;
 }
 
+/* The exhibit: the default beside the standard. The default is an image on
+   purpose, so nothing rounded or gradient ever enters this page's own DOM. */
+.exhibit {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(280px, 0.7fr);
+  border: 1px solid var(--line-bright);
+  margin-bottom: 3.4rem;
+}
+.exhibit-before {
+  margin: 0;
+  border-right: 1px solid var(--line-bright);
+  background: #f5f6fa;
+}
+.exhibit-before img { width: 100%; height: auto; }
+.exhibit-after {
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+}
+.after-bar {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.7rem 1.3rem;
+  border-bottom: 1px solid var(--line);
+  font-family: var(--display);
+  font-size: 0.9rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.after-body {
+  padding: clamp(1.4rem, 2.6vw, 2.2rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1;
+}
+.after-body .eyebrow { font-size: 0.86rem; margin-bottom: 0.7rem; }
+.after-title {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: clamp(1.8rem, 2.6vw, 2.4rem);
+  line-height: 0.96;
+  margin: 0 0 0.9rem;
+  text-wrap: balance;
+}
+.after-copy { color: var(--muted); font-size: 0.98rem; margin-bottom: 1.3rem; }
+.after-button { align-self: flex-start; padding: 0.8rem 1.3rem; font-size: 1.02rem; }
+.after-facts {
+  list-style: none;
+  margin: 1.4rem 0 0;
+  padding: 0;
+  font-size: 0.92rem;
+}
+.after-facts li {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.5rem 0;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+}
+.after-facts li:last-child { border-bottom: 1px solid var(--line); }
+.after-facts b {
+  font-family: var(--display);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted-strong);
+}
+.exhibit-caption {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(280px, 0.7fr);
+  border-top: 1px solid var(--line-bright);
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+.exhibit-caption div { padding: 0.85rem 1.3rem; }
+.exhibit-caption div:first-child { border-right: 1px solid var(--line-bright); }
+.exhibit-caption b { color: var(--text); font-weight: 600; }
+
 /* The receipt: the standard measured on this very page. */
 .receipt {
   margin-top: 3.2rem;
@@ -768,6 +850,9 @@ html.smooth-active { scroll-behavior: auto; }
   .start-grid { grid-template-columns: 1fr; }
   .receipt-copy { border-right: none; border-bottom: 1px solid var(--line); }
   .hero h1 { max-width: none; }
+  .exhibit, .exhibit-caption { grid-template-columns: 1fr; }
+  .exhibit-before { border-right: none; border-bottom: 1px solid var(--line-bright); }
+  .exhibit-caption div:first-child { border-right: none; border-bottom: 1px solid var(--line); }
 }
 
 @media (max-width: 860px) {
