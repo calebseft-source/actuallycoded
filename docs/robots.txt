@@ -1,0 +1,10 @@
+# actuallycoded.com
+# The homepage and legal pages are open to search engines. The
+# fictional concept pages are deliberately kept out of the index.
+
+User-agent: *
+Allow: /
+Disallow: /concepts/
+Disallow: /marks.html
+
+Sitemap: https://actuallycoded.com/sitemap.xml

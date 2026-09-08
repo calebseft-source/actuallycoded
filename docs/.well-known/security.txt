@@ -1,0 +1,11 @@
+# Security contact for actuallycoded.com
+# https://securitytxt.org/
+
+Contact: mailto:caleb@actuallycoded.com
+Expires: 2027-09-08T00:00:00.000Z
+Preferred-Languages: en
+Canonical: https://actuallycoded.com/.well-known/security.txt
+
+# If you believe you have found a security issue with this site,
+# please email the address above with enough detail to reproduce it.
+# Good-faith reports are welcome and will be acknowledged.

@@ -1,0 +1,30 @@
+/* Page-local layout for marks.html, the three mark options. Nothing here ships on the site.
+   A separate file because the CSP is style-src self, which blocks inline style blocks. */
+.marks { padding: clamp(3rem, 6vw, 5rem) 0; }
+.marks-intro { max-width: 46rem; margin-bottom: 3rem; }
+.marks-intro p { color: var(--muted-strong); }
+.option { border: 1px solid var(--line-bright); background: var(--surface); margin-bottom: 2rem; }
+.option-head { display: grid; grid-template-columns: 4rem minmax(0, 1fr); gap: 1.4rem; align-items: baseline; padding: 1.4rem 1.6rem; border-bottom: 1px solid var(--line); }
+.option-head span { font-family: var(--display); font-size: 1.05rem; letter-spacing: 0.16em; color: var(--accent); }
+.option-head h2 { font-size: 1.9rem; margin-bottom: 0.3rem; }
+.option-head p { color: var(--muted); margin: 0; font-size: 1rem; }
+.swatches { display: grid; grid-template-columns: 1fr 1fr; }
+.swatch { padding: 2rem 1.6rem; display: flex; flex-direction: column; gap: 1.6rem; }
+.swatch.dark { background: var(--bg); }
+.swatch.light { background: #efe9df; color: #0b0b0c; }
+.swatch.light .brand-word { color: #0b0b0c; }
+.row { display: flex; align-items: center; gap: 1.6rem; flex-wrap: wrap; }
+.row small { font-family: var(--display); font-size: 0.86rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); min-width: 7rem; }
+.swatch.light small { color: #6b655c; }
+.mark { fill: var(--accent); flex: none; }
+.mark.ink { fill: currentColor; }
+.tile { display: grid; place-items: center; background: var(--accent); }
+.tile .mark { fill: var(--accent-ink); }
+.fav { display: inline-grid; place-items: center; width: 24px; height: 24px; }
+.fav-bar { display: inline-flex; align-items: center; gap: 0.6rem; padding: 0.4rem 0.7rem; border: 1px solid var(--line-bright); font-family: var(--font); font-size: 0.85rem; color: var(--muted-strong); }
+.swatch.light .fav-bar { border-color: #b9b2a5; color: #3a3631; }
+.path { padding: 1rem 1.6rem; border-top: 1px solid var(--line); font-family: "Cascadia Mono", Consolas, monospace; font-size: 0.82rem; color: var(--muted); word-break: break-all; }
+@media (max-width: 720px) { .swatches { grid-template-columns: 1fr; } }
+
+.tile-96 { width: 96px; height: 96px; }
+.marks-title { font-size: clamp(2.4rem, 5vw, 4rem); }
