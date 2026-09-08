@@ -30,7 +30,7 @@ docs/
   accessibility.html
   legal.css           reading layout for the three pages above
   404.html
-  marks.html          three wordmark options for Caleb to choose between (noindex, unlinked)
+  marks.html          the monogram and three alternates, on dark and light (noindex, unlinked)
   robots.txt  sitemap.xml  CNAME  .nojekyll  .well-known/security.txt
   fonts/              Big Shoulders + Newsreader, self hosted woff2, SIL OFL
   vendor/lenis.min.js Lenis 1.1.18, MIT, vendored because the CSP is script-src 'self'
@@ -45,9 +45,11 @@ and its privacy page gates the Google OAuth app. Nothing here touches either.
 
 ### 1. Approve and choose
 
-- **Pick a mark** on `docs/marks.html`. Then replace the two `<path>` elements in every
-  `.brand-mark` SVG (`index.html` twice, the three legal pages, `404.html`) and the
-  `href` of every `<link rel="icon">` with the chosen paths. One search and replace.
+- **The mark is the ac monogram** on the cut-corner tile in the house green, per Caleb's
+  direction on 2026-09-08. Three geometric alternates stay on `docs/marks.html` in case it
+  reads as too close to the old brand. To swap: replace the `<svg class="brand-mark">` in
+  `index.html` (twice), the three legal pages and `404.html`, and the `href` of every
+  `<link rel="icon">`.
 - **Approve the copy that is commercial**: the terms in `terms.html` section 7 (48 hours
   counted on business days, late remedy is full refund or $100 off), section 8 (refund
   rules, the 30 day no-brief rule), and section 9 (the round of changes is one list within

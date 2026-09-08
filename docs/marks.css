@@ -11,20 +11,23 @@
 .swatches { display: grid; grid-template-columns: 1fr 1fr; }
 .swatch { padding: 2rem 1.6rem; display: flex; flex-direction: column; gap: 1.6rem; }
 .swatch.dark { background: var(--bg); }
-.swatch.light { background: #efe9df; color: #0b0b0c; }
-.swatch.light .brand-word { color: #0b0b0c; }
+.swatch.light { background: #eff8f2; color: #050a07; }
+.swatch.light .brand-word { color: #050a07; }
 .row { display: flex; align-items: center; gap: 1.6rem; flex-wrap: wrap; }
 .row small { font-family: var(--display); font-size: 0.86rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); min-width: 7rem; }
-.swatch.light small { color: #6b655c; }
+.swatch.light small { color: #5f7466; }
 .mark { fill: var(--accent); flex: none; }
 .mark.ink { fill: currentColor; }
 .tile { display: grid; place-items: center; background: var(--accent); }
 .tile .mark { fill: var(--accent-ink); }
 .fav { display: inline-grid; place-items: center; width: 24px; height: 24px; }
 .fav-bar { display: inline-flex; align-items: center; gap: 0.6rem; padding: 0.4rem 0.7rem; border: 1px solid var(--line-bright); font-family: var(--font); font-size: 0.85rem; color: var(--muted-strong); }
-.swatch.light .fav-bar { border-color: #b9b2a5; color: #3a3631; }
+.swatch.light .fav-bar { border-color: #315a40; color: #2a3a30; }
 .path { padding: 1rem 1.6rem; border-top: 1px solid var(--line); font-family: "Cascadia Mono", Consolas, monospace; font-size: 0.82rem; color: var(--muted); word-break: break-all; }
 @media (max-width: 720px) { .swatches { grid-template-columns: 1fr; } }
 
 .tile-96 { width: 96px; height: 96px; }
 .marks-title { font-size: clamp(2.4rem, 5vw, 4rem); }
+.mono { flex: none; }
+.mono-tile { fill: var(--accent); }
+.mono-glyphs { fill: var(--accent-ink); }
