@@ -218,23 +218,25 @@
     });
   }
 
-  /* ---- The comparison switcher: swap which finished page is shown ---- */
-  var cleanFrame = document.querySelector("#compare-clean");
-  var switches = document.querySelectorAll(".compare-switch button");
-  if (cleanFrame && switches.length) {
-    Array.prototype.forEach.call(switches, function (btn) {
+  /* ---- The comparison switchers: each group swaps its own window ---- */
+  var groups = document.querySelectorAll(".compare-switch[data-target]");
+  Array.prototype.forEach.call(groups, function (group) {
+    var frame = document.getElementById(group.getAttribute("data-target"));
+    if (!frame) return;
+    var buttons = group.querySelectorAll("button");
+    Array.prototype.forEach.call(buttons, function (btn) {
       btn.addEventListener("click", function () {
-        Array.prototype.forEach.call(switches, function (b) {
+        Array.prototype.forEach.call(buttons, function (b) {
           b.classList.remove("is-active");
           b.setAttribute("aria-pressed", "false");
         });
         btn.classList.add("is-active");
         btn.setAttribute("aria-pressed", "true");
-        cleanFrame.setAttribute("title", btn.getAttribute("data-title"));
-        cleanFrame.src = btn.getAttribute("data-src");
+        frame.setAttribute("title", btn.getAttribute("data-title"));
+        frame.src = btn.getAttribute("data-src");
       });
     });
-  }
+  });
 
   var year = document.querySelector("#year");
   if (year) year.textContent = new Date().getFullYear();

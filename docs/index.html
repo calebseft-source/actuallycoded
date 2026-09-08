@@ -188,10 +188,14 @@
           <div class="compare-head">
             <span class="compare-kicker">Scroll inside it</span>
             <h3>The default</h3>
-            <p>A whole generated site for a fictional mobile tire shop, every tell left in. Built as an exhibit, in its own document.</p>
+            <p>A whole generated site for a fictional business, every tell left in. Two flavours of it. Built as exhibits, in their own documents.</p>
+            <div class="compare-switch" role="group" aria-label="Choose a generated site" data-target="compare-slop">
+              <button type="button" class="is-active" data-src="exhibit/slop.html" data-title="Exhibit: a generated looking website for a fictional tire shop, scrollable" aria-pressed="true">Tire shop</button>
+              <button type="button" data-src="exhibit/dental.html" data-title="Exhibit: a template looking website for a fictional dental practice, scrollable" aria-pressed="false">Dentist</button>
+            </div>
           </div>
           <div class="compare-frame">
-            <iframe src="exhibit/slop.html" title="Exhibit: a generated looking website for a fictional tire shop, scrollable" loading="lazy"></iframe>
+            <iframe id="compare-slop" src="exhibit/slop.html" title="Exhibit: a generated looking website for a fictional tire shop, scrollable" loading="lazy"></iframe>
           </div>
         </div>
         <div class="compare-pane">
@@ -199,10 +203,8 @@
             <span class="compare-kicker">Scroll inside it</span>
             <h3>Built to the list</h3>
             <p>A finished page for a fictional business, to this standard. Pick one.</p>
-            <div class="compare-switch" role="group" aria-label="Choose a finished page">
+            <div class="compare-switch" role="group" aria-label="Choose a finished page" data-target="compare-clean">
               <button type="button" class="is-active" data-src="concepts/northline-dental.html" data-title="Northline Dental, a fictional dental practice concept" aria-pressed="true">Dental</button>
-              <button type="button" data-src="concepts/fieldnote-coffee.html" data-title="Fieldnote Coffee, a fictional coffee bar concept" aria-pressed="false">Coffee</button>
-              <button type="button" data-src="concepts/kestrel-electric.html" data-title="Kestrel Electric, a fictional electrician concept" aria-pressed="false">Electrician</button>
               <button type="button" data-src="concepts/hollis-barbershop.html" data-title="Hollis Barbershop, a fictional barbershop concept" aria-pressed="false">Barber</button>
             </div>
           </div>
@@ -210,7 +212,7 @@
             <iframe id="compare-clean" src="concepts/northline-dental.html" title="Northline Dental, a fictional dental practice concept" loading="lazy"></iframe>
           </div>
         </div>
-        <p class="compare-foot">Both businesses are fictional. The default is a separate document built to show the tells, so nothing in it enters the code of this page, which is what the counts below measure.</p>
+        <p class="compare-foot">Every business here is fictional. The defaults are separate documents built to show the tells, so nothing in them enters the code of this page, which is what the counts below measure.</p>
       </div>
 
       <div class="receipt" data-reveal>
