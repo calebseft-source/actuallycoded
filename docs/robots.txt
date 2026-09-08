@@ -6,5 +6,6 @@ User-agent: *
 Allow: /
 Disallow: /concepts/
 Disallow: /marks.html
+Disallow: /exhibit/
 
 Sitemap: https://actuallycoded.com/sitemap.xml

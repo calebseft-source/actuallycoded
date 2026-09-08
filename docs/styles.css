@@ -493,21 +493,51 @@ a { color: inherit; }
 .tells-head span:last-child { color: var(--accent); }
 .tell-not h3::before, .tell-yes h3::before { display: none; }
 
-/* The exhibit: the default beside the standard. Headers on top so the
-   reader knows what each column is before looking. The default is an
-   image on purpose, so nothing rounded or gradient enters this page. */
-.exhibit {
+/* Specimens: the tell shown as an image, the answer rendered live. */
+.specimen {
+  height: 170px;
+  border: 1px solid var(--line-bright);
+  margin-bottom: 1.1rem;
+  overflow: hidden;
+}
+.specimen-not { margin: 0 0 1.1rem; background: #f5f6fa; }
+.specimen-not img { width: 100%; height: 100%; object-fit: cover; }
+.specimen-yes { background: var(--surface); padding: 1.2rem 1.3rem; display: flex; flex-direction: column; justify-content: center; gap: 0.6rem; }
+.spec-btn { flex-direction: row; flex-wrap: wrap; align-items: center; gap: 0.8rem; }
+.spec-btn .button { padding: 0.8rem 1.3rem; font-size: 1.02rem; }
+.spec-bar { display: block; width: 44px; height: 8px; background: var(--accent); }
+.spec-flat-title { font-family: var(--display); font-weight: 600; font-size: 1.8rem; line-height: 1; }
+.spec-flat-sub { color: var(--muted); font-size: 0.95rem; }
+.spec-type-head { font-family: var(--display); font-weight: 600; font-size: 2.2rem; line-height: 0.95; }
+.spec-type-body { color: var(--muted); font-size: 0.95rem; max-width: 30rem; }
+.spec-wire { gap: 0.4rem; padding: 1rem 1.3rem; }
+.spec-wire > div { display: grid; gap: 0.3rem; border: 1px solid var(--line-bright); padding: 0.35rem; }
+.spec-wire span { display: block; height: 6px; background: var(--line-bright); }
+.spec-wire .w-hero { height: 30px; border-color: var(--accent); background: rgba(47, 230, 111, 0.08); }
+.spec-wire .w-list { grid-template-columns: 1fr; }
+.spec-wire .w-split { grid-template-columns: 1fr 2fr; }
+.spec-wire .w-split span:first-child { height: 18px; background: var(--line); }
+.spec-wire .w-form { grid-template-columns: 3fr 1fr; }
+.spec-wire .w-form span:last-child { background: var(--accent); }
+.spec-rules { gap: 0; padding: 0.6rem 1.3rem; }
+.spec-rules > div { display: flex; justify-content: space-between; padding: 0.5rem 0; border-top: 1px solid var(--line); font-size: 0.95rem; color: var(--muted); }
+.spec-rules > div:first-child { border-top: none; }
+.spec-rules b { font-family: var(--display); font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text); }
+.spec-copy-head { font-family: var(--display); font-weight: 600; font-size: 1.5rem; line-height: 1; }
+.spec-copy-sub { color: var(--muted); font-size: 0.95rem; }
+
+/* The comparison: two whole sites, each scrolling inside its own window.
+   The default is its own document so nothing in it enters this page. */
+.compare {
   display: grid;
-  grid-template-columns: minmax(0, 1.3fr) minmax(280px, 0.7fr);
+  grid-template-columns: 1fr 1fr;
   border: 1px solid var(--line-bright);
   margin: 3.4rem 0;
 }
-.exhibit-label {
-  padding: 1.4rem 1.5rem 1.3rem;
-  border-bottom: 1px solid var(--line-bright);
-}
-.exhibit-label-before { border-right: 1px solid var(--line-bright); }
-.exhibit-kicker {
+.compare-pane { display: flex; flex-direction: column; }
+.compare-pane:first-child { border-right: 1px solid var(--line-bright); }
+.compare-head { padding: 1.4rem 1.5rem 1.3rem; border-bottom: 1px solid var(--line-bright); }
+.compare-kicker {
   display: block;
   font-family: var(--display);
   font-size: 0.92rem;
@@ -516,66 +546,26 @@ a { color: inherit; }
   color: var(--accent);
   margin-bottom: 0.5rem;
 }
-.exhibit-label h3 { font-size: clamp(1.7rem, 2.6vw, 2.3rem); margin-bottom: 0.45rem; }
-.exhibit-label p { margin: 0; color: var(--muted); font-size: 0.98rem; }
-.exhibit-before {
-  margin: 0;
-  border-right: 1px solid var(--line-bright);
-  background: #f5f6fa;
-}
-.exhibit-before img { width: 100%; height: auto; }
-.exhibit-after {
-  display: flex;
-  flex-direction: column;
-  background: var(--bg);
-}
-.after-bar {
-  display: flex;
-  justify-content: space-between;
-  padding: 0.7rem 1.3rem;
-  border-bottom: 1px solid var(--line);
+.compare-head h3 { font-size: clamp(1.7rem, 2.6vw, 2.3rem); margin-bottom: 0.45rem; }
+.compare-head p { margin: 0; color: var(--muted); font-size: 0.98rem; }
+.compare-switch { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.9rem; }
+.compare-switch button {
+  padding: 0.5rem 0.9rem;
+  background: transparent;
+  border: 1px solid var(--line-bright);
+  color: var(--muted-strong);
   font-family: var(--display);
-  font-size: 0.9rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-.after-body {
-  padding: clamp(1.4rem, 2.6vw, 2.2rem);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  flex: 1;
-}
-.after-body .eyebrow { font-size: 0.86rem; margin-bottom: 0.7rem; }
-.after-title {
-  font-family: var(--display);
-  font-weight: 600;
-  font-size: clamp(1.8rem, 2.6vw, 2.4rem);
-  line-height: 0.96;
-  margin: 0 0 0.9rem;
-  text-wrap: balance;
-}
-.after-copy { color: var(--muted); font-size: 0.98rem; margin-bottom: 1.3rem; }
-.after-button { align-self: flex-start; padding: 0.8rem 1.3rem; font-size: 1.02rem; }
-.after-facts { list-style: none; margin: 1.4rem 0 0; padding: 0; font-size: 0.92rem; }
-.after-facts li {
-  display: flex;
-  justify-content: space-between;
-  gap: 1rem;
-  padding: 0.5rem 0;
-  border-top: 1px solid var(--line);
-  color: var(--muted);
-}
-.after-facts li:last-child { border-bottom: 1px solid var(--line); }
-.after-facts b {
-  font-family: var(--display);
+  font-size: 0.98rem;
   font-weight: 500;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--muted-strong);
+  cursor: pointer;
 }
-.exhibit-foot {
+.compare-switch button:hover { border-color: var(--accent); color: var(--text); }
+.compare-switch button.is-active { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.compare-frame { height: 640px; background: #ffffff; }
+.compare-frame iframe { display: block; width: 100%; height: 100%; border: 0; }
+.compare-foot {
   grid-column: 1 / -1;
   margin: 0;
   padding: 0.85rem 1.5rem;
@@ -635,9 +625,11 @@ a { color: inherit; }
   display: flex;
   flex-direction: column;
   border-right: 1px solid var(--line-bright);
+  border-bottom: 1px solid var(--line-bright);
   background: var(--bg);
 }
-.proof-card:last-child { border-right: none; }
+.proof-card:nth-child(2n) { border-right: none; }
+.proof-card:nth-last-child(-n+2) { border-bottom: none; }
 .proof-media {
   position: relative;
   display: block;
@@ -877,12 +869,9 @@ html.smooth-active { scroll-behavior: auto; }
   .start-grid { grid-template-columns: 1fr; }
   .receipt-copy { border-right: none; border-bottom: 1px solid var(--line); }
   .hero h1 { max-width: none; }
-  .exhibit { grid-template-columns: 1fr; }
-  .exhibit-label-before { border-right: none; }
-  .exhibit-label-after { order: 2; }
-  .exhibit-after { order: 3; }
-  .exhibit-foot { order: 4; }
-  .exhibit-before { border-right: none; border-bottom: 1px solid var(--line-bright); }
+  .compare { grid-template-columns: 1fr; }
+  .compare-pane:first-child { border-right: none; border-bottom: 1px solid var(--line-bright); }
+  .compare-frame { height: 480px; }
 }
 
 @media (max-width: 860px) {
@@ -905,11 +894,12 @@ html.smooth-active { scroll-behavior: auto; }
   .site-nav a { padding: 0.85rem 0; border-bottom: 1px solid var(--line); }
   .nav-cta { margin-top: 0.8rem; text-align: center; padding: 0.85rem 1.15rem; }
   .proof-grid { grid-template-columns: 1fr; }
-  .proof-card { border-right: none; border-bottom: 1px solid var(--line-bright); }
+  .proof-card, .proof-card:nth-child(2n), .proof-card:nth-last-child(-n+2) { border-right: none; border-bottom: 1px solid var(--line-bright); }
   .proof-card:last-child { border-bottom: none; }
   .tells-head { display: none; }
   .tells li { grid-template-columns: 2.6rem minmax(0, 1fr); }
   .tells .tell-yes { grid-column: 2; }
+  .specimen { height: 150px; }
   .tell-not h3::before, .tell-yes h3::before { display: block; }
   .footer-main { grid-template-columns: 1fr; align-items: start; }
 }

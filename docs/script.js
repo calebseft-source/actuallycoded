@@ -218,6 +218,24 @@
     });
   }
 
+  /* ---- The comparison switcher: swap which finished page is shown ---- */
+  var cleanFrame = document.querySelector("#compare-clean");
+  var switches = document.querySelectorAll(".compare-switch button");
+  if (cleanFrame && switches.length) {
+    Array.prototype.forEach.call(switches, function (btn) {
+      btn.addEventListener("click", function () {
+        Array.prototype.forEach.call(switches, function (b) {
+          b.classList.remove("is-active");
+          b.setAttribute("aria-pressed", "false");
+        });
+        btn.classList.add("is-active");
+        btn.setAttribute("aria-pressed", "true");
+        cleanFrame.setAttribute("title", btn.getAttribute("data-title"));
+        cleanFrame.src = btn.getAttribute("data-src");
+      });
+    });
+  }
+
   var year = document.querySelector("#year");
   if (year) year.textContent = new Date().getFullYear();
 })();

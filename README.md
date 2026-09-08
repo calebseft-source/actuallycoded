@@ -31,10 +31,14 @@ docs/
   legal.css           reading layout for the three pages above
   404.html
   marks.html          the monogram and three alternates, on dark and light (noindex, unlinked)
+  exhibit/            QUARANTINE: the deliberately generated-looking tire shop site shown in the comparison
+                      windows; its own document so nothing in it enters the page; robots disallowed;
+                      the gate never scans this folder, on purpose
+  assets/tells/       six SVG specimens of the tells, one per row of the list; images on purpose
   robots.txt  sitemap.xml  CNAME  .nojekyll  .well-known/security.txt
   fonts/              Big Shoulders + Newsreader, self hosted woff2, SIL OFL
   vendor/lenis.min.js Lenis 1.1.18, MIT, vendored because the CSP is script-src 'self'
-  concepts/           the two fictional proof pages and their shared motion script
+  concepts/           the four fictional proof pages (dental, coffee, electrician, barber) and their shared motion script
   assets/concepts/    their images, each folder with a SOURCES.md crediting Pexels
 ```
 
@@ -55,8 +59,9 @@ and its privacy page gates the Google OAuth app. Nothing here touches either.
   rules, the 30 day no-brief rule), and section 9 (the round of changes is one list within
   14 days). The brief fixed the offer; these are the edges of it and they are Caleb's call.
 - **Decide on the matrix identity.** It is not on this site. The brief says ask, not decide.
-- **Approve reusing Northline Dental and Fieldnote Coffee** as the proof pages. They are
-  copied into `docs/concepts/` and rebranded, but nothing is published yet.
+- **Approve the four proof pages**: Northline Dental and Fieldnote Coffee (copied across and
+  rebranded) plus Kestrel Electric and Hollis Barbershop (built here 2026-09-08). Nothing is
+  published yet.
 
 ### 2. Stripe
 
@@ -146,4 +151,8 @@ grep -c "Content-Security-Policy" index.html privacy.html terms.html accessibili
 ```
 
 Then on localhost: 375px wide with no horizontal overflow, fonts loaded from `fonts/`, every
-`data-reveal` element revealed, and the brief button opens a mailto with the answers in it.
+`data-reveal` element revealed, the brief button opens a mailto with the answers in it, and
+the live DOM check (computed border-radius, background-image and font-style over every
+element) returns 0, 0, 0 on the homepage. That last check is what caught empty `<i>` tags
+being counted as italics. `docs/exhibit/` is excluded from every count by design: it is the
+thing the page is measured against.
