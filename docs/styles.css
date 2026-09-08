@@ -450,10 +450,11 @@ a { color: inherit; }
 }
 .tell-index {
   font-family: var(--display);
-  font-size: 1.05rem;
-  letter-spacing: 0.16em;
+  font-size: 1.7rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
   color: var(--accent);
-  padding-top: 0.35rem;
+  line-height: 1;
 }
 .tells h3 { margin-bottom: 0.45rem; }
 .tells p { margin: 0; color: var(--muted); font-size: 1.02rem; }
@@ -475,14 +476,48 @@ a { color: inherit; }
   margin-bottom: 0.3rem;
 }
 
-/* The exhibit: the default beside the standard. The default is an image on
-   purpose, so nothing rounded or gradient ever enters this page's own DOM. */
+/* The tells: a named header row on desktop; the per item micro labels
+   take over when the columns stack on small screens. */
+.tells-head {
+  display: grid;
+  grid-template-columns: 3.6rem minmax(0, 1fr) minmax(0, 1fr);
+  gap: 1.6rem;
+  padding-bottom: 0.9rem;
+  font-family: var(--display);
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.tells-head span:last-child { color: var(--accent); }
+.tell-not h3::before, .tell-yes h3::before { display: none; }
+
+/* The exhibit: the default beside the standard. Headers on top so the
+   reader knows what each column is before looking. The default is an
+   image on purpose, so nothing rounded or gradient enters this page. */
 .exhibit {
   display: grid;
   grid-template-columns: minmax(0, 1.3fr) minmax(280px, 0.7fr);
   border: 1px solid var(--line-bright);
-  margin-bottom: 3.4rem;
+  margin: 3.4rem 0;
 }
+.exhibit-label {
+  padding: 1.4rem 1.5rem 1.3rem;
+  border-bottom: 1px solid var(--line-bright);
+}
+.exhibit-label-before { border-right: 1px solid var(--line-bright); }
+.exhibit-kicker {
+  display: block;
+  font-family: var(--display);
+  font-size: 0.92rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+}
+.exhibit-label h3 { font-size: clamp(1.7rem, 2.6vw, 2.3rem); margin-bottom: 0.45rem; }
+.exhibit-label p { margin: 0; color: var(--muted); font-size: 0.98rem; }
 .exhibit-before {
   margin: 0;
   border-right: 1px solid var(--line-bright);
@@ -523,12 +558,7 @@ a { color: inherit; }
 }
 .after-copy { color: var(--muted); font-size: 0.98rem; margin-bottom: 1.3rem; }
 .after-button { align-self: flex-start; padding: 0.8rem 1.3rem; font-size: 1.02rem; }
-.after-facts {
-  list-style: none;
-  margin: 1.4rem 0 0;
-  padding: 0;
-  font-size: 0.92rem;
-}
+.after-facts { list-style: none; margin: 1.4rem 0 0; padding: 0; font-size: 0.92rem; }
 .after-facts li {
   display: flex;
   justify-content: space-between;
@@ -545,17 +575,14 @@ a { color: inherit; }
   text-transform: uppercase;
   color: var(--muted-strong);
 }
-.exhibit-caption {
+.exhibit-foot {
   grid-column: 1 / -1;
-  display: grid;
-  grid-template-columns: minmax(0, 1.3fr) minmax(280px, 0.7fr);
+  margin: 0;
+  padding: 0.85rem 1.5rem;
   border-top: 1px solid var(--line-bright);
   font-size: 0.9rem;
   color: var(--muted);
 }
-.exhibit-caption div { padding: 0.85rem 1.3rem; }
-.exhibit-caption div:first-child { border-right: 1px solid var(--line-bright); }
-.exhibit-caption b { color: var(--text); font-weight: 600; }
 
 /* The receipt: the standard measured on this very page. */
 .receipt {
@@ -850,9 +877,12 @@ html.smooth-active { scroll-behavior: auto; }
   .start-grid { grid-template-columns: 1fr; }
   .receipt-copy { border-right: none; border-bottom: 1px solid var(--line); }
   .hero h1 { max-width: none; }
-  .exhibit, .exhibit-caption { grid-template-columns: 1fr; }
+  .exhibit { grid-template-columns: 1fr; }
+  .exhibit-label-before { border-right: none; }
+  .exhibit-label-after { order: 2; }
+  .exhibit-after { order: 3; }
+  .exhibit-foot { order: 4; }
   .exhibit-before { border-right: none; border-bottom: 1px solid var(--line-bright); }
-  .exhibit-caption div:first-child { border-right: none; border-bottom: 1px solid var(--line); }
 }
 
 @media (max-width: 860px) {
@@ -877,8 +907,10 @@ html.smooth-active { scroll-behavior: auto; }
   .proof-grid { grid-template-columns: 1fr; }
   .proof-card { border-right: none; border-bottom: 1px solid var(--line-bright); }
   .proof-card:last-child { border-bottom: none; }
+  .tells-head { display: none; }
   .tells li { grid-template-columns: 2.6rem minmax(0, 1fr); }
   .tells .tell-yes { grid-column: 2; }
+  .tell-not h3::before, .tell-yes h3::before { display: block; }
   .footer-main { grid-template-columns: 1fr; align-items: start; }
 }
 

@@ -87,12 +87,12 @@
   </g>
 
   <!-- callouts: the six tells, numbered to match the list on the page -->
-  <g font-family="'Arial Narrow', Impact, 'Segoe UI', sans-serif" font-size="17" font-weight="700" fill="#031408" text-anchor="middle">
-    <rect x="398" y="350" width="34" height="34" fill="#2fe66f"/><text x="415" y="373">01</text>
-    <rect x="1146" y="58" width="34" height="34" fill="#2fe66f"/><text x="1163" y="81">02</text>
-    <rect x="448" y="228" width="34" height="34" fill="#2fe66f"/><text x="465" y="251">03</text>
-    <rect x="1146" y="748" width="34" height="34" fill="#2fe66f"/><text x="1163" y="771">04</text>
-    <rect x="1130" y="522" width="34" height="34" fill="#2fe66f"/><text x="1147" y="545">05</text>
-    <rect x="672" y="286" width="34" height="34" fill="#2fe66f"/><text x="689" y="309">06</text>
+  <g font-family="'Arial Narrow', Impact, 'Segoe UI', sans-serif" font-size="20" font-weight="700" fill="#031408" text-anchor="middle">
+    <rect x="394" y="346" width="42" height="42" fill="#2fe66f"/><text x="415" y="374">01</text>
+    <rect x="1142" y="54" width="42" height="42" fill="#2fe66f"/><text x="1163" y="82">02</text>
+    <rect x="444" y="224" width="42" height="42" fill="#2fe66f"/><text x="465" y="252">03</text>
+    <rect x="1142" y="744" width="42" height="42" fill="#2fe66f"/><text x="1163" y="772">04</text>
+    <rect x="1126" y="518" width="42" height="42" fill="#2fe66f"/><text x="1147" y="546">05</text>
+    <rect x="668" y="282" width="42" height="42" fill="#2fe66f"/><text x="689" y="310">06</text>
   </g>
 </svg>
