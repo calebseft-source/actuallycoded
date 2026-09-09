@@ -21,7 +21,7 @@ h1, h2, h3, h4 { margin: 0; }
 p { margin: 0; }
 
 .exhibit-banner { background: #111; color: #fff; font-size: 13px; padding: 8px 20px; text-align: center; }
-.exhibit-banner strong { color: #2fe66f; }
+.exhibit-banner strong { color: #e9a63b; }
 
 .announce {
   background: linear-gradient(90deg, #ff6b6b, #ffa06b);

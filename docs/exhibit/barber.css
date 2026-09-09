@@ -25,7 +25,7 @@ p { margin: 0; }
 .grad { background: linear-gradient(90deg, #f6d77a, #d4a017 50%, #f6d77a); -webkit-background-clip: text; background-clip: text; color: transparent; }
 
 .exhibit-banner { background: #111; color: #fff; font-size: 13px; padding: 8px 20px; text-align: center; border-bottom: 1px solid #2a2a2a; }
-.exhibit-banner strong { color: #2fe66f; }
+.exhibit-banner strong { color: #e9a63b; }
 
 .announce { background: linear-gradient(90deg, #d4a017, #f6d77a, #d4a017); color: #1a1200; font-size: 13px; font-weight: 700; padding: 8px 0; text-align: center; white-space: nowrap; overflow: hidden; }
 
