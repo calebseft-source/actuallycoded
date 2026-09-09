@@ -929,45 +929,50 @@ html.smooth-active { scroll-behavior: auto; }
   * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
 }
 
+
 /* ============================================================
-   The living background, 2026-09-09. Each section carries a layer of
-   this site's own code being written: HTML behind the hero, CSS behind
-   the standard, JavaScript behind the proof, the shell behind the
-   brief. It scrolls with its section, sits behind everything, and is
-   decoration only: aria-hidden, no pointer events, off under reduced
-   motion (the finished code stays, still, and dim).
+   THE BUILD, 2026-09-09. The code builds the page in front of you.
+   A small editor pane above the offer types the hero's own markup,
+   and each element appears the moment its line is written. Every
+   section below types its opening tag before it reveals. All of it is
+   enhancement: without JavaScript, under reduced motion, or in a tab
+   that was hidden mid build, the page is simply finished.
    ============================================================ */
-.hero, .section { position: relative; }
-.hero > :not(.code-layer), .section > :not(.code-layer) { position: relative; z-index: 1; }
-.code-layer {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-  z-index: 0;
-  pointer-events: none;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0 3rem;
-  align-content: start;
-  padding: 2.2rem clamp(1rem, 3vw, 2.6rem);
+.hero-right { display: grid; gap: 1.4rem; align-content: end; }
+.build-pane {
+  border: 1px solid var(--line-bright);
+  background: var(--bg-deep);
   font-family: var(--mono);
-  font-size: 1rem;
-  line-height: 1.6;
-  color: rgba(241, 235, 224, 0.17);
+  font-size: 0.82rem;
+  line-height: 1.55;
+  color: rgba(241, 235, 224, 0.55);
+}
+.build-bar {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.45rem 0.9rem;
+  border-bottom: 1px solid var(--line);
+  font-family: var(--display);
+  font-size: 0.86rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.build-pane pre {
+  margin: 0;
+  height: calc(1.55em * 9 + 1.6rem);
+  padding: 0.8rem 0.9rem;
+  overflow: hidden;
+  font: inherit;
   white-space: pre;
   tab-size: 2;
 }
-.code-layer pre { margin: 0; min-width: 0; overflow: hidden; font: inherit; color: inherit; white-space: inherit; }
-/* Sections that are themselves the shell get a layer the full width of the screen. */
-.section.shell > .code-layer { left: 50%; right: auto; width: 100vw; transform: translateX(-50%); }
-.code-layer .ln { display: inline-block; width: 2.4em; color: rgba(241, 235, 224, 0.08); }
-.code-layer .kw { color: rgba(245, 137, 28, 0.5); }
-.code-layer .st { color: rgba(241, 235, 224, 0.25); }
-.code-layer .cm { color: rgba(241, 235, 224, 0.1); }
-.code-layer .now { color: rgba(241, 235, 224, 0.62); }
-.code-layer .now .kw { color: rgba(245, 137, 28, 0.9); }
-.code-layer .now .st { color: rgba(241, 235, 224, 0.72); }
-.code-layer .caret {
+.build-pane .ln { display: inline-block; width: 2.2em; color: rgba(241, 235, 224, 0.22); }
+.build-pane .kw { color: var(--accent); }
+.build-pane .st { color: var(--muted-strong); }
+.build-pane .cm { color: rgba(241, 235, 224, 0.3); }
+.build-pane .now { color: var(--text); }
+.build-pane .caret {
   display: inline-block;
   width: 0.55em;
   height: 1.05em;
@@ -978,38 +983,59 @@ html.smooth-active { scroll-behavior: auto; }
 }
 @keyframes caret-blink { 0%, 55% { opacity: 1; } 56%, 100% { opacity: 0; } }
 
-/* Reading planes: where there is text to read, the code behind drops
-   into a soft texture. The section's own near black at four fifths,
-   a light backdrop blur, square, no border, no glow. Not glass. */
-.reading {
-  position: relative;
-  z-index: 1;
-  background: rgba(11, 10, 8, 0.8);
-  -webkit-backdrop-filter: blur(4px);
-  backdrop-filter: blur(4px);
-  padding: 1.5rem;
-  margin: -1.5rem;
+/* Build states. Hidden only while the html carries is-building, which
+   only the script adds, and which the script always removes. */
+.is-building [data-build] { opacity: 0; transform: translate3d(0, 10px, 0); }
+.is-building [data-build].is-built {
+  opacity: 1;
+  transform: none;
+  transition: opacity 380ms cubic-bezier(0.22, 0.75, 0.25, 1), transform 380ms cubic-bezier(0.22, 0.75, 0.25, 1);
 }
-.hero .reading { background: rgba(6, 5, 4, 0.78); }
-.proof .reading { background: rgba(18, 16, 12, 0.82); }
-.tells-head.reading { margin-bottom: 0; padding-bottom: 0.9rem; }
-.tells.reading { margin-top: 0; padding-top: 0; }
-.section-heading.reading { margin-bottom: calc(3.2rem - 1.5rem); }
-.next-steps.reading { margin-top: 0; }
-@media (max-width: 860px) {
-  .reading { padding: 1rem; margin: -1rem; }
-  .section-heading.reading { margin-bottom: calc(3.2rem - 1rem); }
+.is-building .offer[data-build] { transform: none; }
+
+/* Section builds: the section's own code writes across the empty
+   section, the elements pop up over it as their lines finish, then
+   the code fades and is removed. */
+[data-build-section] { position: relative; }
+[data-build-section] > :not(.section-code) { position: relative; z-index: 1; }
+.section-code {
+  position: absolute;
+  left: 50%;
+  top: clamp(4.5rem, 9vw, 8rem);
+  width: min(100% - 3rem, var(--shell));
+  margin: 0;
+  transform: translateX(-50%);
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  font-family: var(--mono);
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: rgba(241, 235, 224, 0.5);
+  white-space: pre;
+  tab-size: 2;
+  transition: opacity 600ms ease;
 }
-/* The hero's layer sits a shade dimmer under the headline. */
-.hero .code-layer { color: rgba(241, 235, 224, 0.14); }
-.hero .code-layer .now { color: rgba(241, 235, 224, 0.5); }
-@media (min-width: 1500px) {
-  .code-layer { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.section-code.is-fading { opacity: 0; }
+.section-code .ln { display: inline-block; width: 2.2em; color: rgba(241, 235, 224, 0.18); }
+.section-code .kw { color: var(--accent); }
+.section-code .st { color: var(--muted-strong); }
+.section-code .now { color: var(--text); }
+.section-code .caret {
+  display: inline-block;
+  width: 0.55em;
+  height: 1.05em;
+  margin-left: 1px;
+  background: var(--accent);
+  vertical-align: -0.18em;
+  animation: caret-blink 1s steps(1, end) infinite;
 }
-@media (max-width: 860px) {
-  .code-layer { grid-template-columns: 1fr; font-size: 0.86rem; color: rgba(241, 235, 224, 0.11); }
-  .code-layer pre:nth-child(n+2) { display: none; }
+
+@media (max-width: 980px) {
+  .hero-right { gap: 1rem; }
+  .build-pane pre { height: calc(1.55em * 6 + 1.6rem); }
 }
 @media (prefers-reduced-motion: reduce) {
-  .code-layer .caret { animation: none; display: none; }
+  .build-pane .caret, .section-code .caret { animation: none; display: none; }
+  .is-building [data-build] { opacity: 1; transform: none; }
 }

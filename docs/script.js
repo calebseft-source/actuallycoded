@@ -53,7 +53,10 @@
      The hidden state is applied only from here, so a visitor without
      JavaScript sees the whole page. Nothing below depends on
      requestAnimationFrame, which is paused in background tabs. */
-  var targets = document.querySelectorAll("[data-reveal]");
+  // Build sections reveal their own content in step with their code.
+  var targets = Array.prototype.filter.call(document.querySelectorAll("[data-reveal]"), function (el) {
+    return !el.closest("[data-build-section]");
+  });
   if (targets.length && supported && !reduced) {
     document.documentElement.classList.add("has-reveal");
 
@@ -103,7 +106,9 @@
 
     // Last resort: never leave a visitor looking at blank sections.
     window.setTimeout(function () {
-      var stuck = document.querySelectorAll("[data-reveal]:not(.is-revealed)");
+      var stuck = Array.prototype.filter.call(document.querySelectorAll("[data-reveal]:not(.is-revealed)"), function (el) {
+        return !el.closest("[data-build-section]");
+      });
       if (!stuck.length) return;
       var anyOnScreen = false;
       Array.prototype.forEach.call(stuck, function (el) {
@@ -300,262 +305,26 @@
 })();
 
 /* ============================================================
-   THE LIVING BACKGROUND. Each section writes its own code behind
-   itself, one character at a time, in three or four columns across the
-   full width. The fragments are this page's real markup, styles, and
-   scripts for that section: the hero writes the hero, the standard
-   writes the rules that make its receipt true, the proof writes the four
-   concept cards and the engine that reveals them, the brief writes the
-   JavaScript that builds the email. Decoration only: aria-hidden, no
-   pointer events, behind everything, typing only while the section is
-   near the viewport (a bounding rect check, not IntersectionObserver,
-   which stalls in non compositing contexts). Under reduced motion each
-   column shows one fragment finished and still.
+   THE BUILD. The code builds the page in front of you. The pane types
+   the hero's own markup and each element appears the moment its line
+   is finished; then the pane keeps writing the site's CSS and the
+   receipt script, slowly, as the standing object on the page. Every
+   section below types its opening tag as it reveals.
+
+   Enhancement only. Without JavaScript nothing is hidden. Under
+   reduced motion, or if the tab is hidden, the page is finished at
+   once and the pane shows finished code. A failsafe finishes the build
+   twelve seconds in no matter what.
    ============================================================ */
 (function () {
   "use strict";
-  var layers = document.querySelectorAll(".code-layer[data-code]");
-  if (!layers.length) return;
+  var pane = document.querySelector(".build-pane pre");
+  var root = document.documentElement;
   var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-  var F = function (lang, lines) { return { lang: lang, lines: lines }; };
-
-  var CODE = {
-    // The hero writes the hero.
-    html: [
-      F("html", [
-        "<section class=\"hero\" id=\"top\" aria-labelledby=\"hero-title\">",
-        "  <div class=\"shell hero-grid\">",
-        "    <p class=\"eyebrow\">Custom one-page websites</p>",
-        "    <h1 id=\"hero-title\">One page. Real code you own. Finished in 48 hours.</h1>",
-        "    <p class=\"hero-lede\">A website for your business that was written, not generated.</p>",
-        "    <div class=\"hero-actions\">",
-        "      <a class=\"button button-accent\" href=\"#start\">Start your site</a>",
-        "      <a class=\"text-link\" href=\"#standard\">Read the standard</a>",
-        "    </div>",
-        "    <p class=\"tagline\"><b>Actually coded,</b> finished by hand.</p>"
-      ]),
-      F("html", [
-        "<aside class=\"offer\" aria-label=\"The offer\">",
-        "  <div class=\"offer-head\"><span>The one product</span></div>",
-        "  <div class=\"offer-price\">",
-        "    <span class=\"display-num\">$495</span>",
-        "    <small>Founding price</small>",
-        "  </div>",
-        "  <p class=\"offer-then\">For the first ten sites. Then <b>$850</b>.</p>",
-        "  <ul class=\"offer-list\">",
-        "    <li>One custom page, designed and coded for your business</li>",
-        "    <li>Delivered in 48 hours from a paid brief</li>",
-        "    <li>One round of changes included</li>",
-        "    <li>You own the code. Host it anywhere, keep it forever</li>",
-        "  </ul>",
-        "  <p class=\"offer-founding\"><b>10 of 10</b> founding places remaining</p>",
-        "</aside>"
-      ]),
-      F("css", [
-        ".hero h1 { max-width: 12ch; }",
-        "h1 {",
-        "  font-family: var(--display);",
-        "  font-size: clamp(3rem, 7vw, 5.6rem);",
-        "  line-height: 0.95;",
-        "  letter-spacing: -0.005em;",
-        "}",
-        ".offer {",
-        "  border: 1px solid var(--line-bright);",
-        "  background: var(--surface);",
-        "  border-radius: 0;",
-        "}",
-        ".display-num { font-family: var(--display); font-weight: 600; line-height: 0.9; }"
-      ]),
-      F("html", [
-        "<header class=\"site-header\">",
-        "  <a class=\"brand\" href=\"#top\" aria-label=\"actuallycoded home\">",
-        "    <svg class=\"brand-mark\" viewBox=\"0 0 100 100\"></svg>",
-        "    <span class=\"brand-word\">actuallycoded</span>",
-        "  </a>",
-        "  <nav id=\"site-nav\" class=\"site-nav\">",
-        "    <a href=\"#standard\">The standard</a>",
-        "    <a href=\"#proof\">Proof</a>",
-        "    <a href=\"#start\">How it works</a>",
-        "    <a class=\"nav-cta\" href=\"#start\">Start your site</a>",
-        "  </nav>",
-        "</header>"
-      ])
-    ],
-    // The standard writes the rules that make its own receipt true.
-    css: [
-      F("css", [
-        ":root {",
-        "  --bg: #0b0a08;",
-        "  --surface: #12100c;",
-        "  --line: #2b2720;",
-        "  --text: #f1ebe0;",
-        "  --accent: #f5891c;",
-        "  --display: \"Big Shoulders\", \"Arial Narrow\", Impact, sans-serif;",
-        "  --font: \"Newsreader\", Georgia, serif;",
-        "}",
-        ".button {",
-        "  border-radius: 0;",
-        "  background-color: var(--accent);",
-        "  font-family: var(--display);",
-        "  letter-spacing: 0.07em;",
-        "  text-transform: uppercase;",
-        "}"
-      ]),
-      F("css", [
-        "/* the six tells, kept out on purpose */",
-        "* { border-radius: 0; }",
-        "em, i { font-style: normal; }",
-        ".card { box-shadow: none; }",
-        "body { font-family: var(--font); }",
-        "",
-        "@font-face {",
-        "  font-family: \"Newsreader\";",
-        "  src: url(fonts/newsreader-latin.woff2) format(\"woff2\");",
-        "  font-display: swap;",
-        "}",
-        "@font-face {",
-        "  font-family: \"Big Shoulders\";",
-        "  src: url(fonts/bigshoulders-latin.woff2) format(\"woff2\");",
-        "}"
-      ]),
-      F("js", [
-        "// the receipt, measured on the live page",
-        "const all = [...document.querySelectorAll(\"*\")];",
-        "const rounded = all.filter((el) =>",
-        "  getComputedStyle(el).borderRadius !== \"0px\").length;",
-        "const gradients = all.filter((el) =>",
-        "  getComputedStyle(el).backgroundImage.includes(\"gradient\")).length;",
-        "const italics = all.filter((el) =>",
-        "  getComputedStyle(el).fontStyle === \"italic\").length;",
-        "console.log({ rounded, gradients, italics }); // { 0, 0, 0 }"
-      ]),
-      F("css", [
-        ".tells li {",
-        "  display: grid;",
-        "  grid-template-columns: 3.6rem minmax(0, 1fr) minmax(0, 1fr);",
-        "  gap: 1.6rem;",
-        "  padding: 2rem 0;",
-        "  border-top: 1px solid var(--line);",
-        "}",
-        ".tell-index { font-family: var(--display); color: var(--accent); }",
-        ".specimen { height: 170px; border: 1px solid var(--line-bright); }",
-        ".compare-frame { height: 640px; }",
-        ".compare-frame iframe { width: 100%; height: 100%; border: 0; }"
-      ])
-    ],
-    // The proof writes the four cards and the engine that reveals them.
-    js: [
-      F("html", [
-        "<div class=\"proof-grid\">",
-        "  <article class=\"proof-card\">",
-        "    <a class=\"proof-media\" href=\"concepts/northline-dental.html\">",
-        "      <img src=\"assets/concepts/northline-dental/hero.jpg\" alt=\"\">",
-        "      <span>Fictional business</span>",
-        "    </a>",
-        "    <h3>Northline Dental</h3>",
-        "  </article>",
-        "  <article class=\"proof-card\"><h3>Fieldnote Coffee</h3></article>",
-        "  <article class=\"proof-card\"><h3>Kestrel Electric</h3></article>",
-        "  <article class=\"proof-card\"><h3>Hollis Barbershop</h3></article>",
-        "</div>"
-      ]),
-      F("js", [
-        "const targets = document.querySelectorAll(\"[data-reveal]\");",
-        "const revealer = new IntersectionObserver((entries) => {",
-        "  for (const entry of entries) {",
-        "    if (!entry.isIntersecting) continue;",
-        "    entry.target.classList.add(\"is-revealed\");",
-        "    revealer.unobserve(entry.target);",
-        "  }",
-        "}, { rootMargin: \"0px 0px -12% 0px\", threshold: 0.08 });",
-        "targets.forEach((el) => revealer.observe(el));"
-      ]),
-      F("js", [
-        "// concept-motion.js, vendored Lenis, touch left native",
-        "const lenis = new window.Lenis({",
-        "  duration: 0.9,",
-        "  smoothWheel: true,",
-        "  syncTouch: false,",
-        "  wheelMultiplier: 1",
-        "});",
-        "function raf(time) {",
-        "  lenis.raf(time);",
-        "  window.requestAnimationFrame(raf);",
-        "}",
-        "window.requestAnimationFrame(raf);"
-      ]),
-      F("css", [
-        ".proof-grid { display: grid; grid-template-columns: 1fr 1fr; }",
-        ".proof-card { border-right: 1px solid var(--line-bright); border-bottom: 1px solid var(--line-bright); }",
-        ".proof-media img { aspect-ratio: 3 / 2; object-fit: cover; }",
-        ".proof-media span {",
-        "  position: absolute;",
-        "  left: 1rem; bottom: 1rem;",
-        "  font-family: var(--display);",
-        "  letter-spacing: 0.14em;",
-        "  text-transform: uppercase;",
-        "  background: var(--bg-deep);",
-        "}"
-      ])
-    ],
-    // The brief writes the JavaScript that builds the email, and the ship.
-    shell: [
-      F("js", [
-        "const lines = [",
-        "  \"Site brief for actuallycoded\",",
-        "  \"\",",
-        "  \"THE BUSINESS\", business || \"(not answered)\",",
-        "  \"\",",
-        "  \"WHO THE PAGE IS FOR\", visitor || \"(not answered)\",",
-        "  \"\",",
-        "  \"THE ONE THING IT MUST MAKE THEM DO\", action || \"(not answered)\",",
-        "  \"\",",
-        "  \"LINKS TO ANYTHING THAT EXISTS\", links || \"(none yet)\"",
-        "];",
-        "window.location.href = \"mailto:hello@actuallycoded.com\"",
-        "  + \"?subject=\" + encodeURIComponent(\"Site brief\")",
-        "  + \"&body=\" + encodeURIComponent(lines.join(\"\\n\"));"
-      ]),
-      F("shell", [
-        "$ git add docs/",
-        "$ git commit -m \"Finished: one page, measured against the standard\"",
-        "$ git push origin master",
-        "$ curl -sI https://actuallycoded.com | head -1",
-        "HTTP/2 200",
-        "$ grep -c \"border-radius\" docs/styles.css",
-        "0",
-        "$ grep -c \"gradient(\" docs/styles.css",
-        "0"
-      ]),
-      F("html", [
-        "<div class=\"intake\" id=\"intake\" aria-label=\"Site brief\">",
-        "  <label for=\"business\">The business, in a sentence or two</label>",
-        "  <textarea id=\"business\" rows=\"3\"></textarea>",
-        "  <label for=\"visitor\">Who the page is for</label>",
-        "  <input id=\"visitor\" type=\"text\">",
-        "  <label for=\"action\">The one thing it must make them do</label>",
-        "  <input id=\"action\" type=\"text\">",
-        "  <button id=\"send-brief\" class=\"button button-accent\">Send the brief</button>",
-        "</div>"
-      ]),
-      F("shell", [
-        "$ ls docs/fonts",
-        "bigshoulders-latin.woff2  newsreader-latin.woff2",
-        "$ du -sh docs/vendor/lenis.min.js",
-        "13K  docs/vendor/lenis.min.js",
-        "$ python -m http.server 8642 --directory docs",
-        "Serving HTTP on :: port 8642 ..."
-      ])
-    ]
-  };
 
   var escapeHtml = function (str) {
     return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
   };
-
-  // Two tones only. Strings are painted first so the painter never
-  // matches the quotes inside its own markup.
   var paint = function (line, lang) {
     var h = escapeHtml(line);
     var strings = [];
@@ -567,136 +336,358 @@
       h = h.replace(/(&lt;\/?)([a-z][a-z0-9-]*)/g, "$1<span class=\"kw\">$2</span>");
     } else if (lang === "css") {
       h = h.replace(/(\/\*.*?\*\/)/g, "<span class=\"cm\">$1</span>")
-           .replace(/(--[a-z-]+|@font-face|font-family|border-radius|background-color|background|letter-spacing|text-transform|line-height|font-size|font-style|font-display|font-weight|box-shadow|grid-template-columns|object-fit|aspect-ratio|position|display|border|src)\b/g, "<span class=\"kw\">$1</span>");
+           .replace(/(--[a-z-]+|@font-face|font-family|border-radius|background-color|background|letter-spacing|text-transform|line-height|font-size|font-style|font-display|box-shadow|src)\b/g, "<span class=\"kw\">$1</span>");
     } else if (lang === "js") {
       h = h.replace(/(\/\/.*)$/g, "<span class=\"cm\">$1</span>")
            .replace(/\b(const|new|for|of|if|continue|return|function|window)\b/g, "<span class=\"kw\">$1</span>");
-    } else {
-      h = h.replace(/^\$ (\S+)/, "$ <span class=\"kw\">$1</span>");
     }
     h = h.replace(/\u0001(\d+)\u0001/g, function (_, i) { return strings[Number(i)]; });
     return h;
   };
-
   var lineHtml = function (n, line, lang, now, caret) {
     return "<span class=\"ln\">" + String(n).padStart(2, " ") + "</span>" +
       "<span class=\"" + (now ? "now" : "old") + "\">" + paint(line, lang) + "</span>" +
       (caret ? "<span class=\"caret\"></span>" : "") + "\n";
   };
 
-  var renderStatic = function (layer, pre, fragments, startFrag) {
-    var lh = parseFloat(getComputedStyle(pre).lineHeight) || 26;
-    var want = Math.max(8, Math.floor((layer.clientHeight - 60) / lh));
-    var out = "", n = 1, frag = startFrag % fragments.length, line = 0, guard = 0;
-    while (n <= want && guard++ < 4000) {
-      var f = fragments[frag];
-      if (line >= f.lines.length) { out += lineHtml(n++, "", f.lang, false, false); frag = (frag + 1) % fragments.length; line = 0; continue; }
-      out += lineHtml(n++, f.lines[line++], f.lang, false, false);
-    }
-    pre.innerHTML = out;
+  // The hero, as the pane writes it. b names the element that appears
+  // when the line is finished.
+  var BUILD = [
+    { t: "<section class=\"hero\" id=\"top\">" },
+    { t: "  <div class=\"shell hero-grid\">" },
+    { t: "    <p class=\"eyebrow\">Custom one-page websites</p>", b: "eyebrow" },
+    { t: "    <h1>One page. Real code you own. Finished in 48 hours.</h1>", b: "h1" },
+    { t: "    <p class=\"hero-lede\">A website for your business that was written, not generated.</p>", b: "lede" },
+    { t: "    <a class=\"button button-accent\" href=\"#start\">Start your site</a>", b: "cta" },
+    { t: "    <a class=\"text-link\" href=\"#standard\">Read the standard</a>", b: "link" },
+    { t: "    <p class=\"tagline\">Actually coded, finished by hand.</p>", b: "tagline" },
+    { t: "" },
+    { t: "    <aside class=\"offer\" aria-label=\"The offer\">", b: "offer" },
+    { t: "      <span>The one product</span>", b: "offer-head" },
+    { t: "      <span class=\"display-num\">$495</span> <small>Founding price</small>", b: "price" },
+    { t: "      <p>For the first ten sites. Then <b>$850</b>.</p>", b: "then" },
+    { t: "      <ul class=\"offer-list\">" },
+    { t: "        <li>One custom page, designed and coded for your business</li>", b: "li1" },
+    { t: "        <li>Delivered in 48 hours from a paid brief</li>", b: "li2" },
+    { t: "        <li>One round of changes included</li>", b: "li3" },
+    { t: "        <li>You own the code. Host it anywhere, keep it forever</li>", b: "li4" },
+    { t: "        <li>Built to the published standard, and measured against it</li>", b: "li5" },
+    { t: "      </ul>" },
+    { t: "      <a class=\"button button-accent\" href=\"#start\">Start your site</a>", b: "offer-cta" },
+    { t: "      <p class=\"offer-founding\"><b>10 of 10</b> founding places remaining</p>", b: "founding" },
+    { t: "    </aside>" },
+    { t: "  </div>" },
+    { t: "</section>" }
+  ];
+
+  // What the pane keeps writing afterwards, slowly, forever.
+  var AFTER = [
+    { lang: "css", lines: [
+      "/* styles.css */",
+      ":root {",
+      "  --bg: #0b0a08;",
+      "  --text: #f1ebe0;",
+      "  --accent: #f5891c;",
+      "  --display: \"Big Shoulders\";",
+      "  --font: \"Newsreader\";",
+      "}",
+      ".button { border-radius: 0; background: var(--accent); }",
+      "* { border-radius: 0; }",
+      "em, i { font-style: normal; }",
+      "@font-face { font-family: \"Newsreader\"; src: url(fonts/newsreader-latin.woff2); }"
+    ] },
+    { lang: "js", lines: [
+      "// the receipt, measured on the live page",
+      "const all = [...document.querySelectorAll(\"*\")];",
+      "const rounded = all.filter((el) =>",
+      "  getComputedStyle(el).borderRadius !== \"0px\").length;",
+      "const gradients = all.filter((el) =>",
+      "  getComputedStyle(el).backgroundImage.includes(\"gradient\")).length;",
+      "console.log({ rounded, gradients }); // { rounded: 0, gradients: 0 }"
+    ] }
+  ];
+
+  var TAIL = 9;
+  var built = function (key) {
+    var el = document.querySelector("[data-build=\"" + key + "\"]");
+    if (el) el.classList.add("is-built");
+  };
+  var finishAll = function () {
+    var all = document.querySelectorAll("[data-build]");
+    Array.prototype.forEach.call(all, function (el) { el.classList.add("is-built"); });
+    window.setTimeout(function () { root.classList.remove("is-building"); }, 500);
   };
 
-  var makeTypist = function (layer, pre, fragments, startFrag, startDelay) {
-    // Each column is a live editor: it starts full of dim code, keeps
-    // writing at the bottom, and the oldest line leaves the top. So the
-    // code runs from the top of the section to the bottom from the
-    // first frame, and it never stops moving.
-    var frag = startFrag % fragments.length, line = 0, col = 0;
-    var done = [], base = 1, timer = null, started = false;
-
-    var inView = function () {
-      var r = layer.getBoundingClientRect();
-      var vh = window.innerHeight || 0;
-      return !vh || (r.bottom > -240 && r.top < vh + 240);
-    };
-    var maxLines = function () {
-      var lh = parseFloat(getComputedStyle(pre).lineHeight) || 26;
-      return Math.max(8, Math.floor((layer.clientHeight - 60) / lh));
-    };
-    var advanceFragment = function () {
-      frag = (frag + 1) % fragments.length;
-      line = 0; col = 0;
-    };
-    var prefill = function () {
-      // Fill the column with finished lines from the fragments in order,
-      // leaving one row for the line being written.
-      var want = maxLines() - 1;
-      var guard = 0;
-      while (done.length < want && guard++ < 4000) {
-        var f = fragments[frag];
-        if (line >= f.lines.length) { done.push(""); advanceFragment(); continue; }
-        done.push(f.lines[line]);
-        line += 1;
-      }
-      if (line >= fragments[frag].lines.length) { done.push(""); advanceFragment(); }
-    };
-    var trim = function () {
-      var cap = maxLines() - 1;
-      while (done.length > cap) { done.shift(); base += 1; }
-    };
-    var draw = function () {
-      var f = fragments[frag];
+  // The pane shows the last few lines: a window onto a growing file.
+  var makeWriter = function () {
+    var done = [], base = 1;
+    var render = function (lang, current, caret) {
       var out = "";
-      for (var i = 0; i < done.length; i++) out += lineHtml(base + i, done[i], f.lang, false, false);
-      var current = f.lines[line] || "";
-      out += lineHtml(base + done.length, current.slice(0, col), f.lang, true, true);
+      for (var i = 0; i < done.length; i++) out += lineHtml(base + i, done[i], lang, false, false);
+      out += lineHtml(base + done.length, current, lang, true, caret);
+      pane.innerHTML = out;
+    };
+    var push = function (line) {
+      done.push(line);
+      while (done.length > TAIL - 1) { done.shift(); base += 1; }
+    };
+    return { render: render, push: push };
+  };
+
+  if (!pane) return;
+  var writer = makeWriter();
+
+  var renderFinished = function () {
+    BUILD.forEach(function (l) { writer.push(l.t); });
+    writer.render("html", "", true);
+  };
+
+  if (reduced || document.hidden) {
+    renderFinished();
+    return;
+  }
+
+  root.classList.add("is-building");
+  var failsafe = window.setTimeout(finishAll, 12000);
+  var finished = false;
+  var finishNow = function () {
+    if (finished) return;
+    finished = true;
+    window.clearTimeout(failsafe);
+    finishAll();
+  };
+  document.addEventListener("visibilitychange", function () { if (document.hidden) finishNow(); });
+
+  // Speed is a rate, not a timer: about 300 characters a second, so it
+  // reads the same on every machine whatever the timer granularity.
+  var MS_PER_CHAR = 3.4;
+  var idx = 0, col = 0, last = 0;
+  var typeBuild = function () {
+    if (finished) return;
+    var line = BUILD[idx];
+    var now = Date.now();
+    if (!last) last = now;
+    if (col < line.t.length) {
+      var n = Math.floor((now - last) / MS_PER_CHAR);
+      if (n > 0) { col = Math.min(line.t.length, col + n); last += n * MS_PER_CHAR; }
+      writer.render("html", line.t.slice(0, col), true);
+      window.setTimeout(typeBuild, 16);
+      return;
+    }
+    writer.push(line.t);
+    if (line.b) built(line.b);
+    idx += 1; col = 0; last = 0;
+    if (idx >= BUILD.length) {
+      writer.render("html", "", true);
+      finishNow();
+      window.setTimeout(typeAfter, 2600);
+      return;
+    }
+    writer.render("html", "", true);
+    window.setTimeout(typeBuild, line.t.length ? 40 + Math.random() * 40 : 30);
+  };
+
+  // Afterwards: the standing object, writing slowly.
+  var frag = 0, aline = 0, acol = 0;
+  var typeAfter = function () {
+    var f = AFTER[frag];
+    var line = f.lines[aline];
+    if (acol < line.length) {
+      acol += 1;
+      writer.render(f.lang, line.slice(0, acol), true);
+      window.setTimeout(typeAfter, 24 + Math.random() * 40);
+      return;
+    }
+    writer.push(line);
+    aline += 1; acol = 0;
+    if (aline >= f.lines.length) {
+      writer.push("");
+      frag = (frag + 1) % AFTER.length; aline = 0;
+      writer.render(AFTER[frag].lang, "", true);
+      window.setTimeout(typeAfter, 3200);
+      return;
+    }
+    writer.render(f.lang, "", true);
+    window.setTimeout(typeAfter, 260 + Math.random() * 300);
+  };
+
+  writer.render("html", "", true);
+  window.setTimeout(typeBuild, 500);
+})();
+
+/* ============================================================
+   SECTION BUILDS. Each section below the hero is written in code as
+   it scrolls into view: the section's own markup types across the
+   empty section, the content pops up over it line by line, then the
+   code fades and is removed. Fast, about two seconds, because people
+   scroll. Interruptible: scroll past it and it finishes at once; land
+   on it from a link and it is already built; a hidden tab finishes
+   everything. Without JavaScript or under reduced motion nothing is
+   hidden in the first place.
+   ============================================================ */
+(function () {
+  "use strict";
+  var sections = document.querySelectorAll("[data-build-section]");
+  if (!sections.length) return;
+  var root = document.documentElement;
+  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  var FRAG = {
+    standard: [
+      "<section id=\"standard\">",
+      "  <h2>Six things a generated site does. Six things yours will not.</h2>",
+      "  <ol class=\"tells\">",
+      "    <li>Rounded everything</li>",
+      "    <li>Gradients as decoration</li>",
+      "    <li>Whatever font the computer had, plus one cursive word</li>",
+      "    <li>The section march</li>",
+      "    <li>Card soup</li>",
+      "    <li>Copy that describes a process</li>",
+      "  </ol>",
+      "  <div class=\"compare\"><iframe src=\"exhibit/dental.html\"></iframe><iframe src=\"concepts/northline-dental.html\"></iframe></div>",
+      "  <div class=\"receipt\">rounded 0, gradients 0, third party 0, cookies 0</div>",
+      "</section>"
+    ],
+    proof: [
+      "<section id=\"proof\">",
+      "  <h2>Four pages, built to the list above.</h2>",
+      "  <div class=\"proof-grid\">",
+      "    <article><a href=\"concepts/northline-dental.html\">Northline Dental</a></article>",
+      "    <article><a href=\"concepts/fieldnote-coffee.html\">Fieldnote Coffee</a></article>",
+      "    <article><a href=\"concepts/kestrel-electric.html\">Kestrel Electric</a></article>",
+      "    <article><a href=\"concepts/hollis-barbershop.html\">Hollis Barbershop</a></article>",
+      "  </div>",
+      "</section>"
+    ],
+    start: [
+      "<section id=\"start\">",
+      "  <h2>Answer four questions. Pay once. Wait 48 hours.</h2>",
+      "  <ol class=\"next-steps\">",
+      "    <li>Send the brief</li>",
+      "    <li>Pay the founding price</li>",
+      "    <li>48 hours later, a link</li>",
+      "    <li>One round of changes</li>",
+      "  </ol>",
+      "  <div class=\"intake\">",
+      "    <label>The business, in a sentence or two</label>",
+      "    <label>Who the page is for</label>",
+      "    <label>The one thing it must make them do</label>",
+      "    <label>Links to anything that already exists</label>",
+      "    <button>Send the brief</button>",
+      "  </div>",
+      "</section>"
+    ]
+  };
+
+  var escapeHtml = function (str) { return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); };
+  var paint = function (line) {
+    var h = escapeHtml(line);
+    var strings = [];
+    h = h.replace(/"([^"]*)"/g, function (_, inner) {
+      strings.push("<span class=\"st\">\"" + inner + "\"</span>");
+      return "\u0001" + (strings.length - 1) + "\u0001";
+    });
+    h = h.replace(/(&lt;\/?)([a-z][a-z0-9-]*)/g, "$1<span class=\"kw\">$2</span>");
+    return h.replace(/\u0001(\d+)\u0001/g, function (_, i) { return strings[Number(i)]; });
+  };
+  var lineHtml = function (n, line, now, caret) {
+    return "<span class=\"ln\">" + String(n).padStart(2, " ") + "</span>" +
+      "<span class=\"" + (now ? "now" : "old") + "\">" + paint(line) + "</span>" +
+      (caret ? "<span class=\"caret\"></span>" : "") + "\n";
+  };
+
+  var revealsOff = reduced || !root.classList.contains("has-reveal");
+
+  var builders = [];
+  Array.prototype.forEach.call(sections, function (sec) {
+    var lines = FRAG[sec.getAttribute("data-build-section")] || [];
+    var pre = sec.querySelector(".section-code");
+    var reveals = Array.prototype.slice.call(sec.querySelectorAll("[data-reveal]"));
+    var done = false, started = false, ri = 0;
+
+    var revealNext = function (n) {
+      for (var k = 0; k < n && ri < reveals.length; k++) reveals[ri++].classList.add("is-revealed");
+    };
+    var finish = function () {
+      if (done) return;
+      done = true;
+      revealNext(reveals.length);
+      sec.classList.add("is-built");
+      if (pre) {
+        pre.classList.add("is-fading");
+        window.setTimeout(function () { if (pre.parentNode) pre.parentNode.removeChild(pre); }, 700);
+      }
+    };
+
+    if (revealsOff || !pre || !lines.length) { finish(); return; }
+
+    var per = Math.max(1, Math.ceil(reveals.length / Math.max(1, lines.length - 2)));
+    var written = [], i = 0, col = 0;
+    var render = function (current) {
+      var out = "";
+      for (var k = 0; k < written.length; k++) out += lineHtml(k + 1, written[k], false, false);
+      out += lineHtml(written.length + 1, current, true, true);
       pre.innerHTML = out;
     };
+    var rect = function () { return sec.getBoundingClientRect(); };
+    var inView = function () { var r = rect(); var vh = window.innerHeight || 0; return !vh || (r.top < vh * 0.88 && r.bottom > 0); };
+    var passed = function () { return rect().bottom < 0; };
+
+    var MS_PER_CHAR = 2.6;
+    var last = 0;
     var step = function () {
-      if (!inView()) { timer = null; return; }
-      var f = fragments[frag];
-      var current = f.lines[line];
-      var delay;
-      if (col < current.length) {
-        col += 1;
-        var ch = current.charAt(col - 1);
-        delay = 9 + Math.random() * 14;
-        if (ch === " ") delay += 12;
-        if (ch === ";" || ch === "{" || ch === "}" || ch === ">") delay += 40;
-      } else {
-        done.push(current);
-        line += 1; col = 0;
-        delay = current.length ? 90 + Math.random() * 120 : 60;
-        if (line >= f.lines.length) {
-          done.push("");
-          advanceFragment();
-          delay = 1200;
-        }
-        trim();
+      if (done) return;
+      if (passed()) { finish(); return; }
+      var line = lines[i];
+      var now = Date.now();
+      if (!last) last = now;
+      if (col < line.length) {
+        var n = Math.floor((now - last) / MS_PER_CHAR);
+        if (n > 0) { col = Math.min(line.length, col + n); last += n * MS_PER_CHAR; }
+        render(line.slice(0, col));
+        window.setTimeout(step, 16);
+        return;
       }
-      draw();
-      timer = window.setTimeout(step, delay);
+      written.push(line);
+      if (i > 0) revealNext(per);
+      i += 1; col = 0; last = 0;
+      if (i >= lines.length) { render(""); window.setTimeout(finish, 300); return; }
+      render("");
+      window.setTimeout(step, 30 + Math.random() * 40);
     };
     var start = function () {
-      if (timer) return;
+      if (started || done) return;
       if (!inView()) return;
-      if (!started) { started = true; prefill(); trim(); draw(); }
-      timer = window.setTimeout(step, startDelay);
+      started = true;
+      render("");
+      window.setTimeout(step, 120);
+      window.setTimeout(finish, 6000);
     };
-    return start;
-  };
-
-  var starters = [];
-  layers.forEach(function (layer, index) {
-    var fragments = CODE[layer.getAttribute("data-code")];
-    var pres = layer.querySelectorAll("pre");
-    if (!fragments || !pres.length) return;
-    Array.prototype.forEach.call(pres, function (pre, col) {
-      if (getComputedStyle(pre).display === "none") return;
-      if (reduced) { renderStatic(layer, pre, fragments, col + index); return; }
-      starters.push(makeTypist(layer, pre, fragments, col + index, 300 + col * 700 + index * 200));
-    });
+    builders.push({ start: start, finish: finish, inView: inView, sec: sec });
   });
-  if (reduced || !starters.length) return;
+  if (!builders.length) return;
 
-  var startAll = function () { starters.forEach(function (s) { s(); }); };
+  // A section already on screen at load is not held hostage: it is
+  // simply built. The build is for sections you scroll to.
+  builders.forEach(function (b) { if (document.hidden || b.inView() || ("#" + b.sec.id) === window.location.hash) b.finish(); });
+
+  var startAll = function () { builders.forEach(function (b) { b.start(); }); };
   var tick = false;
   window.addEventListener("scroll", function () {
     if (tick) return;
     tick = true;
-    window.setTimeout(function () { tick = false; startAll(); }, 150);
+    window.setTimeout(function () { tick = false; startAll(); }, 80);
   }, { passive: true });
   window.addEventListener("resize", startAll, { passive: true });
-  startAll();
-  window.setTimeout(startAll, 800);
+  document.addEventListener("visibilitychange", function () {
+    if (document.hidden) builders.forEach(function (b) { b.finish(); });
+  });
+  window.setTimeout(startAll, 300);
+  // A cheap poll as well: a section that is on screen never waits on a
+  // scroll event to notice. Stops itself once every section has started.
+  var poll = window.setInterval(function () {
+    startAll();
+    var pending = builders.some(function (b) { return !b.sec.classList.contains("is-built"); });
+    if (!pending) window.clearInterval(poll);
+  }, 700);
 })();
