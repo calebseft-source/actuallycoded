@@ -325,7 +325,7 @@
 
   var L = function (t, b) { return b ? { t: t, b: b } : { t: t }; };
   var SPECS = [
-    { id: "hero", rate: 2.6, pause: [30, 60], failsafe: 12000, tail: 9, atLoad: true, after: [
+    { id: "hero", rate: 3.4, pause: [40, 80], failsafe: 14000, tail: 9, atLoad: true, after: [
         { lang: "css", lines: [
           "/* styles.css */", ":root {", "  --bg: #0b0a08;", "  --text: #f1ebe0;", "  --accent: #f5891c;",
           "  --display: \"Big Shoulders\";", "  --font: \"Newsreader\";", "}",
@@ -365,25 +365,19 @@
         L("  </div>"),
         L("</section>")
       ] },
-    { id: "standard", rate: 1.8, pause: [20, 45], failsafe: 8000, tail: 7, lines: [
-        L("<section id=\"standard\">"),
-        L("  <p class=\"eyebrow\">The standard</p>", "s-eyebrow"),
-        L("  <h2>Six things a generated site does. Six things yours will not.</h2>", "s-h2"),
-        L("  <p>Most small business websites now come out of the same handful of tools.</p>", "s-p"),
-        L("  <div class=\"tells-head\">The tell. What you get instead.</div>", "s-head"),
-        L("  <ol class=\"tells\">"),
-        L("    <li>01 Rounded everything</li>", "s-tell1"),
-        L("    <li>02 Gradients as decoration</li>", "s-tell2"),
-        L("    <li>03 Whatever font the computer had, plus one cursive word</li>", "s-tell3"),
-        L("    <li>04 The section march</li>", "s-tell4"),
-        L("    <li>05 Card soup</li>", "s-tell5"),
-        L("    <li>06 Copy that describes a process</li>", "s-tell6"),
-        L("  </ol>"),
-        L("  <div class=\"compare\"><iframe src=\"exhibit/dental.html\"></iframe> <iframe src=\"concepts/northline-dental.html\"></iframe></div>", "s-compare"),
-        L("  <div class=\"receipt\">rounded 0, gradients 0, third party 0, cookies 0</div>", "s-receipt"),
-        L("</section>")
-      ] },
-    { id: "proof", rate: 1.8, pause: [20, 45], failsafe: 8000, tail: 7, lines: [
+    { id: "proof", rate: 2.6, pause: [30, 60], failsafe: 9000, tail: 7, after: [
+        { lang: "js", lines: [
+          "// concept-motion.js: the reveal observer", "const targets = document.querySelectorAll(\"[data-reveal]\");",
+          "const revealer = new IntersectionObserver((entries) => {", "  for (const entry of entries) {",
+          "    if (!entry.isIntersecting) continue;", "    entry.target.classList.add(\"is-revealed\");", "  }",
+          "}, { rootMargin: \"0px 0px -12% 0px\", threshold: 0.08 });", "targets.forEach((el) => revealer.observe(el));"
+        ] },
+        { lang: "css", lines: [
+          "/* the proof grid */", ".proof-grid { display: grid; grid-template-columns: 1fr 1fr; }",
+          ".proof-card { border-right: 1px solid var(--line-bright); }", ".proof-media img { aspect-ratio: 3 / 2; object-fit: cover; }",
+          ".proof-media span { font-family: var(--display); letter-spacing: 0.14em; text-transform: uppercase; }"
+        ] }
+      ], lines: [
         L("<section id=\"proof\">"),
         L("  <p class=\"eyebrow\">Proof</p>", "p-eyebrow"),
         L("  <h2>Four pages, built to the list above.</h2>", "p-h2"),
@@ -396,7 +390,19 @@
         L("  </div>"),
         L("</section>")
       ] },
-    { id: "start", rate: 1.8, pause: [20, 45], failsafe: 9000, tail: 7, lines: [
+    { id: "start", rate: 2.6, pause: [30, 60], failsafe: 10000, tail: 7, after: [
+        { lang: "js", lines: [
+          "// the brief, built into an email you send yourself", "const lines = [", "  \"Site brief for actuallycoded\",", "  \"\",",
+          "  \"THE BUSINESS\", business || \"(not answered)\",", "  \"WHO THE PAGE IS FOR\", visitor || \"(not answered)\",",
+          "  \"THE ONE THING IT MUST MAKE THEM DO\", action || \"(not answered)\"", "];",
+          "window.location.href = \"mailto:hello@actuallycoded.com\"", "  + \"?subject=\" + encodeURIComponent(\"Site brief\")",
+          "  + \"&body=\" + encodeURIComponent(lines.join(\"\\n\"));"
+        ] },
+        { lang: "shell", lines: [
+          "$ git push origin master", "$ curl -sI https://actuallycoded.com | head -1", "HTTP/2 200",
+          "$ grep -c \"border-radius\" docs/styles.css", "0"
+        ] }
+      ], lines: [
         L("<section id=\"start\">"),
         L("  <p class=\"eyebrow\">How it works</p>", "h-eyebrow"),
         L("  <h2>Answer four questions. Pay once. Wait 48 hours.</h2>", "h-h2"),
@@ -435,6 +441,8 @@
     } else if (lang === "js") {
       h = h.replace(/(\/\/.*)$/g, "<span class=\"cm\">$1</span>")
            .replace(/\b(const|new|for|of|if|continue|return|function|window)\b/g, "<span class=\"kw\">$1</span>");
+    } else if (lang === "shell") {
+      h = h.replace(/^\$ (\S+)/, "$ <span class=\"kw\">$1</span>");
     } else {
       h = h.replace(/(&lt;\/?)([a-z][a-z0-9-]*)/g, "$1<span class=\"kw\">$2</span>");
     }
@@ -480,11 +488,12 @@
       Array.prototype.forEach.call(targets, function (el) { el.classList.add("is-built"); });
       window.setTimeout(function () { sec.classList.remove("is-building"); }, 450);
       if (!started) renderFinished();
+      if (pane) pane.parentNode.classList.add("is-open");
       if (spec.after && !afterRunning) { afterRunning = true; window.setTimeout(typeAfter, 2400); }
     };
 
     var rect = function () { return sec.getBoundingClientRect(); };
-    var inView = function () { var r = rect(); var vh = window.innerHeight || 0; return !vh || (r.top < vh * 0.88 && r.bottom > 0); };
+    var inView = function () { var r = rect(); var vh = window.innerHeight || 0; return !vh || (r.top < vh * 0.7 && r.bottom > vh * 0.25); };
     var passed = function () { return rect().bottom < 0; };
     var mostlyIn = function () { var r = rect(); var vh = window.innerHeight || 0; return vh && r.top < vh * 0.4; };
 
@@ -504,6 +513,7 @@
       }
       push(line.t);
       if (line.b) built(line.b);
+      if (idx === 0 && pane) pane.parentNode.classList.add("is-open");
       idx += 1; col = 0; last = 0;
       if (idx >= spec.lines.length) { render("html", "", true); finish(); return; }
       render("html", "", true);
@@ -586,4 +596,142 @@
     sweep();
     if (builds.every(function (b) { return b.isDone(); })) window.clearInterval(poll);
   }, 700);
+})();
+
+/* ============================================================
+   ROW BUILDS. The six tells are coded into existence as you reach
+   them. Each row's two boxes start as a strip of code being written,
+   the tell on the left and the answer on the right, then grow to size
+   and the code fades to reveal what it made. Fast, so you can scroll.
+   Same off switches as the section builds.
+   ============================================================ */
+(function () {
+  "use strict";
+  var rows = document.querySelectorAll(".tells li[data-row]");
+  if (!rows.length) return;
+  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reduced || document.hidden) return;
+
+  var ROWS = {
+    1: { no: [".button {", "  border-radius: 999px;", "  box-shadow: 0 10px 30px rgba(0,0,0,.2);", "}"],
+         yes: [".button {", "  border-radius: 0;", "  background: var(--accent);", "}"] },
+    2: { no: [".hero {", "  background: linear-gradient(135deg, #6d5dfc, #37b5ff);", "}"],
+         yes: [".hero { background: var(--bg); }", ".mark { background: var(--accent); }"] },
+    3: { no: ["body { font-family: Inter, system-ui, sans-serif; }", "h1 em { font-family: cursive; font-style: italic; }"],
+         yes: ["@font-face { font-family: \"Big Shoulders\"; src: url(fonts/bigshoulders-latin.woff2); }", "h1 { font-family: var(--display); }"] },
+    4: { no: ["<section class=\"cards\">Why Choose Us</section>", "<section class=\"cards\">Our Services</section>", "<section class=\"cards\">Our Features</section>", "<section class=\"cards\">Our Benefits</section>"],
+         yes: ["<section class=\"hero\">", "<section class=\"list\">", "<section class=\"split\">", "<section class=\"form\">"] },
+    5: { no: [".card {", "  border-radius: 20px;", "  box-shadow: 0 10px 40px rgba(0,0,0,.1);", "}"],
+         yes: [".row { border-top: 1px solid var(--line); }", ".row b { font-family: var(--display); }"] },
+    6: { no: ["<p>We leverage a client-centric approach", "  to deliver seamless solutions.</p>"],
+         yes: ["<p>Two slots held every weekday", "  for pain that cannot wait.</p>"] }
+  };
+
+  var escapeHtml = function (str) { return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); };
+  var paint = function (line) {
+    var h = escapeHtml(line);
+    var strings = [];
+    h = h.replace(/"([^"]*)"/g, function (_, inner) {
+      strings.push("<span class=\"st\">\"" + inner + "\"</span>");
+      return "\u0001" + (strings.length - 1) + "\u0001";
+    });
+    if (line.charAt(0) === "<" || line.indexOf("<") === 0) {
+      h = h.replace(/(&lt;\/?)([a-z][a-z0-9-]*)/g, "$1<span class=\"kw\">$2</span>");
+    } else {
+      h = h.replace(/(--[a-z-]+|@font-face|font-family|border-radius|box-shadow|background|font-style|src)\b/g, "<span class=\"kw\">$1</span>");
+    }
+    return h.replace(/\u0001(\d+)\u0001/g, function (_, i) { return strings[Number(i)]; });
+  };
+
+  var RATE = 3.2, TAIL = 2;
+  var makeTypist = function (pre, lines, onDone) {
+    var done = [], i = 0, col = 0, last = 0, finished = false;
+    var render = function (current) {
+      var out = "";
+      var shown = done.slice(-TAIL);
+      for (var k = 0; k < shown.length; k++) out += "<span class=\"old\">" + paint(shown[k]) + "</span>\n";
+      out += "<span class=\"now\">" + paint(current) + "</span><span class=\"caret\"></span>\n";
+      pre.innerHTML = out;
+    };
+    var step = function () {
+      if (finished) return;
+      var line = lines[i];
+      var now = Date.now();
+      if (!last) last = now;
+      if (col < line.length) {
+        var n = Math.floor((now - last) / RATE);
+        if (n > 0) { col = Math.min(line.length, col + n); last += n * RATE; }
+        render(line.slice(0, col));
+        window.setTimeout(step, 16);
+        return;
+      }
+      done.push(line); i += 1; col = 0; last = 0;
+      if (i >= lines.length) { finished = true; render(""); onDone(); return; }
+      render("");
+      window.setTimeout(step, 90 + Math.random() * 80);
+    };
+    return { start: function () { render(""); window.setTimeout(step, 60); }, stop: function () { finished = true; } };
+  };
+
+  var builds = [];
+  Array.prototype.forEach.call(rows, function (li) {
+    var spec = ROWS[li.getAttribute("data-row")];
+    var pres = li.querySelectorAll(".spec-code");
+    if (!spec || pres.length < 2) return;
+    li.classList.add("is-building");
+    var started = false, done = false, remaining = 2, typists = [];
+    var rect = function () { return li.getBoundingClientRect(); };
+    var inView = function () { var r = rect(); var vh = window.innerHeight || 0; return !vh || (r.top < vh * 0.8 && r.bottom > vh * 0.1); };
+    var passed = function () { return rect().bottom < 0; };
+    var finish = function (instant) {
+      if (done) return;
+      done = true;
+      typists.forEach(function (t) { t.stop(); });
+      if (instant) li.classList.add("is-instant");
+      li.classList.add("is-grown");
+      var t1 = instant ? 0 : 560, t2 = instant ? 0 : 420, t3 = instant ? 0 : 400;
+      window.setTimeout(function () {
+        li.classList.add("is-shown");
+        window.setTimeout(function () {
+          li.classList.add("is-done");
+          window.setTimeout(function () { li.classList.remove("is-building"); }, t3);
+        }, t2);
+      }, t1);
+    };
+    var onDone = function () { remaining -= 1; if (remaining === 0) window.setTimeout(function () { finish(false); }, 220); };
+    var start = function () {
+      if (started || done) return;
+      if (!inView()) return;
+      started = true;
+      typists = [makeTypist(pres[0], spec.no, onDone), makeTypist(pres[1], spec.yes, onDone)];
+      typists[0].start();
+      window.setTimeout(function () { typists[1].start(); }, 260);
+      window.setTimeout(function () { finish(false); }, 5000);
+    };
+    builds.push({ start: start, finish: finish, passed: passed, isDone: function () { return done; }, li: li });
+  });
+  if (!builds.length) return;
+
+  var sweep = function () {
+    builds.forEach(function (b) {
+      if (b.isDone()) return;
+      if (b.passed()) { b.finish(true); return; }
+      b.start();
+    });
+  };
+  var tick = false;
+  window.addEventListener("scroll", function () {
+    if (tick) return;
+    tick = true;
+    window.setTimeout(function () { tick = false; sweep(); }, 80);
+  }, { passive: true });
+  window.addEventListener("resize", sweep, { passive: true });
+  document.addEventListener("visibilitychange", function () {
+    if (document.hidden) builds.forEach(function (b) { b.finish(true); });
+  });
+  window.setTimeout(sweep, 300);
+  var poll = window.setInterval(function () {
+    sweep();
+    if (builds.every(function (b) { return b.isDone(); })) window.clearInterval(poll);
+  }, 600);
 })();

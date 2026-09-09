@@ -1003,6 +1003,60 @@ html.smooth-active { scroll-behavior: auto; }
 .start-right { display: grid; gap: 1.4rem; align-content: start; }
 .section .build-pane pre { height: calc(1.55em * 7 + 1.6rem); }
 
+/* The panes open once: they start at two thirds width and widen to the
+   column as the first line lands, then hold. */
+.build-pane { width: 66%; transition: width 800ms cubic-bezier(0.22, 0.75, 0.25, 1); }
+.build-pane.is-open { width: 100%; }
+
+/* Row builds: each of the six tells is coded into existence as you reach
+   it. Both specimen boxes start as a strip of code being written, grow
+   to size, and the code fades to reveal what it made. */
+.specimen { position: relative; overflow: hidden; transition: height 560ms cubic-bezier(0.22, 0.75, 0.25, 1); }
+.tells li.is-building .specimen { height: 56px; }
+.tells li.is-building.is-grown .specimen { height: 170px; }
+.tells li.is-building.is-instant .specimen { transition: none; }
+.spec-code {
+  display: none;
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  margin: 0;
+  padding: 0.6rem 0.9rem;
+  background: var(--bg-deep);
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  line-height: 1.55;
+  color: rgba(241, 235, 224, 0.62);
+  white-space: pre;
+  overflow: hidden;
+  transition: opacity 420ms ease;
+}
+.tells li.is-building .spec-code { display: block; }
+.tells li.is-building.is-shown .spec-code { opacity: 0; }
+.tells li.is-building.is-instant .spec-code { transition: none; }
+.spec-code .kw { color: var(--accent); }
+.spec-code .st { color: var(--muted-strong); }
+.spec-code .now { color: var(--text); }
+.spec-code .caret {
+  display: inline-block;
+  width: 0.55em;
+  height: 1.05em;
+  margin-left: 1px;
+  background: var(--accent);
+  vertical-align: -0.18em;
+  animation: caret-blink 1s steps(1, end) infinite;
+}
+.tells li.is-building .tell-not > h3, .tells li.is-building .tell-not > p,
+.tells li.is-building .tell-yes > h3, .tells li.is-building .tell-yes > p { opacity: 0; transform: translate3d(0, 8px, 0); }
+.tells li.is-building.is-done .tell-not > h3, .tells li.is-building.is-done .tell-not > p,
+.tells li.is-building.is-done .tell-yes > h3, .tells li.is-building.is-done .tell-yes > p {
+  opacity: 1; transform: none;
+  transition: opacity 360ms cubic-bezier(0.22, 0.75, 0.25, 1), transform 360ms cubic-bezier(0.22, 0.75, 0.25, 1);
+}
+@media (max-width: 860px) {
+  .tells li.is-building.is-grown .specimen { height: 150px; }
+}
+
 /* The panes hold their shape. Long code lines must never widen a grid
    column; the pane clips and the columns are allowed to be narrower
    than their content. */
@@ -1015,6 +1069,7 @@ html.smooth-active { scroll-behavior: auto; }
   .build-pane pre { height: calc(1.55em * 6 + 1.6rem); }
 }
 @media (prefers-reduced-motion: reduce) {
-  .build-pane .caret { animation: none; display: none; }
+  .build-pane .caret, .spec-code .caret { animation: none; display: none; }
+  .build-pane { width: 100%; transition: none; }
   [data-build-section].is-building [data-build] { opacity: 1; transform: none; }
 }
