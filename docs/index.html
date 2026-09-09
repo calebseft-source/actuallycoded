@@ -184,32 +184,32 @@
       </ol>
 
       <div class="compare" data-reveal>
-        <div class="compare-pane">
+        <div class="compare-pick">
+          <span class="compare-kicker">Pick a business</span>
+          <div class="compare-switch" role="group" aria-label="Choose a business to compare" data-pair>
+            <button type="button" class="is-active" aria-pressed="true" data-slop="exhibit/dental.html" data-slop-title="Exhibit: Northline Dental as a template would build it, scrollable" data-clean="concepts/northline-dental.html" data-clean-title="Northline Dental, the finished concept, scrollable">Dental</button>
+            <button type="button" aria-pressed="false" data-slop="exhibit/barber.html" data-slop-title="Exhibit: Hollis Barbershop as a template would build it, scrollable" data-clean="concepts/hollis-barbershop.html" data-clean-title="Hollis Barbershop, the finished concept, scrollable">Barber</button>
+          </div>
+          <p>Both windows change together: the same fictional business, the default on the left and the finished page on the right.</p>
+        </div>
+        <div class="compare-pane compare-left">
           <div class="compare-head">
             <span class="compare-kicker">Scroll inside it</span>
             <h3>The default</h3>
-            <p>A whole generated site for a fictional business, every tell left in. Two flavours of it. Built as exhibits, in their own documents.</p>
-            <div class="compare-switch" role="group" aria-label="Choose a generated site" data-target="compare-slop">
-              <button type="button" class="is-active" data-src="exhibit/slop.html" data-title="Exhibit: a generated looking website for a fictional tire shop, scrollable" aria-pressed="true">Tire shop</button>
-              <button type="button" data-src="exhibit/dental.html" data-title="Exhibit: a template looking website for a fictional dental practice, scrollable" aria-pressed="false">Dentist</button>
-            </div>
+            <p>What a template does with the brief. Every tell left in, built as an exhibit in its own document.</p>
           </div>
           <div class="compare-frame">
-            <iframe id="compare-slop" src="exhibit/slop.html" title="Exhibit: a generated looking website for a fictional tire shop, scrollable" loading="lazy"></iframe>
+            <iframe id="compare-slop" src="exhibit/dental.html" title="Exhibit: Northline Dental as a template would build it, scrollable" loading="lazy"></iframe>
           </div>
         </div>
         <div class="compare-pane">
           <div class="compare-head">
             <span class="compare-kicker">Scroll inside it</span>
             <h3>Built to the list</h3>
-            <p>A finished page for a fictional business, to this standard. Pick one.</p>
-            <div class="compare-switch" role="group" aria-label="Choose a finished page" data-target="compare-clean">
-              <button type="button" class="is-active" data-src="concepts/northline-dental.html" data-title="Northline Dental, a fictional dental practice concept" aria-pressed="true">Dental</button>
-              <button type="button" data-src="concepts/hollis-barbershop.html" data-title="Hollis Barbershop, a fictional barbershop concept" aria-pressed="false">Barber</button>
-            </div>
+            <p>What a person does with the same brief, finished to this standard.</p>
           </div>
           <div class="compare-frame">
-            <iframe id="compare-clean" src="concepts/northline-dental.html" title="Northline Dental, a fictional dental practice concept" loading="lazy"></iframe>
+            <iframe id="compare-clean" src="concepts/northline-dental.html" title="Northline Dental, the finished concept, scrollable" loading="lazy"></iframe>
           </div>
         </div>
         <p class="compare-foot">Every business here is fictional. The defaults are separate documents built to show the tells, so nothing in them enters the code of this page, which is what the counts below measure.</p>

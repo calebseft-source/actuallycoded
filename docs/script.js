@@ -218,25 +218,28 @@
     });
   }
 
-  /* ---- The comparison switchers: each group swaps its own window ---- */
-  var groups = document.querySelectorAll(".compare-switch[data-target]");
-  Array.prototype.forEach.call(groups, function (group) {
-    var frame = document.getElementById(group.getAttribute("data-target"));
-    if (!frame) return;
-    var buttons = group.querySelectorAll("button");
-    Array.prototype.forEach.call(buttons, function (btn) {
+  /* ---- The comparison switcher: one choice moves both windows ---- */
+  var pick = document.querySelector(".compare-switch[data-pair]");
+  var slopFrame = document.getElementById("compare-slop");
+  var cleanFrame = document.getElementById("compare-clean");
+  if (pick && slopFrame && cleanFrame) {
+    var pickButtons = pick.querySelectorAll("button");
+    Array.prototype.forEach.call(pickButtons, function (btn) {
       btn.addEventListener("click", function () {
-        Array.prototype.forEach.call(buttons, function (b) {
+        if (btn.classList.contains("is-active")) return;
+        Array.prototype.forEach.call(pickButtons, function (b) {
           b.classList.remove("is-active");
           b.setAttribute("aria-pressed", "false");
         });
         btn.classList.add("is-active");
         btn.setAttribute("aria-pressed", "true");
-        frame.setAttribute("title", btn.getAttribute("data-title"));
-        frame.src = btn.getAttribute("data-src");
+        slopFrame.setAttribute("title", btn.getAttribute("data-slop-title"));
+        slopFrame.src = btn.getAttribute("data-slop");
+        cleanFrame.setAttribute("title", btn.getAttribute("data-clean-title"));
+        cleanFrame.src = btn.getAttribute("data-clean");
       });
     });
-  });
+  }
 
   var year = document.querySelector("#year");
   if (year) year.textContent = new Date().getFullYear();

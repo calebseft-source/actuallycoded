@@ -31,7 +31,7 @@ docs/
   legal.css           reading layout for the three pages above
   404.html
   marks.html          the monogram and three alternates, on dark and light (noindex, unlinked)
-  exhibit/            QUARANTINE: the deliberately generated-looking tire shop site shown in the comparison
+  exhibit/            QUARANTINE: two deliberately generated-looking sites (Northline as a cheerful template, Hollis as a dark premium one) shown in the comparison
                       windows; its own document so nothing in it enters the page; robots disallowed;
                       the gate never scans this folder, on purpose
   assets/tells/       six SVG specimens of the tells, one per row of the list; images on purpose
