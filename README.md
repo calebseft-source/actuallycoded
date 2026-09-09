@@ -53,6 +53,14 @@ were verified resolving after the change. Lighthouse on the live page: performan
 accessibility 100, best practices 100, SEO 100. Live DOM check: 0 rounded, 0 gradients,
 0 italics, 0 third party hosts.
 
+**Deployed again 2026-09-09 evening (`63a157b`).** The page now builds itself from its own
+code: an editor pane at the top of the hero types the hero's markup and the page assembles
+beneath it; every section and component below (the six tells, the comparison, the receipt,
+the proof cards, the brief) is written in its own markup as it scrolls into view, grows to
+size, and the code fades to reveal it. Wordmark is `actually.coded`. Off for reduced motion,
+hidden tabs and no JavaScript; every build has a failsafe. Engines and rules are documented
+in `docs/script.js` at the bottom.
+
 **Decisions recorded 2026-09-09:** matrix identity off; terms as written; the four
 concepts and two exhibits final. Palette is the stone's orange amber on a warm near black
 (`--accent: #f5891c`), inclusions only on the monogram.
