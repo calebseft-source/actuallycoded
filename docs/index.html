@@ -189,8 +189,8 @@
         </li>
       </ol>
 
-      <div class="compare" data-reveal>
-        <div class="compare-pick">
+      <div class="compare">
+        <div class="compare-pick" data-coded>
           <span class="compare-kicker">Pick a business</span>
           <div class="compare-switch" role="group" aria-label="Choose a business to compare" data-pair>
             <button type="button" class="is-active" aria-pressed="true" data-slop="exhibit/dental.html" data-slop-title="Exhibit: Northline Dental as a template would build it, scrollable" data-clean="concepts/northline-dental.html" data-clean-title="Northline Dental, the finished concept, scrollable">Dental</button>
@@ -199,40 +199,40 @@
           <p>Both windows change together: the same fictional business, the default on the left and the finished page on the right.</p>
         </div>
         <div class="compare-pane compare-left">
-          <div class="compare-head">
+          <div class="compare-head" data-coded>
             <span class="compare-kicker">Scroll inside it</span>
             <h3>The default</h3>
             <p>What a template does with the brief. Every tell left in, built as an exhibit in its own document.</p>
           </div>
-          <div class="compare-frame">
+          <div class="compare-frame" data-coded>
             <iframe id="compare-slop" src="exhibit/dental.html" title="Exhibit: Northline Dental as a template would build it, scrollable" loading="lazy"></iframe>
           </div>
         </div>
         <div class="compare-pane">
-          <div class="compare-head">
+          <div class="compare-head" data-coded>
             <span class="compare-kicker">Scroll inside it</span>
             <h3>Built to the list</h3>
             <p>What a person does with the same brief, finished to this standard.</p>
           </div>
-          <div class="compare-frame">
+          <div class="compare-frame" data-coded>
             <iframe id="compare-clean" src="concepts/northline-dental.html" title="Northline Dental, the finished concept, scrollable" loading="lazy"></iframe>
           </div>
         </div>
-        <p class="compare-foot">Every business here is fictional. The defaults are separate documents built to show the tells, so nothing in them enters the code of this page, which is what the counts below measure.</p>
+        <p class="compare-foot" data-coded>Every business here is fictional. The defaults are separate documents built to show the tells, so nothing in them enters the code of this page, which is what the counts below measure.</p>
       </div>
 
-      <div class="receipt" data-reveal>
-        <div class="receipt-copy">
+      <div class="receipt">
+        <div class="receipt-copy" data-coded>
           <h3>This page, measured against its own list.</h3>
           <p>The counts come from this page's own code. The specimens in the list are images and the default above is its own document, so neither enters them. Open the source and check. If you buy a site, the same receipt comes with it.</p>
         </div>
         <div class="receipt-grid" role="list" aria-label="Measurements of this page">
-          <div role="listitem"><span class="display-num">0</span><small>Rounded corners</small></div>
-          <div role="listitem"><span class="display-num">0</span><small>Gradients</small></div>
-          <div role="listitem"><span class="display-num">0</span><small>Third party scripts</small></div>
-          <div role="listitem"><span class="display-num">0</span><small>Tracking cookies</small></div>
-          <div role="listitem"><span class="display-num">2</span><small>Typefaces, self hosted</small></div>
-          <div role="listitem"><span class="display-num">4</span><small>Sections</small></div>
+          <div role="listitem" data-coded><span class="display-num">0</span><small>Rounded corners</small></div>
+          <div role="listitem" data-coded><span class="display-num">0</span><small>Gradients</small></div>
+          <div role="listitem" data-coded><span class="display-num">0</span><small>Third party scripts</small></div>
+          <div role="listitem" data-coded><span class="display-num">0</span><small>Tracking cookies</small></div>
+          <div role="listitem" data-coded><span class="display-num">2</span><small>Typefaces, self hosted</small></div>
+          <div role="listitem" data-coded><span class="display-num">4</span><small>Sections</small></div>
         </div>
       </div>
     </section>
@@ -257,7 +257,7 @@
         </div>
 
         <div class="proof-grid">
-          <article class="proof-card" data-build="p-card1">
+          <article class="proof-card" data-coded>
             <a class="proof-media" href="concepts/northline-dental.html" aria-label="Open the Northline Dental concept page">
               <img src="assets/concepts/northline-dental/hero.jpg" width="1800" height="1200" loading="lazy" alt="Bright dental treatment room used in the fictional Northline Dental concept">
               <span>Fictional business</span>
@@ -270,7 +270,7 @@
             </div>
           </article>
 
-          <article class="proof-card" data-build="p-card2">
+          <article class="proof-card" data-coded>
             <a class="proof-media" href="concepts/fieldnote-coffee.html" aria-label="Open the Fieldnote Coffee concept page">
               <img src="assets/concepts/fieldnote-coffee/hero.jpg" width="1800" height="1200" loading="lazy" alt="Warm plant filled cafe interior used in the fictional Fieldnote Coffee concept">
               <span>Fictional business</span>
@@ -283,7 +283,7 @@
             </div>
           </article>
 
-          <article class="proof-card" data-build="p-card3">
+          <article class="proof-card" data-coded>
             <a class="proof-media" href="concepts/kestrel-electric.html" aria-label="Open the Kestrel Electric concept page">
               <img src="assets/concepts/kestrel-electric/hero.jpg" width="1800" height="1200" loading="lazy" alt="An electrician checking a residential breaker panel, used in the fictional Kestrel Electric concept">
               <span>Fictional business</span>
@@ -296,7 +296,7 @@
             </div>
           </article>
 
-          <article class="proof-card" data-build="p-card4">
+          <article class="proof-card" data-coded>
             <a class="proof-media" href="concepts/hollis-barbershop.html" aria-label="Open the Hollis Barbershop concept page">
               <img src="assets/concepts/hollis-barbershop/hero.jpg" width="1800" height="1200" loading="lazy" alt="Green leather barber chairs on a checkerboard floor, used in the fictional Hollis Barbershop concept">
               <span>Fictional business</span>
@@ -324,10 +324,10 @@
           <p data-build="h-p">There is no call to book and no proposal to wait for. The brief is short on purpose: the four things a page needs to be about you rather than about websites. Payment comes first because it is what starts the clock.</p>
 
           <ol class="next-steps">
-            <li data-build="h-step1"><b>Send the brief.</b> The button opens an email in your own mail app with your answers already in it. Nothing is sent until you press send.</li>
-            <li data-build="h-step2"><b>Pay the founding price.</b> Checkout is on Stripe's own page. This site never sees your card.</li>
-            <li data-build="h-step3"><b>48 hours later, a link.</b> A finished page on a private address, with the receipt of measurements beside it.</li>
-            <li data-build="h-step4"><b>One round of changes.</b> Send them together. They go in, and you get the code, yours to keep and host anywhere.</li>
+            <li data-coded><b>Send the brief.</b> The button opens an email in your own mail app with your answers already in it. Nothing is sent until you press send.</li>
+            <li data-coded><b>Pay the founding price.</b> Checkout is on Stripe's own page. This site never sees your card.</li>
+            <li data-coded><b>48 hours later, a link.</b> A finished page on a private address, with the receipt of measurements beside it.</li>
+            <li data-coded><b>One round of changes.</b> Send them together. They go in, and you get the code, yours to keep and host anywhere.</li>
           </ol>
         </div>
 
@@ -338,48 +338,48 @@
           </div>
 
           <div class="intake" id="intake" aria-label="Site brief">
-          <div class="intake-head" data-build="h-ihead">
+          <div class="intake-head" data-coded>
             <span>The brief</span>
             <span>Four questions</span>
           </div>
 
-          <div class="field" data-build="h-q1">
+          <div class="field" data-coded>
             <label for="business">The business, in a sentence or two</label>
             <small>What you do, where, and for whom. Plain words beat polished ones.</small>
             <textarea id="business" name="business" rows="3" placeholder="Mobile dog grooming in Winter Park and Maitland. Mostly regulars, mostly anxious dogs."></textarea>
           </div>
 
-          <div class="field" data-build="h-q2">
+          <div class="field" data-coded>
             <label for="visitor">Who the page is for</label>
             <small>The person you most want reading it. Be narrow.</small>
             <input id="visitor" name="visitor" type="text" placeholder="A dog owner who just moved to the area and is searching on their phone">
           </div>
 
-          <div class="field" data-build="h-q3">
+          <div class="field" data-coded>
             <label for="action">The one thing it must make them do</label>
             <small>Call, book, email, visit, order. Pick one.</small>
             <input id="action" name="action" type="text" placeholder="Text the number to book a first groom">
           </div>
 
-          <div class="field" data-build="h-q4">
+          <div class="field" data-coded>
             <label for="links">Links to anything that already exists</label>
             <small>A current site, a Google listing, Instagram, a menu PDF, photos. Anything.</small>
             <textarea id="links" name="links" rows="2" placeholder="https://"></textarea>
           </div>
 
-          <div class="field" data-build="h-q5">
+          <div class="field" data-coded>
             <label for="reply">Your email</label>
             <small>So the finished link has somewhere to go.</small>
             <input id="reply" name="reply" type="email" autocomplete="email" placeholder="you@yourbusiness.com">
           </div>
 
-          <div class="intake-actions" data-build="h-actions">
+          <div class="intake-actions" data-coded>
             <button class="button button-accent" id="send-brief" type="button">Send the brief</button>
             <!-- STRIPE: replace this href with the live Payment Link. Product: One-page website, founding price, $495. See README. -->
             <a class="button button-outline" id="pay-link" href="mailto:hello@actuallycoded.com?subject=Founding%20price%2C%20%24495">Request the payment link, $495</a>
           </div>
           <p class="intake-status" id="intake-status" role="status" aria-live="polite"></p>
-          <p class="intake-note" data-build="h-note">The brief goes through your own email app and the payment through Stripe. This page loads no third party script and stores nothing you type. Card payments open the moment Stripe finishes checking this site; until then the button emails me and the payment link comes back by reply. Prefer to write it yourself? <a href="mailto:hello@actuallycoded.com?subject=Site%20brief">hello@actuallycoded.com</a>.</p>
+          <p class="intake-note" data-coded>The brief goes through your own email app and the payment through Stripe. This page loads no third party script and stores nothing you type. Card payments open the moment Stripe finishes checking this site; until then the button emails me and the payment link comes back by reply. Prefer to write it yourself? <a href="mailto:hello@actuallycoded.com?subject=Site%20brief">hello@actuallycoded.com</a>.</p>
         </div>
         </div>
       </div>

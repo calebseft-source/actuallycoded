@@ -383,10 +383,10 @@
         L("  <h2>Four pages, built to the list above.</h2>", "p-h2"),
         L("  <p>A dental practice, a coffee bar, an electrician and a barbershop.</p>", "p-p"),
         L("  <div class=\"proof-grid\">"),
-        L("    <article><a href=\"concepts/northline-dental.html\">Northline Dental</a></article>", "p-card1"),
-        L("    <article><a href=\"concepts/fieldnote-coffee.html\">Fieldnote Coffee</a></article>", "p-card2"),
-        L("    <article><a href=\"concepts/kestrel-electric.html\">Kestrel Electric</a></article>", "p-card3"),
-        L("    <article><a href=\"concepts/hollis-barbershop.html\">Hollis Barbershop</a></article>", "p-card4"),
+        L("    <article class=\"proof-card\">Northline Dental</article>"),
+        L("    <article class=\"proof-card\">Fieldnote Coffee</article>"),
+        L("    <article class=\"proof-card\">Kestrel Electric</article>"),
+        L("    <article class=\"proof-card\">Hollis Barbershop</article>"),
         L("  </div>"),
         L("</section>")
       ] },
@@ -408,20 +408,14 @@
         L("  <h2>Answer four questions. Pay once. Wait 48 hours.</h2>", "h-h2"),
         L("  <p>There is no call to book and no proposal to wait for.</p>", "h-p"),
         L("  <ol class=\"next-steps\">"),
-        L("    <li>01 Send the brief</li>", "h-step1"),
-        L("    <li>02 Pay the founding price</li>", "h-step2"),
-        L("    <li>03 48 hours later, a link</li>", "h-step3"),
-        L("    <li>04 One round of changes</li>", "h-step4"),
+        L("    <li>Send the brief</li>"),
+        L("    <li>Pay the founding price</li>"),
+        L("    <li>48 hours later, a link</li>"),
+        L("    <li>One round of changes</li>"),
         L("  </ol>"),
         L("  <div class=\"intake\" id=\"intake\">"),
-        L("    <div class=\"intake-head\">The brief. Four questions.</div>", "h-ihead"),
-        L("    <textarea id=\"business\" placeholder=\"The business, in a sentence or two\"></textarea>", "h-q1"),
-        L("    <input id=\"visitor\" placeholder=\"Who the page is for\">", "h-q2"),
-        L("    <input id=\"action\" placeholder=\"The one thing it must make them do\">", "h-q3"),
-        L("    <textarea id=\"links\" placeholder=\"Links to anything that already exists\"></textarea>", "h-q4"),
-        L("    <input id=\"reply\" type=\"email\" placeholder=\"Reply to\">", "h-q5"),
-        L("    <button id=\"send-brief\" class=\"button button-accent\">Send the brief</button>", "h-actions"),
-        L("    <p class=\"intake-note\">The brief goes through your own email app and the payment through Stripe.</p>", "h-note"),
+        L("    <textarea id=\"business\"></textarea> <input id=\"visitor\"> <input id=\"action\">"),
+        L("    <button id=\"send-brief\">Send the brief</button>"),
         L("  </div>"),
         L("</section>")
       ] }
@@ -733,5 +727,175 @@
   var poll = window.setInterval(function () {
     sweep();
     if (builds.every(function (b) { return b.isDone(); })) window.clearInterval(poll);
+  }, 600);
+})();
+
+/* ============================================================
+   CODED COMPONENTS. Everything marked data-coded is written in its
+   own markup before it exists: the comparison windows and their
+   switch, the receipt and its six numbers, the four proof cards, the
+   four steps, every field and button of the brief. The code is read
+   from the element itself, so it is always true. Each starts as a
+   strip of code, grows to size, and the code fades to reveal what it
+   made; small things skip the strip. Same off switches as the rest.
+   ============================================================ */
+(function () {
+  "use strict";
+  var els = document.querySelectorAll("[data-coded]");
+  if (!els.length) return;
+  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reduced || document.hidden) return;
+
+  var escapeHtml = function (str) { return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); };
+  var paint = function (line) {
+    var h = escapeHtml(line);
+    var strings = [];
+    h = h.replace(/"([^"]*)"/g, function (_, inner) {
+      strings.push("<span class=\"st\">\"" + inner + "\"</span>");
+      return "\u0001" + (strings.length - 1) + "\u0001";
+    });
+    h = h.replace(/(&lt;\/?)([a-z][a-z0-9-]*)/g, "$1<span class=\"kw\">$2</span>");
+    return h.replace(/\u0001(\d+)\u0001/g, function (_, i) { return strings[Number(i)]; });
+  };
+  var text = function (node, max) {
+    var t = (node.textContent || "").replace(/\s+/g, " ").trim();
+    if (t.length > max) t = t.slice(0, max - 1).replace(/\s+\S*$/, "") + "\u2026";
+    return t;
+  };
+  var firstClass = function (node) {
+    var c = node.getAttribute("class");
+    return c ? c.split(/\s+/).filter(function (x) { return x && x.indexOf("is-") !== 0; })[0] : "";
+  };
+
+  // The element's own markup, abbreviated: its opening tag, up to six
+  // of the things inside it, its closing tag.
+  var serialize = function (el) {
+    var tag = el.tagName.toLowerCase();
+    var cls = firstClass(el);
+    var lines = ["<" + tag + (cls ? " class=\"" + cls + "\"" : "") + ">"];
+    var emitted = [];
+    var nodes = el.querySelectorAll("img, iframe, h2, h3, p, span, small, label, input, textarea, select, button, a, li, b");
+    for (var i = 0; i < nodes.length && lines.length < 7; i++) {
+      var n = nodes[i];
+      if (n.classList.contains("coded-code") || n.classList.contains("spec-code")) continue;
+      var inside = false;
+      for (var k = 0; k < emitted.length; k++) if (emitted[k].contains(n)) { inside = true; break; }
+      if (inside) continue;
+      var t = n.tagName.toLowerCase(), line = "";
+      if (t === "img") line = "<img src=\"" + (n.getAttribute("src") || "") + "\">";
+      else if (t === "iframe") line = "<iframe src=\"" + (n.getAttribute("src") || "") + "\"></iframe>";
+      else if (t === "input") line = "<input id=\"" + (n.id || "") + "\" type=\"" + (n.getAttribute("type") || "text") + "\">";
+      else if (t === "textarea") line = "<textarea id=\"" + (n.id || "") + "\"></textarea>";
+      else if (t === "select") line = "<select id=\"" + (n.id || "") + "\"></select>";
+      else {
+        var body = text(n, 62);
+        if (!body) continue;
+        var c = firstClass(n);
+        line = "<" + t + (c ? " class=\"" + c + "\"" : "") + ">" + body + "</" + t + ">";
+      }
+      lines.push("  " + line);
+      emitted.push(n);
+    }
+    lines.push("</" + tag + ">");
+    return lines;
+  };
+
+  var RATE = 2.4, TAIL = 3;
+  var makeTypist = function (pre, lines, onDone) {
+    var done = [], i = 0, col = 0, last = 0, finished = false;
+    var render = function (current) {
+      var out = "";
+      var shown = done.slice(-TAIL);
+      for (var k = 0; k < shown.length; k++) out += "<span class=\"old\">" + paint(shown[k]) + "</span>\n";
+      out += "<span class=\"now\">" + paint(current) + "</span><span class=\"caret\"></span>\n";
+      pre.innerHTML = out;
+    };
+    var step = function () {
+      if (finished) return;
+      var line = lines[i];
+      var now = Date.now();
+      if (!last) last = now;
+      if (col < line.length) {
+        var n = Math.floor((now - last) / RATE);
+        if (n > 0) { col = Math.min(line.length, col + n); last += n * RATE; }
+        render(line.slice(0, col));
+        window.setTimeout(step, 16);
+        return;
+      }
+      done.push(line); i += 1; col = 0; last = 0;
+      if (i >= lines.length) { finished = true; render(""); onDone(); return; }
+      render("");
+      window.setTimeout(step, 70 + Math.random() * 70);
+    };
+    return { start: function () { render(""); window.setTimeout(step, 60); }, stop: function () { finished = true; } };
+  };
+
+  var items = [];
+  Array.prototype.forEach.call(els, function (el) {
+    var natural = el.offsetHeight;
+    // Hidden at this width (a pane the layout does not show): leave it.
+    if (!natural) return;
+    var collapse = natural >= 90;
+    var lines = serialize(el);
+    var pre = document.createElement("pre");
+    pre.className = "coded-code";
+    pre.setAttribute("aria-hidden", "true");
+    el.classList.add("is-coding");
+    el.appendChild(pre);
+    if (collapse) el.style.height = "56px";
+    var started = false, done = false, typist = null;
+
+    var rect = function () { return el.getBoundingClientRect(); };
+    var inView = function () { var r = rect(); var vh = window.innerHeight || 0; return !vh || (r.top < vh * 0.8 && r.bottom > vh * 0.08); };
+    var passed = function () { return rect().bottom < 0; };
+    var finish = function (instant) {
+      if (done) return;
+      done = true;
+      if (typist) typist.stop();
+      if (instant) { el.classList.add("is-instant"); pre.classList.add("is-instant"); }
+      var grow = collapse ? (instant ? 0 : 560) : 0;
+      if (collapse) el.style.height = natural + "px";
+      window.setTimeout(function () {
+        el.style.height = "";
+        pre.classList.add("is-fading");
+        window.setTimeout(function () {
+          if (pre.parentNode) pre.parentNode.removeChild(pre);
+          el.classList.remove("is-coding");
+          el.classList.remove("is-instant");
+        }, instant ? 0 : 440);
+      }, grow);
+    };
+    var start = function () {
+      if (started || done) return;
+      if (!inView()) return;
+      started = true;
+      typist = makeTypist(pre, lines, function () { window.setTimeout(function () { finish(false); }, 200); });
+      typist.start();
+      window.setTimeout(function () { finish(false); }, 5000);
+    };
+    items.push({ start: start, finish: finish, passed: passed, isDone: function () { return done; } });
+  });
+
+  var sweep = function () {
+    items.forEach(function (it) {
+      if (it.isDone()) return;
+      if (it.passed()) { it.finish(true); return; }
+      it.start();
+    });
+  };
+  var tick = false;
+  window.addEventListener("scroll", function () {
+    if (tick) return;
+    tick = true;
+    window.setTimeout(function () { tick = false; sweep(); }, 80);
+  }, { passive: true });
+  window.addEventListener("resize", sweep, { passive: true });
+  document.addEventListener("visibilitychange", function () {
+    if (document.hidden) items.forEach(function (it) { it.finish(true); });
+  });
+  window.setTimeout(sweep, 300);
+  var poll = window.setInterval(function () {
+    sweep();
+    if (items.every(function (it) { return it.isDone(); })) window.clearInterval(poll);
   }, 600);
 })();
