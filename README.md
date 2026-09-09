@@ -67,8 +67,8 @@ three optional brief fields, redirect to `https://actuallycoded.com/#start`), th
 the interim button in `docs/index.html` (`id="pay-link"`, currently a mailto that reads
 "Request the payment link, $495") with the Stripe URL, the text "Pay the founding price,
 $495", and `target="_blank" rel="noopener noreferrer"`, and trim the sentence about the
-button emailing from the intake note. Caleb still has to add the payout bank account under
-Account status.
+button emailing from the intake note. Bank account added 2026-09-09. Branding (icon, logo, colours) and public details
+(support email, privacy and terms URLs) are set; brand files live in `brand/`.
 
 **Not planned:** the OAuth app stays pointed at cfwebdev.net and cfwebdev.net is not
 redirected; it remains Caleb's portfolio (his call 2026-09-08). Steps 4 and 5 below are
