@@ -48,9 +48,9 @@
     <!-- ============================================================
          1. HERO
          ============================================================ -->
-    <section class="hero" id="top" aria-labelledby="hero-title">
+    <section class="hero" data-build-section="hero" id="top" aria-labelledby="hero-title">
       <div class="shell hero-grid">
-        <div data-reveal>
+        <div>
           <p class="eyebrow" data-build="eyebrow">Custom one-page websites</p>
           <h1 id="hero-title" data-build="h1">One page. Real code you own. Finished in 48 hours.</h1>
           <p class="hero-lede" data-build="lede">A website for your business that was written, not generated. No template underneath it, no page builder, no build step. One person designs it, codes it, and checks it against a standard you can read further down this page.</p>
@@ -67,7 +67,7 @@
             <pre></pre>
           </div>
 
-          <aside class="offer" data-reveal data-build="offer" aria-label="The offer">
+          <aside class="offer" data-build="offer" aria-label="The offer">
             <div class="offer-head" data-build="offer-head">
               <span>The one product</span>
             </div>
@@ -95,22 +95,27 @@
          2. THE STANDARD, SHOWN
          ============================================================ -->
     <section class="section shell" data-build-section="standard" id="standard" aria-labelledby="standard-title">
-      <pre class="section-code" aria-hidden="true"></pre>
-      <div class="section-heading split-heading" data-reveal>
+      <div class="section-heading split-heading">
         <div>
-          <p class="eyebrow">The standard</p>
-          <h2 id="standard-title">Six things a generated site does. Six things yours will not.</h2>
+          <p class="eyebrow" data-build="s-eyebrow">The standard</p>
+          <h2 id="standard-title" data-build="s-h2">Six things a generated site does. Six things yours will not.</h2>
         </div>
-        <p>Most small business websites now come out of the same handful of tools, and they share the same tells. You have seen them without knowing their names. Below: the six tells, each one shown beside what you get instead. Then two whole sites you can scroll, one generated and one finished. Then this page measured against the list.</p>
+        <div class="heading-right">
+          <div class="build-pane" aria-hidden="true">
+            <div class="build-bar"><span>index.html</span><span>#standard</span></div>
+            <pre></pre>
+          </div>
+          <p data-build="s-p">Most small business websites now come out of the same handful of tools, and they share the same tells. You have seen them without knowing their names. Below: the six tells, each one shown beside what you get instead. Then two whole sites you can scroll, one generated and one finished. Then this page measured against the list.</p>
+        </div>
       </div>
 
-      <div class="tells-head" aria-hidden="true">
+      <div class="tells-head" data-build="s-head" aria-hidden="true">
         <span></span>
         <span>The tell</span>
         <span>What you get instead</span>
       </div>
-      <ol class="tells" data-reveal-group>
-        <li data-reveal>
+      <ol class="tells">
+        <li data-build="s-tell1">
           <span class="tell-index">01</span>
           <div class="tell-not">
             <figure class="specimen specimen-not"><img src="assets/tells/01.svg" width="600" height="260" loading="lazy" alt="Pill shaped buttons and a rounded card with a soft shadow"></figure>
@@ -123,7 +128,7 @@
             <p>Square corners on every element, including the favicon in the browser tab. Nothing on the page is a leftover setting.</p>
           </div>
         </li>
-        <li data-reveal>
+        <li data-build="s-tell2">
           <span class="tell-index">02</span>
           <div class="tell-not">
             <figure class="specimen specimen-not"><img src="assets/tells/02.svg" width="600" height="260" loading="lazy" alt="A purple to blue gradient hero with glowing blobs behind the headline"></figure>
@@ -136,7 +141,7 @@
             <p>A single colour that marks what matters: the price, the button, the thing to read next. Everywhere else, restraint.</p>
           </div>
         </li>
-        <li data-reveal>
+        <li data-build="s-tell3">
           <span class="tell-index">03</span>
           <div class="tell-not">
             <figure class="specimen specimen-not"><img src="assets/tells/03.svg" width="600" height="260" loading="lazy" alt="A system font headline with one word in yellow cursive"></figure>
@@ -149,7 +154,7 @@
             <p>A display face and a reading face, picked for the business, served from your own site so nothing is fetched from Google to render your name.</p>
           </div>
         </li>
-        <li data-reveal>
+        <li data-build="s-tell4">
           <span class="tell-index">04</span>
           <div class="tell-not">
             <figure class="specimen specimen-not"><img src="assets/tells/04.svg" width="600" height="260" loading="lazy" alt="Four identical sections stacked: a heading, three cards, repeat"></figure>
@@ -162,7 +167,7 @@
             <p>Fewer, longer, and different from one another. This page has four. Yours will have as many as it needs and not one more.</p>
           </div>
         </li>
-        <li data-reveal>
+        <li data-build="s-tell5">
           <span class="tell-index">05</span>
           <div class="tell-not">
             <figure class="specimen specimen-not"><img src="assets/tells/05.svg" width="600" height="260" loading="lazy" alt="Six floating white cards with drop shadows and no hierarchy"></figure>
@@ -175,7 +180,7 @@
             <p>Rules, borders and type size do the work. When something is in a box on your page, it is because it earned one.</p>
           </div>
         </li>
-        <li data-reveal>
+        <li data-build="s-tell6">
           <span class="tell-index">06</span>
           <div class="tell-not">
             <figure class="specimen specimen-not"><img src="assets/tells/06.svg" width="600" height="260" loading="lazy" alt="Copy that reads: we leverage a client centric approach to deliver seamless innovative solutions"></figure>
@@ -190,7 +195,7 @@
         </li>
       </ol>
 
-      <div class="compare" data-reveal>
+      <div class="compare" data-build="s-compare">
         <div class="compare-pick">
           <span class="compare-kicker">Pick a business</span>
           <div class="compare-switch" role="group" aria-label="Choose a business to compare" data-pair>
@@ -222,7 +227,7 @@
         <p class="compare-foot">Every business here is fictional. The defaults are separate documents built to show the tells, so nothing in them enters the code of this page, which is what the counts below measure.</p>
       </div>
 
-      <div class="receipt" data-reveal>
+      <div class="receipt" data-build="s-receipt">
         <div class="receipt-copy">
           <h3>This page, measured against its own list.</h3>
           <p>The counts come from this page's own code. The specimens in the list are images and the default above is its own document, so neither enters them. Open the source and check. If you buy a site, the same receipt comes with it.</p>
@@ -242,18 +247,23 @@
          3. PROOF, HONESTLY LABELED
          ============================================================ -->
     <section class="proof section" data-build-section="proof" id="proof" aria-labelledby="proof-title">
-      <pre class="section-code" aria-hidden="true"></pre>
       <div class="shell">
-        <div class="section-heading split-heading" data-reveal>
+        <div class="section-heading split-heading">
           <div>
-            <p class="eyebrow">Proof</p>
-            <h2 id="proof-title">Four pages, built to the list above.</h2>
+            <p class="eyebrow" data-build="p-eyebrow">Proof</p>
+            <h2 id="proof-title" data-build="p-h2">Four pages, built to the list above.</h2>
           </div>
-          <p>A dental practice, a coffee bar, an electrician and a barbershop, each taken from a blank file to a finished page against the same six tells, then measured. All four are demonstration concepts for fictional businesses and say so on screen, which is the point: nothing in them is inherited from a template or borrowed from anyone. Open any of them and count.</p>
+          <div class="heading-right">
+            <div class="build-pane" aria-hidden="true">
+              <div class="build-bar"><span>index.html</span><span>#proof</span></div>
+              <pre></pre>
+            </div>
+            <p data-build="p-p">A dental practice, a coffee bar, an electrician and a barbershop, each taken from a blank file to a finished page against the same six tells, then measured. All four are demonstration concepts for fictional businesses and say so on screen, which is the point: nothing in them is inherited from a template or borrowed from anyone. Open any of them and count.</p>
+          </div>
         </div>
 
-        <div class="proof-grid" data-reveal-group>
-          <article class="proof-card" data-reveal>
+        <div class="proof-grid">
+          <article class="proof-card" data-build="p-card1">
             <a class="proof-media" href="concepts/northline-dental.html" aria-label="Open the Northline Dental concept page">
               <img src="assets/concepts/northline-dental/hero.jpg" width="1800" height="1200" loading="lazy" alt="Bright dental treatment room used in the fictional Northline Dental concept">
               <span>Fictional business</span>
@@ -266,7 +276,7 @@
             </div>
           </article>
 
-          <article class="proof-card" data-reveal>
+          <article class="proof-card" data-build="p-card2">
             <a class="proof-media" href="concepts/fieldnote-coffee.html" aria-label="Open the Fieldnote Coffee concept page">
               <img src="assets/concepts/fieldnote-coffee/hero.jpg" width="1800" height="1200" loading="lazy" alt="Warm plant filled cafe interior used in the fictional Fieldnote Coffee concept">
               <span>Fictional business</span>
@@ -279,7 +289,7 @@
             </div>
           </article>
 
-          <article class="proof-card" data-reveal>
+          <article class="proof-card" data-build="p-card3">
             <a class="proof-media" href="concepts/kestrel-electric.html" aria-label="Open the Kestrel Electric concept page">
               <img src="assets/concepts/kestrel-electric/hero.jpg" width="1800" height="1200" loading="lazy" alt="An electrician checking a residential breaker panel, used in the fictional Kestrel Electric concept">
               <span>Fictional business</span>
@@ -292,7 +302,7 @@
             </div>
           </article>
 
-          <article class="proof-card" data-reveal>
+          <article class="proof-card" data-build="p-card4">
             <a class="proof-media" href="concepts/hollis-barbershop.html" aria-label="Open the Hollis Barbershop concept page">
               <img src="assets/concepts/hollis-barbershop/hero.jpg" width="1800" height="1200" loading="lazy" alt="Green leather barber chairs on a checkerboard floor, used in the fictional Hollis Barbershop concept">
               <span>Fictional business</span>
@@ -313,64 +323,70 @@
          4. START: THE BRIEF AND THE PAYMENT
          ============================================================ -->
     <section class="section shell" data-build-section="start" id="start" aria-labelledby="start-title">
-      <pre class="section-code" aria-hidden="true"></pre>
       <div class="start-grid">
-        <div class="start-copy" data-reveal>
-          <p class="eyebrow">How it works</p>
-          <h2 id="start-title">Answer four questions. Pay once. Wait 48 hours.</h2>
-          <p>There is no call to book and no proposal to wait for. The brief is short on purpose: the four things a page needs to be about you rather than about websites. Payment comes first because it is what starts the clock.</p>
+        <div class="start-copy">
+          <p class="eyebrow" data-build="h-eyebrow">How it works</p>
+          <h2 id="start-title" data-build="h-h2">Answer four questions. Pay once. Wait 48 hours.</h2>
+          <p data-build="h-p">There is no call to book and no proposal to wait for. The brief is short on purpose: the four things a page needs to be about you rather than about websites. Payment comes first because it is what starts the clock.</p>
 
           <ol class="next-steps">
-            <li><b>Send the brief.</b> The button opens an email in your own mail app with your answers already in it. Nothing is sent until you press send.</li>
-            <li><b>Pay the founding price.</b> Checkout is on Stripe's own page. This site never sees your card.</li>
-            <li><b>48 hours later, a link.</b> A finished page on a private address, with the receipt of measurements beside it.</li>
-            <li><b>One round of changes.</b> Send them together. They go in, and you get the code, yours to keep and host anywhere.</li>
+            <li data-build="h-step1"><b>Send the brief.</b> The button opens an email in your own mail app with your answers already in it. Nothing is sent until you press send.</li>
+            <li data-build="h-step2"><b>Pay the founding price.</b> Checkout is on Stripe's own page. This site never sees your card.</li>
+            <li data-build="h-step3"><b>48 hours later, a link.</b> A finished page on a private address, with the receipt of measurements beside it.</li>
+            <li data-build="h-step4"><b>One round of changes.</b> Send them together. They go in, and you get the code, yours to keep and host anywhere.</li>
           </ol>
         </div>
 
-        <div class="intake" id="intake" data-reveal aria-label="Site brief">
-          <div class="intake-head">
+        <div class="start-right">
+          <div class="build-pane" aria-hidden="true">
+            <div class="build-bar"><span>index.html</span><span>#start</span></div>
+            <pre></pre>
+          </div>
+
+          <div class="intake" id="intake" aria-label="Site brief">
+          <div class="intake-head" data-build="h-ihead">
             <span>The brief</span>
             <span>Four questions</span>
           </div>
 
-          <div class="field">
+          <div class="field" data-build="h-q1">
             <label for="business">The business, in a sentence or two</label>
             <small>What you do, where, and for whom. Plain words beat polished ones.</small>
             <textarea id="business" name="business" rows="3" placeholder="Mobile dog grooming in Winter Park and Maitland. Mostly regulars, mostly anxious dogs."></textarea>
           </div>
 
-          <div class="field">
+          <div class="field" data-build="h-q2">
             <label for="visitor">Who the page is for</label>
             <small>The person you most want reading it. Be narrow.</small>
             <input id="visitor" name="visitor" type="text" placeholder="A dog owner who just moved to the area and is searching on their phone">
           </div>
 
-          <div class="field">
+          <div class="field" data-build="h-q3">
             <label for="action">The one thing it must make them do</label>
             <small>Call, book, email, visit, order. Pick one.</small>
             <input id="action" name="action" type="text" placeholder="Text the number to book a first groom">
           </div>
 
-          <div class="field">
+          <div class="field" data-build="h-q4">
             <label for="links">Links to anything that already exists</label>
             <small>A current site, a Google listing, Instagram, a menu PDF, photos. Anything.</small>
             <textarea id="links" name="links" rows="2" placeholder="https://"></textarea>
           </div>
 
-          <div class="field">
+          <div class="field" data-build="h-q5">
             <label for="reply">Your email</label>
             <small>So the finished link has somewhere to go.</small>
             <input id="reply" name="reply" type="email" autocomplete="email" placeholder="you@yourbusiness.com">
           </div>
 
-          <div class="intake-actions">
+          <div class="intake-actions" data-build="h-actions">
             <button class="button button-accent" id="send-brief" type="button">Send the brief</button>
             <!-- STRIPE: replace this href with the live Payment Link. Product: One-page website, founding price, $495. See README. -->
             <a class="button button-outline" id="pay-link" href="mailto:hello@actuallycoded.com?subject=Founding%20price%2C%20%24495">Request the payment link, $495</a>
           </div>
           <p class="intake-status" id="intake-status" role="status" aria-live="polite"></p>
-          <p class="intake-note">The brief goes through your own email app and the payment through Stripe. This page loads no third party script and stores nothing you type. Card payments open the moment Stripe finishes checking this site; until then the button emails me and the payment link comes back by reply. Prefer to write it yourself? <a href="mailto:hello@actuallycoded.com?subject=Site%20brief">hello@actuallycoded.com</a>.</p>
+          <p class="intake-note" data-build="h-note">The brief goes through your own email app and the payment through Stripe. This page loads no third party script and stores nothing you type. Card payments open the moment Stripe finishes checking this site; until then the button emails me and the payment link comes back by reply. Prefer to write it yourself? <a href="mailto:hello@actuallycoded.com?subject=Site%20brief">hello@actuallycoded.com</a>.</p>
+        </div>
         </div>
       </div>
     </section>
