@@ -951,8 +951,8 @@ html.smooth-active { scroll-behavior: auto; }
   align-content: start;
   padding: 2.2rem clamp(1rem, 3vw, 2.6rem);
   font-family: var(--mono);
-  font-size: 0.8rem;
-  line-height: 1.65;
+  font-size: 1rem;
+  line-height: 1.6;
   color: rgba(241, 235, 224, 0.17);
   white-space: pre;
   tab-size: 2;
@@ -977,6 +977,29 @@ html.smooth-active { scroll-behavior: auto; }
   animation: caret-blink 1s steps(1, end) infinite;
 }
 @keyframes caret-blink { 0%, 55% { opacity: 1; } 56%, 100% { opacity: 0; } }
+
+/* Reading planes: where there is text to read, the code behind drops
+   into a soft texture. The section's own near black at four fifths,
+   a light backdrop blur, square, no border, no glow. Not glass. */
+.reading {
+  position: relative;
+  z-index: 1;
+  background: rgba(11, 10, 8, 0.8);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  padding: 1.5rem;
+  margin: -1.5rem;
+}
+.hero .reading { background: rgba(6, 5, 4, 0.78); }
+.proof .reading { background: rgba(18, 16, 12, 0.82); }
+.tells-head.reading { margin-bottom: 0; padding-bottom: 0.9rem; }
+.tells.reading { margin-top: 0; padding-top: 0; }
+.section-heading.reading { margin-bottom: calc(3.2rem - 1.5rem); }
+.next-steps.reading { margin-top: 0; }
+@media (max-width: 860px) {
+  .reading { padding: 1rem; margin: -1rem; }
+  .section-heading.reading { margin-bottom: calc(3.2rem - 1rem); }
+}
 /* The hero's layer sits a shade dimmer under the headline. */
 .hero .code-layer { color: rgba(241, 235, 224, 0.14); }
 .hero .code-layer .now { color: rgba(241, 235, 224, 0.5); }
@@ -984,7 +1007,7 @@ html.smooth-active { scroll-behavior: auto; }
   .code-layer { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 }
 @media (max-width: 860px) {
-  .code-layer { grid-template-columns: 1fr; font-size: 0.72rem; color: rgba(241, 235, 224, 0.11); }
+  .code-layer { grid-template-columns: 1fr; font-size: 0.86rem; color: rgba(241, 235, 224, 0.11); }
   .code-layer pre:nth-child(n+2) { display: none; }
 }
 @media (prefers-reduced-motion: reduce) {

@@ -584,26 +584,62 @@
       (caret ? "<span class=\"caret\"></span>" : "") + "\n";
   };
 
-  var renderStatic = function (pre, frag) {
-    var out = "";
-    for (var i = 0; i < frag.lines.length; i++) out += lineHtml(i + 1, frag.lines[i], frag.lang, false, false);
+  var renderStatic = function (layer, pre, fragments, startFrag) {
+    var lh = parseFloat(getComputedStyle(pre).lineHeight) || 26;
+    var want = Math.max(8, Math.floor((layer.clientHeight - 60) / lh));
+    var out = "", n = 1, frag = startFrag % fragments.length, line = 0, guard = 0;
+    while (n <= want && guard++ < 4000) {
+      var f = fragments[frag];
+      if (line >= f.lines.length) { out += lineHtml(n++, "", f.lang, false, false); frag = (frag + 1) % fragments.length; line = 0; continue; }
+      out += lineHtml(n++, f.lines[line++], f.lang, false, false);
+    }
     pre.innerHTML = out;
   };
 
   var makeTypist = function (layer, pre, fragments, startFrag, startDelay) {
-    var frag = startFrag % fragments.length, line = 0, col = 0, done = [], timer = null, started = false;
+    // Each column is a live editor: it starts full of dim code, keeps
+    // writing at the bottom, and the oldest line leaves the top. So the
+    // code runs from the top of the section to the bottom from the
+    // first frame, and it never stops moving.
+    var frag = startFrag % fragments.length, line = 0, col = 0;
+    var done = [], base = 1, timer = null, started = false;
 
     var inView = function () {
       var r = layer.getBoundingClientRect();
       var vh = window.innerHeight || 0;
       return !vh || (r.bottom > -240 && r.top < vh + 240);
     };
+    var maxLines = function () {
+      var lh = parseFloat(getComputedStyle(pre).lineHeight) || 26;
+      return Math.max(8, Math.floor((layer.clientHeight - 60) / lh));
+    };
+    var advanceFragment = function () {
+      frag = (frag + 1) % fragments.length;
+      line = 0; col = 0;
+    };
+    var prefill = function () {
+      // Fill the column with finished lines from the fragments in order,
+      // leaving one row for the line being written.
+      var want = maxLines() - 1;
+      var guard = 0;
+      while (done.length < want && guard++ < 4000) {
+        var f = fragments[frag];
+        if (line >= f.lines.length) { done.push(""); advanceFragment(); continue; }
+        done.push(f.lines[line]);
+        line += 1;
+      }
+      if (line >= fragments[frag].lines.length) { done.push(""); advanceFragment(); }
+    };
+    var trim = function () {
+      var cap = maxLines() - 1;
+      while (done.length > cap) { done.shift(); base += 1; }
+    };
     var draw = function () {
       var f = fragments[frag];
       var out = "";
-      for (var i = 0; i < done.length; i++) out += lineHtml(i + 1, done[i], f.lang, false, false);
+      for (var i = 0; i < done.length; i++) out += lineHtml(base + i, done[i], f.lang, false, false);
       var current = f.lines[line] || "";
-      out += lineHtml(done.length + 1, current.slice(0, col), f.lang, true, true);
+      out += lineHtml(base + done.length, current.slice(0, col), f.lang, true, true);
       pre.innerHTML = out;
     };
     var step = function () {
@@ -622,15 +658,11 @@
         line += 1; col = 0;
         delay = current.length ? 90 + Math.random() * 120 : 60;
         if (line >= f.lines.length) {
-          draw();
-          timer = window.setTimeout(function () {
-            frag = (frag + 1) % fragments.length;
-            done = []; line = 0; col = 0;
-            draw();
-            timer = window.setTimeout(step, 300);
-          }, 2600);
-          return;
+          done.push("");
+          advanceFragment();
+          delay = 1200;
         }
+        trim();
       }
       draw();
       timer = window.setTimeout(step, delay);
@@ -638,7 +670,7 @@
     var start = function () {
       if (timer) return;
       if (!inView()) return;
-      if (!started) { started = true; draw(); }
+      if (!started) { started = true; prefill(); trim(); draw(); }
       timer = window.setTimeout(step, startDelay);
     };
     return start;
@@ -651,7 +683,7 @@
     if (!fragments || !pres.length) return;
     Array.prototype.forEach.call(pres, function (pre, col) {
       if (getComputedStyle(pre).display === "none") return;
-      if (reduced) { renderStatic(pre, fragments[col % fragments.length]); return; }
+      if (reduced) { renderStatic(layer, pre, fragments, col + index); return; }
       starters.push(makeTypist(layer, pre, fragments, col + index, 300 + col * 700 + index * 200));
     });
   });
