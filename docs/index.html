@@ -49,10 +49,16 @@
          1. HERO
          ============================================================ -->
     <section class="hero" id="top" aria-labelledby="hero-title">
-      <svg class="hero-mark" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><g><rect x="18" y="22" width="28" height="12"/><rect x="34" y="22" width="12" height="56"/><rect x="8" y="44" width="38" height="12"/><rect x="8" y="44" width="12" height="34"/><rect x="8" y="66" width="38" height="12"/><rect x="56" y="22" width="30" height="12"/><rect x="56" y="22" width="12" height="56"/><rect x="56" y="66" width="30" height="12"/></g></svg>
+      <div class="hero-backdrop" aria-hidden="true">
+        <img src="assets/concepts/northline-dental/tile.webp" width="900" height="600" alt="">
+        <img src="assets/concepts/hollis-barbershop/tile.webp" width="900" height="600" alt="">
+        <img src="assets/concepts/kestrel-electric/tile.webp" width="900" height="600" alt="">
+        <img src="assets/concepts/fieldnote-coffee/tile.webp" width="900" height="600" alt="">
+      </div>
+      <div class="hero-shade" aria-hidden="true"></div>
       <div class="shell hero-grid">
         <div data-reveal>
-          <p class="eyebrow"><span class="sec-num">01</span>Custom one-page websites</p>
+          <p class="eyebrow">Custom one-page websites</p>
           <h1 id="hero-title">One page. Real code you own. Finished in 48 hours.</h1>
           <p class="hero-lede">A website for your business that was written, not generated. No template underneath it, no page builder, no build step. One person designs it, codes it, and checks it against a standard you can read further down this page.</p>
           <div class="hero-actions">
@@ -85,20 +91,14 @@
       </div>
     </section>
 
-    <div class="marquee" aria-label="What every site includes">
-      <div class="marquee-track">
-        <span>No template <b>&#183;</b> No page builder <b>&#183;</b> No build step <b>&#183;</b> Real code you own <b>&#183;</b> Finished in 48 hours <b>&#183;</b> One person, start to finish <b>&#183;</b> 0 rounded corners <b>&#183;</b> 0 gradients <b>&#183;</b> 0 third party scripts <b>&#183;</b></span>
-        <span aria-hidden="true">No template <b>&#183;</b> No page builder <b>&#183;</b> No build step <b>&#183;</b> Real code you own <b>&#183;</b> Finished in 48 hours <b>&#183;</b> One person, start to finish <b>&#183;</b> 0 rounded corners <b>&#183;</b> 0 gradients <b>&#183;</b> 0 third party scripts <b>&#183;</b></span>
-      </div>
-    </div>
-
     <!-- ============================================================
          2. THE STANDARD, SHOWN
          ============================================================ -->
     <section class="section shell" id="standard" aria-labelledby="standard-title">
+      <span class="folio" aria-hidden="true">02</span>
       <div class="section-heading split-heading" data-reveal>
         <div>
-          <p class="eyebrow"><span class="sec-num">02</span>The standard</p>
+          <p class="eyebrow">The standard</p>
           <h2 id="standard-title">Six things a generated site does. Six things yours will not.</h2>
         </div>
         <p>Most small business websites now come out of the same handful of tools, and they share the same tells. You have seen them without knowing their names. Below: the six tells, each one shown beside what you get instead. Then two whole sites you can scroll, one generated and one finished. Then this page measured against the list.</p>
@@ -118,7 +118,7 @@
             <p>Pill buttons, softened cards, corners rounded because the tool's default was rounded. It is the single fastest way to spot a template.</p>
           </div>
           <div class="tell-yes">
-            <div class="specimen specimen-yes spec-btn"><span class="button button-accent" aria-hidden="true">Request a time</span><span class="button button-outline" aria-hidden="true">See prices</span></div>
+            <div class="specimen specimen-yes corners spec-btn"><span class="button button-accent" aria-hidden="true">Request a time</span><span class="button button-outline" aria-hidden="true">See prices</span></div>
             <h3>Sharp geometry, decided</h3>
             <p>Square corners on every element, including the favicon in the browser tab. Nothing on the page is a leftover setting.</p>
           </div>
@@ -131,7 +131,7 @@
             <p>Colour fading into other colour behind the headline because the empty space made someone nervous.</p>
           </div>
           <div class="tell-yes">
-            <div class="specimen specimen-yes spec-flat"><span class="spec-bar"></span><span class="spec-flat-title">One colour, one job.</span><span class="spec-flat-sub">Everything else stays quiet.</span></div>
+            <div class="specimen specimen-yes corners spec-flat"><span class="spec-bar"></span><span class="spec-flat-title">One colour, one job.</span><span class="spec-flat-sub">Everything else stays quiet.</span></div>
             <h3>One accent, used on purpose</h3>
             <p>A single colour that marks what matters: the price, the button, the thing to read next. Everywhere else, restraint.</p>
           </div>
@@ -144,7 +144,7 @@
             <p>A system font stack is the absence of a decision, so your brand looks different on every phone. Then one word in the headline is set in a script face for personality. That word is the tell.</p>
           </div>
           <div class="tell-yes">
-            <div class="specimen specimen-yes spec-type"><span class="spec-type-head">Transform your smile.</span><span class="spec-type-body">Set in a display face and a reading face, chosen for the practice and served from its own site.</span></div>
+            <div class="specimen specimen-yes corners spec-type"><span class="spec-type-head">Transform your smile.</span><span class="spec-type-body">Set in a display face and a reading face, chosen for the practice and served from its own site.</span></div>
             <h3>A chosen pair of typefaces</h3>
             <p>A display face and a reading face, picked for the business, served from your own site so nothing is fetched from Google to render your name.</p>
           </div>
@@ -157,7 +157,7 @@
             <p>Seven to nine near identical blocks in a row: heading, three cards, button, repeat. Scroll and nothing changes.</p>
           </div>
           <div class="tell-yes">
-            <div class="specimen specimen-yes spec-wire"><div class="w-hero"></div><div class="w-list"><span></span><span></span><span></span></div><div class="w-split"><span></span><span></span></div><div class="w-form"><span></span><span></span></div></div>
+            <div class="specimen specimen-yes corners spec-wire"><div class="w-hero"></div><div class="w-list"><span></span><span></span><span></span></div><div class="w-split"><span></span><span></span></div><div class="w-form"><span></span><span></span></div></div>
             <h3>Four sections that each say a thing</h3>
             <p>Fewer, longer, and different from one another. This page has four. Yours will have as many as it needs and not one more.</p>
           </div>
@@ -170,7 +170,7 @@
             <p>Every idea in its own floating box with its own drop shadow, so nothing on the page is more important than anything else.</p>
           </div>
           <div class="tell-yes">
-            <div class="specimen specimen-yes spec-rules"><div><b>Cleanings</b><span>from $120</span></div><div><b>Fillings</b><span>from $180</span></div><div><b>Same day pain</b><span>8:00 and 1:15</span></div></div>
+            <div class="specimen specimen-yes corners spec-rules"><div><b>Cleanings</b><span>from $120</span></div><div><b>Fillings</b><span>from $180</span></div><div><b>Same day pain</b><span>8:00 and 1:15</span></div></div>
             <h3>Hierarchy you can feel</h3>
             <p>Rules, borders and type size do the work. When something is in a box on your page, it is because it earned one.</p>
           </div>
@@ -183,7 +183,7 @@
             <p>"We leverage a client centric approach to deliver solutions." Nobody says that out loud, and nobody reads it.</p>
           </div>
           <div class="tell-yes">
-            <div class="specimen specimen-yes spec-copy"><span class="spec-copy-head">Two slots held every weekday for pain that cannot wait.</span><span class="spec-copy-sub">Price in writing before treatment starts. One dentist, first visit to last.</span></div>
+            <div class="specimen specimen-yes corners spec-copy"><span class="spec-copy-head">Two slots held every weekday for pain that cannot wait.</span><span class="spec-copy-sub">Price in writing before treatment starts. One dentist, first visit to last.</span></div>
             <h3>Words a customer would actually say</h3>
             <p>Your prices, your town, your hours, the question people ring you with. Specific is the whole difference, and it cannot be templated.</p>
           </div>
@@ -222,7 +222,7 @@
         <p class="compare-foot">Every business here is fictional. The defaults are separate documents built to show the tells, so nothing in them enters the code of this page, which is what the counts below measure.</p>
       </div>
 
-      <div class="receipt" data-reveal>
+      <div class="receipt corners" data-reveal>
         <div class="receipt-copy">
           <h3>This page, measured against its own list.</h3>
           <p>The counts come from this page's own code. The specimens in the list are images and the default above is its own document, so neither enters them. Open the source and check. If you buy a site, the same receipt comes with it.</p>
@@ -242,10 +242,11 @@
          3. PROOF, HONESTLY LABELED
          ============================================================ -->
     <section class="proof section" id="proof" aria-labelledby="proof-title">
+      <span class="folio" aria-hidden="true">03</span>
       <div class="shell">
         <div class="section-heading split-heading" data-reveal>
           <div>
-            <p class="eyebrow"><span class="sec-num">03</span>Proof</p>
+            <p class="eyebrow">Proof</p>
             <h2 id="proof-title">Four pages, built to the list above.</h2>
           </div>
           <p>A dental practice, a coffee bar, an electrician and a barbershop, each taken from a blank file to a finished page against the same six tells, then measured. All four are demonstration concepts for fictional businesses and say so on screen, which is the point: nothing in them is inherited from a template or borrowed from anyone. Open any of them and count.</p>
@@ -307,7 +308,7 @@
 
         <div class="person" data-reveal>
           <div class="person-mark" aria-hidden="true">CP</div>
-          <p><b>The person is Caleb Pierce, in Orlando.</b> One developer, no studio, no handoff to a junior. He is also the solo developer of <a href="https://saltwrath.com" target="_blank" rel="noopener noreferrer">SALTWRATH</a>, a game on Steam, which is the other thing he finishes. Every site here is designed, coded, and checked by him, and he answers the email.</p>
+          <p><b>I am Caleb Pierce, in Orlando.</b> One developer, no studio, no handoff to a junior. I also build <a href="https://saltwrath.com" target="_blank" rel="noopener noreferrer">SALTWRATH</a>, a game on Steam, which is the other thing I finish. Every site here is designed, coded, and checked by me, and I answer the email.</p>
         </div>
       </div>
     </section>
@@ -316,9 +317,10 @@
          4. START: THE BRIEF AND THE PAYMENT
          ============================================================ -->
     <section class="section shell" id="start" aria-labelledby="start-title">
+      <span class="folio" aria-hidden="true">04</span>
       <div class="start-grid">
         <div class="start-copy" data-reveal>
-          <p class="eyebrow"><span class="sec-num">04</span>How it works</p>
+          <p class="eyebrow">How it works</p>
           <h2 id="start-title">Answer four questions. Pay once. Wait 48 hours.</h2>
           <p>There is no call to book and no proposal to wait for. The brief is short on purpose: the four things a page needs to be about you rather than about websites. Payment comes first because it is what starts the clock.</p>
 

@@ -665,7 +665,7 @@ a { color: inherit; }
   object-fit: cover;
   transition: transform 420ms cubic-bezier(0.2, 0.75, 0.25, 1);
 }
-.proof-card:hover .proof-media img { transform: scale(1.02); }
+.proof-card:hover .proof-media img { transform: scale(1.04); }
 .proof-media span {
   position: absolute;
   left: 1rem;
@@ -951,120 +951,172 @@ html.smooth-active { scroll-behavior: auto; }
 }
 
 /* ============================================================
-   Engagement pass, 2026-09-09. Texture, rhythm and motion inside
-   the standard: no gradient, no radius, no italics, one accent.
+   Depth pass, 2026-09-09. Planes, plates and parallax. Sharp
+   geometry throughout: hard offset shadows with zero blur are
+   plates, not glow; no gradient, no radius, no italics.
    ============================================================ */
 
-/* Hero: a faint drafting grid (an SVG tile, not a gradient) and the
-   monogram at scale behind the type, flat, one tone above the ground. */
-.hero {
-  position: relative;
-  overflow: hidden;
-  background-color: var(--bg);
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='56'%3E%3Cpath d='M55.5 0V56M0 55.5H56' stroke='%23f1ebe0' stroke-opacity='0.055' stroke-width='1'/%3E%3C/svg%3E");
-  background-size: 56px 56px;
-}
-.hero .hero-grid { position: relative; z-index: 1; }
-.hero-mark {
+/* Tonal bands: the page is not one flat sheet. */
+.hero { background: var(--bg-deep); position: relative; overflow: hidden; }
+#start { background: var(--bg-deep); border-top: 1px solid var(--line); }
+
+/* Hero backdrop: the four finished pages as one dim plane, right
+   weighted, desaturated, under a solid shade. It drifts slower than the
+   page where the browser supports scroll driven animation. */
+.hero-backdrop {
   position: absolute;
-  right: -2vw;
-  bottom: -3%;
-  width: min(46vw, 560px);
-  height: auto;
-  fill: #1d1914;
+  top: -6%;
+  right: -4%;
+  width: 62%;
+  height: 112%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 2px;
   pointer-events: none;
   z-index: 0;
+  filter: grayscale(0.8) brightness(0.42) contrast(1.05);
 }
-
-/* Section numerals: the page counts its own four sections. */
-.sec-num {
-  display: inline-block;
-  margin-right: 0.9rem;
-  padding-right: 0.9rem;
-  border-right: 1px solid var(--line-bright);
-  color: var(--text);
-  font-weight: 600;
-  letter-spacing: 0.08em;
-}
-
-/* Marquee: the promises, in the accent, moving. Real claims only. */
-.marquee {
-  overflow: hidden;
-  background: var(--accent);
-  border-bottom: 1px solid var(--line);
-  padding: 0.9rem 0;
-}
-.marquee-track { display: flex; width: max-content; animation: marquee-drift 64s linear infinite; }
-.marquee-track span {
-  display: inline-flex;
-  align-items: center;
-  gap: 2.2rem;
-  padding-right: 2.2rem;
-  font-family: var(--display);
-  font-size: 1.15rem;
-  font-weight: 600;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--accent-ink);
-  white-space: nowrap;
-}
-.marquee-track b { font-weight: 400; opacity: 0.5; }
-.marquee:hover .marquee-track { animation-play-state: paused; }
-@keyframes marquee-drift { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(-50%, 0, 0); } }
-
-/* Scale contrast: the price and the founding count carry the offer. */
-.offer-price .display-num { font-size: clamp(4rem, 6.2vw, 5.6rem); }
-.offer-founding b { font-family: var(--display); font-size: 1.4rem; font-weight: 600; color: var(--accent); letter-spacing: 0.02em; }
-
-/* The receipt reads as a row of numbers, not a list. */
-.receipt-grid .display-num { font-size: 3.6rem; }
-
-/* One restrained sweep on the primary call to action. A solid bar, skewed,
-   passing once every seven seconds; no gradient anywhere in it. */
-.hero-actions .button-accent { position: relative; overflow: hidden; }
-.hero-actions .button-accent::after {
-  content: "";
+.hero-backdrop img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.hero-shade {
   position: absolute;
-  top: -30%;
-  bottom: -30%;
-  left: 0;
-  width: 14%;
-  background: rgba(255, 255, 255, 0.3);
-  transform: skewX(-22deg) translateX(-260%);
-  animation: cta-sweep 7s ease-in-out infinite;
+  inset: 0;
+  background: rgba(6, 5, 4, 0.58);
+  z-index: 0;
   pointer-events: none;
 }
-@keyframes cta-sweep {
-  0%, 84% { transform: skewX(-22deg) translateX(-260%); }
-  100% { transform: skewX(-22deg) translateX(900%); }
+.hero .hero-grid { position: relative; z-index: 1; }
+@supports (animation-timeline: scroll()) {
+  .hero-backdrop {
+    animation: backdrop-drift linear both;
+    animation-timeline: scroll(root);
+    animation-range: 0 100vh;
+  }
+  @keyframes backdrop-drift { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(0, 14%, 0); } }
 }
 
-/* Small motion on hover: an underline that draws, an arrow that nudges,
-   a photo that leans in. */
+/* The offer sits on an amber plate. The plate is the brand's one loud move. */
+.offer {
+  position: relative;
+  border: 1px solid var(--line-bright);
+  box-shadow: 14px 14px 0 var(--accent);
+  background: var(--surface);
+}
+.offer::before {
+  content: "";
+  position: absolute;
+  inset: 6px;
+  border: 1px solid var(--line);
+  pointer-events: none;
+}
+
+/* Buttons are keys. A solid offset plate, a press on hover, a sink on click. */
+.button {
+  position: relative;
+  transition: transform 140ms ease, box-shadow 140ms ease, background-color 160ms ease, color 160ms ease, border-color 160ms ease;
+}
+.button-accent { box-shadow: 4px 4px 0 var(--text); }
+.button-accent:hover { transform: translate(2px, 2px); box-shadow: 2px 2px 0 var(--text); }
+.button-accent:active { transform: translate(4px, 4px); box-shadow: 0 0 0 var(--text); }
+.button-outline { box-shadow: 4px 4px 0 var(--line); }
+.button-outline:hover { transform: translate(2px, 2px); box-shadow: 2px 2px 0 var(--accent); border-color: var(--accent); }
+.button-outline:active { transform: translate(4px, 4px); box-shadow: 0 0 0 var(--accent); }
+.offer .button { box-shadow: 4px 4px 0 var(--bg-deep); }
+.offer .button:hover { box-shadow: 2px 2px 0 var(--bg-deep); }
+
+/* Corner brackets: a drafting frame on the things we made. */
+.corners { position: relative; }
+.corners::before, .corners::after {
+  content: "";
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  pointer-events: none;
+  z-index: 2;
+}
+.corners::before { top: -1px; left: -1px; border-top: 2px solid var(--accent); border-left: 2px solid var(--accent); }
+.corners::after { right: -1px; bottom: -1px; border-bottom: 2px solid var(--accent); border-right: 2px solid var(--accent); }
+
+/* Folio numerals: a giant outlined number behind each section heading,
+   drifting against the scroll so the heading sits in front of it. */
+.section { position: relative; }
+.folio {
+  position: absolute;
+  right: max(1.5rem, calc((100% - var(--shell)) / 2));
+  top: 0.4em;
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: clamp(8rem, 14vw, 12rem);
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--line-bright);
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+}
+.section.shell > .folio { right: 0; }
+.section-heading { position: relative; z-index: 1; }
+@supports (animation-timeline: view()) {
+  .folio {
+    animation: folio-drift linear both;
+    animation-timeline: view();
+    animation-range: entry 0% exit 100%;
+  }
+  @keyframes folio-drift { from { transform: translate3d(0, 2.2rem, 0); } to { transform: translate3d(0, -2.2rem, 0); } }
+}
+
+/* Plates under the panels that hold the argument. */
+.receipt { box-shadow: 12px 12px 0 var(--surface-2); }
+.compare { box-shadow: 12px 12px 0 var(--surface-2); }
+.intake { box-shadow: 12px 12px 0 var(--surface-2); }
+.proof-card { transition: transform 260ms ease, box-shadow 260ms ease; }
+.proof-card:hover { transform: translate(-4px, -4px); box-shadow: 8px 8px 0 var(--accent); z-index: 1; }
+.proof-media img { transition: transform 700ms cubic-bezier(0.22, 0.75, 0.25, 1); }
+
+/* Fields: a heavier bottom edge, amber when live. */
+.intake input, .intake textarea, .intake select {
+  border-bottom-width: 2px;
+  border-bottom-color: var(--line-bright);
+  transition: border-color 160ms ease, background-color 160ms ease;
+}
+.intake input:focus, .intake textarea:focus, .intake select:focus {
+  border-bottom-color: var(--accent);
+  background: var(--bg-deep);
+  outline: none;
+}
+
+/* Scale: the price and the count carry the offer. */
+.offer-price .display-num { font-size: clamp(4rem, 6.2vw, 5.6rem); }
+.offer-founding b { font-family: var(--display); font-size: 1.4rem; font-weight: 600; color: var(--accent); }
+.receipt-grid .display-num { font-size: 3.4rem; }
+
+/* Headings wipe in from the left instead of floating up. */
+.has-reveal .section-heading[data-reveal] { transform: none; opacity: 1; clip-path: inset(0 100% 0 0); }
+.has-reveal .section-heading[data-reveal].is-revealed { clip-path: inset(0 0 0 0); transition: clip-path 900ms cubic-bezier(0.22, 0.75, 0.25, 1); }
+
+/* Small motion on hover. */
 .site-nav a:not(.nav-cta) { position: relative; border-bottom-color: transparent !important; }
 .site-nav a:not(.nav-cta)::after {
   content: "";
   position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -2px;
-  height: 1px;
+  left: 0; right: 0; bottom: -2px; height: 1px;
   background: var(--accent);
   transform: scaleX(0);
   transform-origin: 0 50%;
   transition: transform 220ms ease;
 }
-.site-nav a:not(.nav-cta):hover::after,
-.site-nav a[aria-current="true"]::after { transform: scaleX(1); }
+.site-nav a:not(.nav-cta):hover::after, .site-nav a[aria-current="true"]::after { transform: scaleX(1); }
 .text-link span[aria-hidden] { display: inline-block; transition: transform 200ms ease; }
 .text-link:hover span[aria-hidden] { transform: translateX(5px); }
-.proof-media img { transition: transform 700ms cubic-bezier(0.22, 0.75, 0.25, 1); }
-.proof-card:hover .proof-media img { transform: scale(1.045); }
 
-@media (max-width: 860px) {
-  .hero-mark { width: 78vw; right: -18vw; bottom: -6%; }
+@media (max-width: 980px) {
+  .hero-backdrop { width: 100%; right: 0; top: 0; height: 100%; filter: grayscale(0.8) brightness(0.3); }
+  .hero-shade { background: rgba(6, 5, 4, 0.7); }
+  .folio { font-size: clamp(6rem, 20vw, 8rem); top: 0.5em; }
+  .offer { box-shadow: 10px 10px 0 var(--accent); }
 }
 @media (prefers-reduced-motion: reduce) {
-  .marquee-track { animation: none; transform: none; }
-  .hero-actions .button-accent::after { display: none; }
+  .hero-backdrop, .folio { animation: none; transform: none; }
+  .has-reveal .section-heading[data-reveal] { clip-path: none; }
+  .button, .proof-card { transition: none; }
 }
