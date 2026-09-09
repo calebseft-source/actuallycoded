@@ -56,8 +56,8 @@
   --text: #f1ebe0;
   --muted: #a69d8c;
   --muted-strong: #cdc4b3;
-  --accent: #e9a63b;
-  --accent-hover: #f3b954;
+  --accent: #f5891c;
+  --accent-hover: #ff9c3a;
   --accent-ink: #1b1200;
   --display: "Big Shoulders", "Arial Narrow", Impact, sans-serif;
   --font: "Newsreader", Georgia, "Times New Roman", serif;
@@ -234,11 +234,11 @@ a { color: inherit; }
 
 .nav-cta {
   padding: 0.62rem 1.15rem;
-  background: var(--accent);
+  background-color: var(--accent);
   color: var(--accent-ink) !important;
   border-bottom: none !important;
 }
-.nav-cta:hover { background: var(--accent-hover); }
+.nav-cta:hover { background-color: var(--accent-hover); }
 
 .menu-toggle {
   display: none;
@@ -276,8 +276,11 @@ a { color: inherit; }
   cursor: pointer;
   transition: background-color 160ms ease, color 160ms ease, border-color 160ms ease;
 }
-.button-accent { background: var(--accent); color: var(--accent-ink); }
-.button-accent:hover { background: var(--accent-hover); }
+.button-accent {
+  background-color: var(--accent);
+  color: var(--accent-ink);
+}
+.button-accent:hover { background-color: var(--accent-hover); }
 .button-outline {
   background: transparent;
   color: var(--text);
@@ -513,7 +516,7 @@ a { color: inherit; }
 .spec-wire { gap: 0.4rem; padding: 1rem 1.3rem; }
 .spec-wire > div { display: grid; gap: 0.3rem; border: 1px solid var(--line-bright); padding: 0.35rem; }
 .spec-wire span { display: block; height: 6px; background: var(--line-bright); }
-.spec-wire .w-hero { height: 30px; border-color: var(--accent); background: rgba(233, 166, 59, 0.08); }
+.spec-wire .w-hero { height: 30px; border-color: var(--accent); background: rgba(245, 137, 28, 0.08); }
 .spec-wire .w-list { grid-template-columns: 1fr; }
 .spec-wire .w-split { grid-template-columns: 1fr 2fr; }
 .spec-wire .w-split span:first-child { height: 18px; background: var(--line); }
@@ -577,7 +580,11 @@ a { color: inherit; }
   cursor: pointer;
 }
 .compare-switch button:hover { border-color: var(--accent); color: var(--text); }
-.compare-switch button.is-active { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.compare-switch button.is-active {
+  background-color: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-ink);
+}
 .compare-frame { height: 640px; background: #ffffff; }
 .compare-frame iframe { display: block; width: 100%; height: 100%; border: 0; }
 .compare-foot {
