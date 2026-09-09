@@ -42,6 +42,44 @@ docs/
   assets/concepts/    their images, each folder with a SOURCES.md crediting Pexels
 ```
 
+## Launch state, 2026-09-09
+
+**Live at https://actuallycoded.com since 2026-09-09.** GitHub Pages serves `docs/` from
+`master`, custom domain set, HTTPS enforced with a Let's Encrypt certificate (issued
+2026-09-09, renews automatically). DNS at Namecheap: four A records on `@` to GitHub's
+addresses, `www` CNAME to `calebseft-source.github.io`; the mail records (Private Email MX
+and SPF, the DKIM TXT at `privateemail._domainkey`, the DMARC TXT) were not touched and
+were verified resolving after the change. Lighthouse on the live page: performance 99,
+accessibility 100, best practices 100, SEO 100. Live DOM check: 0 rounded, 0 gradients,
+0 italics, 0 third party hosts.
+
+**Decisions recorded 2026-09-09:** matrix identity off; terms as written; the four
+concepts and two exhibits final. Palette is the stone's orange amber on a warm near black
+(`--accent: #f5891c`), inclusions only on the monogram.
+
+**Stripe, in progress.** Account `actuallycoded` is live and under Stripe's review. The
+product "One-page website, founding price" ($495, one off) exists. The Payment Link could
+not be created yet: Stripe paused payments until it could reach the website, and the
+website task was resubmitted the moment HTTPS was live. Reviews usually finish within 24
+hours. Still to do when Stripe enables payments: create the Payment Link (collect name,
+limit ten payments with a sold out message pointing at hello@actuallycoded.com and $850,
+three optional brief fields, redirect to `https://actuallycoded.com/#start`), then replace
+the interim button in `docs/index.html` (`id="pay-link"`, currently a mailto that reads
+"Request the payment link, $495") with the Stripe URL, the text "Pay the founding price,
+$495", and `target="_blank" rel="noopener noreferrer"`, and trim the sentence about the
+button emailing from the intake note. Caleb still has to add the payout bank account under
+Account status.
+
+**Not planned:** the OAuth app stays pointed at cfwebdev.net and cfwebdev.net is not
+redirected; it remains Caleb's portfolio (his call 2026-09-08). Steps 4 and 5 below are
+kept for reference only.
+
+**Two things learned at launch.** A page whose CSP carries `upgrade-insecure-requests`
+renders unstyled over plain http until the host has a certificate, because every asset is
+forced to https; it was dropped for the minutes between DNS and the certificate and then
+restored. And changing the custom domain through the GitHub API makes GitHub commit
+`docs/CNAME` to master itself, so pull before pushing after any Pages domain change.
+
 ## Things only Caleb can do, in order
 
 The brief lists these and the order matters because cfwebdev.net's DNS carries live mail
@@ -58,7 +96,7 @@ and its privacy page gates the Google OAuth app. Nothing here touches either.
   counted on business days, late remedy is full refund or $100 off), section 8 (refund
   rules, the 30 day no-brief rule), and section 9 (the round of changes is one list within
   14 days). The brief fixed the offer; these are the edges of it and they are Caleb's call.
-- **Decide on the matrix identity.** It is not on this site. The brief says ask, not decide.
+- **Decide on the matrix identity.** Decided 2026-09-09: off.
 - **Approve the four proof pages**: Northline Dental and Fieldnote Coffee (copied across and
   rebranded) plus Kestrel Electric and Hollis Barbershop (built here 2026-09-08). Nothing is
   published yet.
@@ -73,8 +111,8 @@ Create a **Payment Link** in the Stripe dashboard:
 - Optional but useful: add up to three custom text fields so the brief can be typed at
   checkout too. Suggested: `Your business in a sentence`, `The one thing the page must
   make a visitor do`, `Links to anything that exists`.
-- Paste the link over `https://buy.stripe.com/REPLACE_WITH_PAYMENT_LINK` in
-  `docs/index.html`. The deploy gate greps for `REPLACE_WITH` and fails while it is there.
+- Paste the link into the `pay-link` anchor in `docs/index.html`, which carries an interim
+  mailto until then (see Launch state above).
 - When the tenth founding order is paid: create a second Payment Link at `$850.00`, swap the
   href, and change the founding line in the hero (`10 of 10` and the two `$495` strings).
   Stripe's own receipt is the customer's receipt.
