@@ -300,12 +300,17 @@
 })();
 
 /* ============================================================
-   THE LIVING BACKGROUND. This site's own code, written behind each
-   section one character at a time. Decoration only: the layers are
-   aria-hidden and sit behind everything. A layer types only while its
-   section is on screen, holds when finished, then writes the next
-   fragment. Under reduced motion every layer shows its first fragment
-   finished and still. Nothing here fetches anything.
+   THE LIVING BACKGROUND. Each section writes its own code behind
+   itself, one character at a time, in three or four columns across the
+   full width. The fragments are this page's real markup, styles, and
+   scripts for that section: the hero writes the hero, the standard
+   writes the rules that make its receipt true, the proof writes the four
+   concept cards and the engine that reveals them, the brief writes the
+   JavaScript that builds the email. Decoration only: aria-hidden, no
+   pointer events, behind everything, typing only while the section is
+   near the viewport (a bounding rect check, not IntersectionObserver,
+   which stalls in non compositing contexts). Under reduced motion each
+   column shows one fragment finished and still.
    ============================================================ */
 (function () {
   "use strict";
@@ -313,72 +318,150 @@
   if (!layers.length) return;
   var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+  var F = function (lang, lines) { return { lang: lang, lines: lines }; };
+
   var CODE = {
+    // The hero writes the hero.
     html: [
-      [
-        "<!doctype html>",
-        "<html lang=\"en\">",
-        "<head>",
-        "  <meta charset=\"utf-8\">",
-        "  <title>actuallycoded</title>",
-        "  <link rel=\"stylesheet\" href=\"styles.css\">",
-        "</head>",
-        "<body>",
-        "  <main id=\"main\">",
-        "    <section class=\"hero\" id=\"top\">",
-        "      <h1>One page. Real code you own.</h1>",
+      F("html", [
+        "<section class=\"hero\" id=\"top\" aria-labelledby=\"hero-title\">",
+        "  <div class=\"shell hero-grid\">",
+        "    <p class=\"eyebrow\">Custom one-page websites</p>",
+        "    <h1 id=\"hero-title\">One page. Real code you own. Finished in 48 hours.</h1>",
+        "    <p class=\"hero-lede\">A website for your business that was written, not generated.</p>",
+        "    <div class=\"hero-actions\">",
         "      <a class=\"button button-accent\" href=\"#start\">Start your site</a>",
-        "    </section>"
-      ],
-      [
+        "      <a class=\"text-link\" href=\"#standard\">Read the standard</a>",
+        "    </div>",
+        "    <p class=\"tagline\"><b>Actually coded,</b> finished by hand.</p>"
+      ]),
+      F("html", [
         "<aside class=\"offer\" aria-label=\"The offer\">",
-        "  <span class=\"display-num\">$495</span>",
-        "  <small>Founding price</small>",
+        "  <div class=\"offer-head\"><span>The one product</span></div>",
+        "  <div class=\"offer-price\">",
+        "    <span class=\"display-num\">$495</span>",
+        "    <small>Founding price</small>",
+        "  </div>",
+        "  <p class=\"offer-then\">For the first ten sites. Then <b>$850</b>.</p>",
         "  <ul class=\"offer-list\">",
-        "    <li>One custom page, designed and coded</li>",
+        "    <li>One custom page, designed and coded for your business</li>",
         "    <li>Delivered in 48 hours from a paid brief</li>",
-        "    <li>You own the code</li>",
+        "    <li>One round of changes included</li>",
+        "    <li>You own the code. Host it anywhere, keep it forever</li>",
         "  </ul>",
+        "  <p class=\"offer-founding\"><b>10 of 10</b> founding places remaining</p>",
         "</aside>"
-      ]
+      ]),
+      F("css", [
+        ".hero h1 { max-width: 12ch; }",
+        "h1 {",
+        "  font-family: var(--display);",
+        "  font-size: clamp(3rem, 7vw, 5.6rem);",
+        "  line-height: 0.95;",
+        "  letter-spacing: -0.005em;",
+        "}",
+        ".offer {",
+        "  border: 1px solid var(--line-bright);",
+        "  background: var(--surface);",
+        "  border-radius: 0;",
+        "}",
+        ".display-num { font-family: var(--display); font-weight: 600; line-height: 0.9; }"
+      ]),
+      F("html", [
+        "<header class=\"site-header\">",
+        "  <a class=\"brand\" href=\"#top\" aria-label=\"actuallycoded home\">",
+        "    <svg class=\"brand-mark\" viewBox=\"0 0 100 100\"></svg>",
+        "    <span class=\"brand-word\">actuallycoded</span>",
+        "  </a>",
+        "  <nav id=\"site-nav\" class=\"site-nav\">",
+        "    <a href=\"#standard\">The standard</a>",
+        "    <a href=\"#proof\">Proof</a>",
+        "    <a href=\"#start\">How it works</a>",
+        "    <a class=\"nav-cta\" href=\"#start\">Start your site</a>",
+        "  </nav>",
+        "</header>"
+      ])
     ],
+    // The standard writes the rules that make its own receipt true.
     css: [
-      [
+      F("css", [
         ":root {",
         "  --bg: #0b0a08;",
+        "  --surface: #12100c;",
+        "  --line: #2b2720;",
         "  --text: #f1ebe0;",
         "  --accent: #f5891c;",
-        "  --display: \"Big Shoulders\";",
-        "  --font: \"Newsreader\";",
+        "  --display: \"Big Shoulders\", \"Arial Narrow\", Impact, sans-serif;",
+        "  --font: \"Newsreader\", Georgia, serif;",
         "}",
-        "",
         ".button {",
         "  border-radius: 0;",
-        "  background: var(--accent);",
+        "  background-color: var(--accent);",
         "  font-family: var(--display);",
         "  letter-spacing: 0.07em;",
         "  text-transform: uppercase;",
-        "}",
-        "",
-        "h1 { font-size: clamp(3rem, 7vw, 5.6rem); line-height: 0.95; }"
-      ],
-      [
-        "/* the tells, kept out on purpose */",
+        "}"
+      ]),
+      F("css", [
+        "/* the six tells, kept out on purpose */",
         "* { border-radius: 0; }",
         "em, i { font-style: normal; }",
         ".card { box-shadow: none; }",
+        "body { font-family: var(--font); }",
         "",
         "@font-face {",
         "  font-family: \"Newsreader\";",
         "  src: url(fonts/newsreader-latin.woff2) format(\"woff2\");",
         "  font-display: swap;",
+        "}",
+        "@font-face {",
+        "  font-family: \"Big Shoulders\";",
+        "  src: url(fonts/bigshoulders-latin.woff2) format(\"woff2\");",
         "}"
-      ]
+      ]),
+      F("js", [
+        "// the receipt, measured on the live page",
+        "const all = [...document.querySelectorAll(\"*\")];",
+        "const rounded = all.filter((el) =>",
+        "  getComputedStyle(el).borderRadius !== \"0px\").length;",
+        "const gradients = all.filter((el) =>",
+        "  getComputedStyle(el).backgroundImage.includes(\"gradient\")).length;",
+        "const italics = all.filter((el) =>",
+        "  getComputedStyle(el).fontStyle === \"italic\").length;",
+        "console.log({ rounded, gradients, italics }); // { 0, 0, 0 }"
+      ]),
+      F("css", [
+        ".tells li {",
+        "  display: grid;",
+        "  grid-template-columns: 3.6rem minmax(0, 1fr) minmax(0, 1fr);",
+        "  gap: 1.6rem;",
+        "  padding: 2rem 0;",
+        "  border-top: 1px solid var(--line);",
+        "}",
+        ".tell-index { font-family: var(--display); color: var(--accent); }",
+        ".specimen { height: 170px; border: 1px solid var(--line-bright); }",
+        ".compare-frame { height: 640px; }",
+        ".compare-frame iframe { width: 100%; height: 100%; border: 0; }"
+      ])
     ],
+    // The proof writes the four cards and the engine that reveals them.
     js: [
-      [
+      F("html", [
+        "<div class=\"proof-grid\">",
+        "  <article class=\"proof-card\">",
+        "    <a class=\"proof-media\" href=\"concepts/northline-dental.html\">",
+        "      <img src=\"assets/concepts/northline-dental/hero.jpg\" alt=\"\">",
+        "      <span>Fictional business</span>",
+        "    </a>",
+        "    <h3>Northline Dental</h3>",
+        "  </article>",
+        "  <article class=\"proof-card\"><h3>Fieldnote Coffee</h3></article>",
+        "  <article class=\"proof-card\"><h3>Kestrel Electric</h3></article>",
+        "  <article class=\"proof-card\"><h3>Hollis Barbershop</h3></article>",
+        "</div>"
+      ]),
+      F("js", [
         "const targets = document.querySelectorAll(\"[data-reveal]\");",
-        "",
         "const revealer = new IntersectionObserver((entries) => {",
         "  for (const entry of entries) {",
         "    if (!entry.isIntersecting) continue;",
@@ -386,21 +469,55 @@
         "    revealer.unobserve(entry.target);",
         "  }",
         "}, { rootMargin: \"0px 0px -12% 0px\", threshold: 0.08 });",
-        "",
         "targets.forEach((el) => revealer.observe(el));"
-      ],
-      [
-        "// the receipt, measured on the live page",
-        "const all = [...document.querySelectorAll(\"*\")];",
-        "const rounded = all.filter((el) =>",
-        "  getComputedStyle(el).borderRadius !== \"0px\").length;",
-        "const gradients = all.filter((el) =>",
-        "  getComputedStyle(el).backgroundImage.includes(\"gradient\")).length;",
-        "console.log({ rounded, gradients }); // { rounded: 0, gradients: 0 }"
-      ]
+      ]),
+      F("js", [
+        "// concept-motion.js, vendored Lenis, touch left native",
+        "const lenis = new window.Lenis({",
+        "  duration: 0.9,",
+        "  smoothWheel: true,",
+        "  syncTouch: false,",
+        "  wheelMultiplier: 1",
+        "});",
+        "function raf(time) {",
+        "  lenis.raf(time);",
+        "  window.requestAnimationFrame(raf);",
+        "}",
+        "window.requestAnimationFrame(raf);"
+      ]),
+      F("css", [
+        ".proof-grid { display: grid; grid-template-columns: 1fr 1fr; }",
+        ".proof-card { border-right: 1px solid var(--line-bright); border-bottom: 1px solid var(--line-bright); }",
+        ".proof-media img { aspect-ratio: 3 / 2; object-fit: cover; }",
+        ".proof-media span {",
+        "  position: absolute;",
+        "  left: 1rem; bottom: 1rem;",
+        "  font-family: var(--display);",
+        "  letter-spacing: 0.14em;",
+        "  text-transform: uppercase;",
+        "  background: var(--bg-deep);",
+        "}"
+      ])
     ],
+    // The brief writes the JavaScript that builds the email, and the ship.
     shell: [
-      [
+      F("js", [
+        "const lines = [",
+        "  \"Site brief for actuallycoded\",",
+        "  \"\",",
+        "  \"THE BUSINESS\", business || \"(not answered)\",",
+        "  \"\",",
+        "  \"WHO THE PAGE IS FOR\", visitor || \"(not answered)\",",
+        "  \"\",",
+        "  \"THE ONE THING IT MUST MAKE THEM DO\", action || \"(not answered)\",",
+        "  \"\",",
+        "  \"LINKS TO ANYTHING THAT EXISTS\", links || \"(none yet)\"",
+        "];",
+        "window.location.href = \"mailto:hello@actuallycoded.com\"",
+        "  + \"?subject=\" + encodeURIComponent(\"Site brief\")",
+        "  + \"&body=\" + encodeURIComponent(lines.join(\"\\n\"));"
+      ]),
+      F("shell", [
         "$ git add docs/",
         "$ git commit -m \"Finished: one page, measured against the standard\"",
         "$ git push origin master",
@@ -410,15 +527,26 @@
         "0",
         "$ grep -c \"gradient(\" docs/styles.css",
         "0"
-      ],
-      [
-        "$ python -m http.server 8642 --directory docs",
-        "Serving HTTP on :: port 8642 ...",
+      ]),
+      F("html", [
+        "<div class=\"intake\" id=\"intake\" aria-label=\"Site brief\">",
+        "  <label for=\"business\">The business, in a sentence or two</label>",
+        "  <textarea id=\"business\" rows=\"3\"></textarea>",
+        "  <label for=\"visitor\">Who the page is for</label>",
+        "  <input id=\"visitor\" type=\"text\">",
+        "  <label for=\"action\">The one thing it must make them do</label>",
+        "  <input id=\"action\" type=\"text\">",
+        "  <button id=\"send-brief\" class=\"button button-accent\">Send the brief</button>",
+        "</div>"
+      ]),
+      F("shell", [
         "$ ls docs/fonts",
         "bigshoulders-latin.woff2  newsreader-latin.woff2",
         "$ du -sh docs/vendor/lenis.min.js",
-        "13K  docs/vendor/lenis.min.js"
-      ]
+        "13K  docs/vendor/lenis.min.js",
+        "$ python -m http.server 8642 --directory docs",
+        "Serving HTTP on :: port 8642 ..."
+      ])
     ]
   };
 
@@ -426,10 +554,9 @@
     return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
   };
 
-  // Two tones only: keywords in the accent, strings a shade brighter.
+  // Two tones only. Strings are painted first so the painter never
+  // matches the quotes inside its own markup.
   var paint = function (line, lang) {
-    // Strings first, then keywords, so the painter never matches the
-    // quotes inside its own markup.
     var h = escapeHtml(line);
     var strings = [];
     h = h.replace(/"([^"]*)"/g, function (_, inner) {
@@ -440,10 +567,10 @@
       h = h.replace(/(&lt;\/?)([a-z][a-z0-9-]*)/g, "$1<span class=\"kw\">$2</span>");
     } else if (lang === "css") {
       h = h.replace(/(\/\*.*?\*\/)/g, "<span class=\"cm\">$1</span>")
-           .replace(/(--[a-z-]+|@font-face|font-family|border-radius|background|letter-spacing|text-transform|line-height|font-size|font-style|font-display|box-shadow|src)\b/g, "<span class=\"kw\">$1</span>");
+           .replace(/(--[a-z-]+|@font-face|font-family|border-radius|background-color|background|letter-spacing|text-transform|line-height|font-size|font-style|font-display|font-weight|box-shadow|grid-template-columns|object-fit|aspect-ratio|position|display|border|src)\b/g, "<span class=\"kw\">$1</span>");
     } else if (lang === "js") {
       h = h.replace(/(\/\/.*)$/g, "<span class=\"cm\">$1</span>")
-           .replace(/\b(const|new|for|of|if|continue|return)\b/g, "<span class=\"kw\">$1</span>");
+           .replace(/\b(const|new|for|of|if|continue|return|function|window)\b/g, "<span class=\"kw\">$1</span>");
     } else {
       h = h.replace(/^\$ (\S+)/, "$ <span class=\"kw\">$1</span>");
     }
@@ -457,90 +584,87 @@
       (caret ? "<span class=\"caret\"></span>" : "") + "\n";
   };
 
-  var renderStatic = function (pre, lines, lang) {
+  var renderStatic = function (pre, frag) {
     var out = "";
-    for (var i = 0; i < lines.length; i++) out += lineHtml(i + 1, lines[i], lang, false, false);
+    for (var i = 0; i < frag.lines.length; i++) out += lineHtml(i + 1, frag.lines[i], frag.lang, false, false);
     pre.innerHTML = out;
   };
 
-  layers.forEach(function (layer, index) {
-    var lang = layer.getAttribute("data-code");
-    var fragments = CODE[lang];
-    var pre = layer.querySelector("pre");
-    if (!fragments || !pre) return;
+  var makeTypist = function (layer, pre, fragments, startFrag, startDelay) {
+    var frag = startFrag % fragments.length, line = 0, col = 0, done = [], timer = null, started = false;
 
-    if (reduced) { renderStatic(pre, fragments[0], lang); return; }
-
-    var frag = 0, line = 0, col = 0, done = [], timer = null, visible = false;
-    var started = false;
-
+    var inView = function () {
+      var r = layer.getBoundingClientRect();
+      var vh = window.innerHeight || 0;
+      return !vh || (r.bottom > -240 && r.top < vh + 240);
+    };
     var draw = function () {
+      var f = fragments[frag];
       var out = "";
-      for (var i = 0; i < done.length; i++) out += lineHtml(i + 1, done[i], lang, false, false);
-      var current = fragments[frag][line] || "";
-      out += lineHtml(done.length + 1, current.slice(0, col), lang, true, true);
+      for (var i = 0; i < done.length; i++) out += lineHtml(i + 1, done[i], f.lang, false, false);
+      var current = f.lines[line] || "";
+      out += lineHtml(done.length + 1, current.slice(0, col), f.lang, true, true);
       pre.innerHTML = out;
     };
-
     var step = function () {
-      if (!visible) { timer = null; return; }
-      var lines = fragments[frag];
-      var current = lines[line];
+      if (!inView()) { timer = null; return; }
+      var f = fragments[frag];
+      var current = f.lines[line];
       var delay;
       if (col < current.length) {
         col += 1;
         var ch = current.charAt(col - 1);
-        delay = 22 + Math.random() * 34;
-        if (ch === " ") delay += 30;
-        if (ch === ";" || ch === "{" || ch === "}" || ch === ">") delay += 90;
+        delay = 9 + Math.random() * 14;
+        if (ch === " ") delay += 12;
+        if (ch === ";" || ch === "{" || ch === "}" || ch === ">") delay += 40;
       } else {
         done.push(current);
         line += 1; col = 0;
-        delay = current.length ? 260 + Math.random() * 320 : 120;
-        if (line >= lines.length) {
-          // Finished this fragment. Hold it, then clear and write the next one.
+        delay = current.length ? 90 + Math.random() * 120 : 60;
+        if (line >= f.lines.length) {
           draw();
           timer = window.setTimeout(function () {
             frag = (frag + 1) % fragments.length;
             done = []; line = 0; col = 0;
             draw();
-            timer = window.setTimeout(step, 600);
-          }, 5200);
+            timer = window.setTimeout(step, 300);
+          }, 2600);
           return;
         }
       }
       draw();
       timer = window.setTimeout(step, delay);
     };
-
-    // No IntersectionObserver here: it can stall in non compositing
-    // contexts. A bounding rect check is cheap and always answers.
-    var inView = function () {
-      var r = layer.getBoundingClientRect();
-      var vh = window.innerHeight || 0;
-      return !vh || (r.bottom > -240 && r.top < vh + 240);
-    };
-
     var start = function () {
       if (timer) return;
       if (!inView()) return;
-      visible = true;
       if (!started) { started = true; draw(); }
-      timer = window.setTimeout(step, 400 + index * 300);
+      timer = window.setTimeout(step, startDelay);
     };
+    return start;
+  };
 
-    var tick = false;
-    window.addEventListener("scroll", function () {
-      if (tick) return;
-      tick = true;
-      window.setTimeout(function () {
-        tick = false;
-        visible = inView();
-        if (visible) start();
-      }, 150);
-    }, { passive: true });
-    window.addEventListener("resize", function () { visible = inView(); if (visible) start(); }, { passive: true });
-    start();
-    window.setTimeout(start, 800);
+  var starters = [];
+  layers.forEach(function (layer, index) {
+    var fragments = CODE[layer.getAttribute("data-code")];
+    var pres = layer.querySelectorAll("pre");
+    if (!fragments || !pres.length) return;
+    Array.prototype.forEach.call(pres, function (pre, col) {
+      if (getComputedStyle(pre).display === "none") return;
+      if (reduced) { renderStatic(pre, fragments[col % fragments.length]); return; }
+      starters.push(makeTypist(layer, pre, fragments, col + index, 300 + col * 700 + index * 200));
+    });
   });
+  if (reduced || !starters.length) return;
+
+  var startAll = function () { starters.forEach(function (s) { s(); }); };
+  var tick = false;
+  window.addEventListener("scroll", function () {
+    if (tick) return;
+    tick = true;
+    window.setTimeout(function () { tick = false; startAll(); }, 150);
+  }, { passive: true });
+  window.addEventListener("resize", startAll, { passive: true });
+  startAll();
+  window.setTimeout(startAll, 800);
 })();
