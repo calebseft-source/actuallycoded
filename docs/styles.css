@@ -212,6 +212,7 @@ a { color: inherit; }
   letter-spacing: -0.02em;
   line-height: 1;
 }
+.brand-word b { font-weight: inherit; color: var(--accent); }
 
 .site-nav {
   margin-left: auto;
