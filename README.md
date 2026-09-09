@@ -65,18 +65,15 @@ in `docs/script.js` at the bottom.
 concepts and two exhibits final. Palette is the stone's orange amber on a warm near black
 (`--accent: #f5891c`), inclusions only on the monogram.
 
-**Stripe, in progress.** Account `actuallycoded` is live and under Stripe's review. The
-product "One-page website, founding price" ($495, one off) exists. The Payment Link could
-not be created yet: Stripe paused payments until it could reach the website, and the
-website task was resubmitted the moment HTTPS was live. Reviews usually finish within 24
-hours. Still to do when Stripe enables payments: create the Payment Link (collect name,
-limit ten payments with a sold out message pointing at hello@actuallycoded.com and $850,
-three optional brief fields, redirect to `https://actuallycoded.com/#start`), then replace
-the interim button in `docs/index.html` (`id="pay-link"`, currently a mailto that reads
-"Request the payment link, $495") with the Stripe URL, the text "Pay the founding price,
-$495", and `target="_blank" rel="noopener noreferrer"`, and trim the sentence about the
-button emailing from the intake note. Bank account added 2026-09-09. Branding (icon, logo, colours) and public details
-(support email, privacy and terms URLs) are set; brand files live in `brand/`.
+**Stripe, live (2026-09-09).** Account `actuallycoded` passed review; payments and payouts
+are active. The Payment Link for "One-page website, founding price" ($495, one off) is
+`https://buy.stripe.com/28E9AM9gbdr3a2L1SL4sE00` (id `plink_1UDtE15yrxexwnwnIdWutKOY`).
+It collects the customer's name, carries three optional brief fields, is limited to ten
+payments with a sold out message pointing at hello@actuallycoded.com and $850, and
+redirects to `https://actuallycoded.com/#start` after payment. The site's `pay-link`
+button opens it in a new tab. Bank account added 2026-09-09. Branding (icon, logo,
+colours) and public details (support email, privacy and terms URLs) are set; brand files
+live in `brand/`.
 
 **Not planned:** the OAuth app stays pointed at cfwebdev.net and cfwebdev.net is not
 redirected; it remains Caleb's portfolio (his call 2026-09-08). Steps 4 and 5 below are
@@ -119,8 +116,8 @@ Create a **Payment Link** in the Stripe dashboard:
 - Optional but useful: add up to three custom text fields so the brief can be typed at
   checkout too. Suggested: `Your business in a sentence`, `The one thing the page must
   make a visitor do`, `Links to anything that exists`.
-- Paste the link into the `pay-link` anchor in `docs/index.html`, which carries an interim
-  mailto until then (see Launch state above).
+- Done 2026-09-09: the link is live and pasted into the `pay-link` anchor in
+  `docs/index.html` (see Launch state above).
 - When the tenth founding order is paid: create a second Payment Link at `$850.00`, swap the
   href, and change the founding line in the hero (`10 of 10` and the two `$495` strings).
   Stripe's own receipt is the customer's receipt.
