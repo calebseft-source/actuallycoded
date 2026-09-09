@@ -837,6 +837,10 @@
     // Hidden at this width (a pane the layout does not show): leave it.
     if (!natural) return;
     var slow = el.getAttribute("data-coded") === "slow";
+    // Some things wait their turn: data-after names an element that must
+    // have scrolled up past the middle of the screen first.
+    var afterSel = el.getAttribute("data-after");
+    var afterEl = afterSel ? document.querySelector(afterSel) : null;
     var collapse = natural >= 90;
     var lines = serialize(el);
     var pre = document.createElement("pre");
@@ -848,7 +852,17 @@
     var started = false, done = false, typist = null;
 
     var rect = function () { return el.getBoundingClientRect(); };
-    var inView = function () { var r = rect(); var vh = window.innerHeight || 0; return !vh || (r.top < vh * 0.8 && r.bottom > vh * 0.08); };
+    var inView = function () {
+      var r = rect(); var vh = window.innerHeight || 0;
+      if (!vh) return true;
+      if (afterEl) {
+        // Not until everything inside it has finished building, and it
+        // has scrolled up past the middle of the screen.
+        if (afterEl.querySelector("[data-coded].is-coding")) return false;
+        if (afterEl.getBoundingClientRect().bottom > vh * 0.55) return false;
+      }
+      return r.top < vh * 0.8 && r.bottom > vh * 0.08;
+    };
     var passed = function () { return rect().bottom < 0; };
     var finish = function (instant) {
       if (done) return;
