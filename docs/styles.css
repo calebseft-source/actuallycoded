@@ -685,28 +685,6 @@ a { color: inherit; }
 .proof-body p { color: var(--muted); font-size: 1rem; margin-bottom: 1.4rem; }
 .proof-body .text-link { margin-top: auto; align-self: flex-start; }
 
-.person {
-  margin-top: 3rem;
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  gap: 1.8rem;
-  align-items: center;
-  padding: 1.8rem 0 0;
-  border-top: 1px solid var(--line-bright);
-}
-.person-mark {
-  width: 64px;
-  height: 64px;
-  border: 1px solid var(--line-bright);
-  display: grid;
-  place-items: center;
-  font-family: var(--display);
-  font-size: 1.6rem;
-  font-weight: 700;
-  color: var(--accent);
-}
-.person p { color: var(--muted-strong); margin: 0; }
-.person b { color: var(--text); font-weight: 600; }
 
 /* ============================================================
    4. START
