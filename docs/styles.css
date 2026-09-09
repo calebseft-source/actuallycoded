@@ -314,12 +314,12 @@ a { color: inherit; }
    ============================================================ */
 .hero {
   border-bottom: 1px solid var(--line);
-  padding: clamp(5rem, 11vw, 9.5rem) 0 clamp(3.5rem, 7vw, 6rem);
+  padding: clamp(3rem, 6vw, 4.5rem) 0 clamp(3.5rem, 7vw, 6rem);
 }
 .hero-grid {
   display: grid;
   grid-template-columns: minmax(0, 1.35fr) minmax(300px, 0.65fr);
-  gap: clamp(2.5rem, 6vw, 5rem);
+  gap: clamp(1.6rem, 4vw, 3rem) clamp(2.5rem, 6vw, 5rem);
   align-items: end;
 }
 .hero h1 { max-width: 12ch; }
@@ -1092,6 +1092,13 @@ html.smooth-active { scroll-behavior: auto; }
   vertical-align: -0.18em;
   animation: caret-blink 1s steps(1, end) infinite;
 }
+
+/* The hero's pane spans the whole shell in its own row under the hero
+   content, so an opened pane shows whole lines of code. */
+.build-pane-wide { grid-column: 1 / -1; margin-bottom: 0.4rem; }
+.build-pane-wide pre { height: calc(1.55em * 7 + 1.6rem); }
+/* The comparison builds a touch slower, and grows a touch longer. */
+[data-coded="slow"].is-coding { transition-duration: 820ms; }
 
 /* The panes hold their shape. Long code lines must never widen a grid
    column; the pane clips and the columns are allowed to be narrower

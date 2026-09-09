@@ -800,8 +800,9 @@
     return lines;
   };
 
-  var RATE = 2.4, TAIL = 3;
-  var makeTypist = function (pre, lines, onDone) {
+  var TAIL = 3;
+  var makeTypist = function (pre, lines, onDone, slow) {
+    var RATE = slow ? 3.6 : 2.4, PAUSE = slow ? 1.7 : 1;
     var done = [], i = 0, col = 0, last = 0, finished = false;
     var render = function (current) {
       var out = "";
@@ -825,7 +826,7 @@
       done.push(line); i += 1; col = 0; last = 0;
       if (i >= lines.length) { finished = true; render(""); onDone(); return; }
       render("");
-      window.setTimeout(step, 70 + Math.random() * 70);
+      window.setTimeout(step, (70 + Math.random() * 70) * PAUSE);
     };
     return { start: function () { render(""); window.setTimeout(step, 60); }, stop: function () { finished = true; } };
   };
@@ -835,6 +836,7 @@
     var natural = el.offsetHeight;
     // Hidden at this width (a pane the layout does not show): leave it.
     if (!natural) return;
+    var slow = el.getAttribute("data-coded") === "slow";
     var collapse = natural >= 90;
     var lines = serialize(el);
     var pre = document.createElement("pre");
@@ -853,7 +855,7 @@
       done = true;
       if (typist) typist.stop();
       if (instant) { el.classList.add("is-instant"); pre.classList.add("is-instant"); }
-      var grow = collapse ? (instant ? 0 : 560) : 0;
+      var grow = collapse ? (instant ? 0 : (slow ? 820 : 560)) : 0;
       if (collapse) el.style.height = natural + "px";
       window.setTimeout(function () {
         el.style.height = "";
@@ -869,7 +871,7 @@
       if (started || done) return;
       if (!inView()) return;
       started = true;
-      typist = makeTypist(pre, lines, function () { window.setTimeout(function () { finish(false); }, 200); });
+      typist = makeTypist(pre, lines, function () { window.setTimeout(function () { finish(false); }, slow ? 320 : 200); }, slow);
       typist.start();
       window.setTimeout(function () { finish(false); }, 5000);
     };
