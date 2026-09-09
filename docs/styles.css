@@ -949,3 +949,122 @@ html.smooth-active { scroll-behavior: auto; }
   .proof-media img { transition: none; }
   * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
 }
+
+/* ============================================================
+   Engagement pass, 2026-09-09. Texture, rhythm and motion inside
+   the standard: no gradient, no radius, no italics, one accent.
+   ============================================================ */
+
+/* Hero: a faint drafting grid (an SVG tile, not a gradient) and the
+   monogram at scale behind the type, flat, one tone above the ground. */
+.hero {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--bg);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='56'%3E%3Cpath d='M55.5 0V56M0 55.5H56' stroke='%23f1ebe0' stroke-opacity='0.055' stroke-width='1'/%3E%3C/svg%3E");
+  background-size: 56px 56px;
+}
+.hero .hero-grid { position: relative; z-index: 1; }
+.hero-mark {
+  position: absolute;
+  right: -2vw;
+  bottom: -3%;
+  width: min(46vw, 560px);
+  height: auto;
+  fill: #1d1914;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Section numerals: the page counts its own four sections. */
+.sec-num {
+  display: inline-block;
+  margin-right: 0.9rem;
+  padding-right: 0.9rem;
+  border-right: 1px solid var(--line-bright);
+  color: var(--text);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+}
+
+/* Marquee: the promises, in the accent, moving. Real claims only. */
+.marquee {
+  overflow: hidden;
+  background: var(--accent);
+  border-bottom: 1px solid var(--line);
+  padding: 0.9rem 0;
+}
+.marquee-track { display: flex; width: max-content; animation: marquee-drift 64s linear infinite; }
+.marquee-track span {
+  display: inline-flex;
+  align-items: center;
+  gap: 2.2rem;
+  padding-right: 2.2rem;
+  font-family: var(--display);
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent-ink);
+  white-space: nowrap;
+}
+.marquee-track b { font-weight: 400; opacity: 0.5; }
+.marquee:hover .marquee-track { animation-play-state: paused; }
+@keyframes marquee-drift { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(-50%, 0, 0); } }
+
+/* Scale contrast: the price and the founding count carry the offer. */
+.offer-price .display-num { font-size: clamp(4rem, 6.2vw, 5.6rem); }
+.offer-founding b { font-family: var(--display); font-size: 1.4rem; font-weight: 600; color: var(--accent); letter-spacing: 0.02em; }
+
+/* The receipt reads as a row of numbers, not a list. */
+.receipt-grid .display-num { font-size: 3.6rem; }
+
+/* One restrained sweep on the primary call to action. A solid bar, skewed,
+   passing once every seven seconds; no gradient anywhere in it. */
+.hero-actions .button-accent { position: relative; overflow: hidden; }
+.hero-actions .button-accent::after {
+  content: "";
+  position: absolute;
+  top: -30%;
+  bottom: -30%;
+  left: 0;
+  width: 14%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: skewX(-22deg) translateX(-260%);
+  animation: cta-sweep 7s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes cta-sweep {
+  0%, 84% { transform: skewX(-22deg) translateX(-260%); }
+  100% { transform: skewX(-22deg) translateX(900%); }
+}
+
+/* Small motion on hover: an underline that draws, an arrow that nudges,
+   a photo that leans in. */
+.site-nav a:not(.nav-cta) { position: relative; border-bottom-color: transparent !important; }
+.site-nav a:not(.nav-cta)::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 1px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  transition: transform 220ms ease;
+}
+.site-nav a:not(.nav-cta):hover::after,
+.site-nav a[aria-current="true"]::after { transform: scaleX(1); }
+.text-link span[aria-hidden] { display: inline-block; transition: transform 200ms ease; }
+.text-link:hover span[aria-hidden] { transform: translateX(5px); }
+.proof-media img { transition: transform 700ms cubic-bezier(0.22, 0.75, 0.25, 1); }
+.proof-card:hover .proof-media img { transform: scale(1.045); }
+
+@media (max-width: 860px) {
+  .hero-mark { width: 78vw; right: -18vw; bottom: -6%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation: none; transform: none; }
+  .hero-actions .button-accent::after { display: none; }
+}
