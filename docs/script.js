@@ -325,7 +325,7 @@
 
   var L = function (t, b) { return b ? { t: t, b: b } : { t: t }; };
   var SPECS = [
-    { id: "hero", rate: 3.4, pause: [40, 80], failsafe: 14000, tail: 9, atLoad: true, after: [
+    { id: "hero", rate: 2.6, pause: [30, 60], failsafe: 14000, tail: 9, atLoad: true, after: [
         { lang: "css", lines: [
           "/* styles.css */", ":root {", "  --bg: #0b0a08;", "  --text: #f1ebe0;", "  --accent: #f5891c;",
           "  --display: \"Big Shoulders\";", "  --font: \"Newsreader\";", "}",
