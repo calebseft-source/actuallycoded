@@ -7,5 +7,9 @@ Allow: /
 Disallow: /concepts/
 Disallow: /marks.html
 Disallow: /exhibit/
+Disallow: /yt/
+Disallow: /tt/
+Disallow: /ig/
+Disallow: /fb/
 
 Sitemap: https://actuallycoded.com/sitemap.xml
