@@ -22,3 +22,4 @@ Big Shoulders face unpacked from `docs/fonts/bigshoulders-latin.woff2` with font
 at weight 700 and letter spacing minus 0.02em, the header's exact styling. The icon and
 the profile picture are tile only and did not change. The Facebook cover uploaded
 earlier on 2026-09-09 carries the old wordmark and needs replacing with this one.
+- `youtube-banner-2048x1152.png` the wordmark centred inside the 1235 by 338 safe area. YouTube channel banner.
