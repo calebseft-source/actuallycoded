@@ -343,7 +343,7 @@
         L("  <div class=\"shell hero-grid\">"),
         L("    <p class=\"eyebrow\">Custom one-page websites</p>", "eyebrow"),
         L("    <h1>One page. Real code you own. Finished in 48 hours.</h1>", "h1"),
-        L("    <p class=\"hero-lede\">A website for your business that was written, not generated.</p>", "lede"),
+        L("    <p class=\"hero-lede\">A website written for your business, not assembled by a builder.</p>", "lede"),
         L("    <a class=\"button button-accent\" href=\"#start\">Start your site</a>", "cta"),
         L("    <a class=\"text-link\" href=\"#standard\">Read the standard</a>", "link"),
         L("    <p class=\"tagline\">Actually coded, finished by hand.</p>", "tagline"),
