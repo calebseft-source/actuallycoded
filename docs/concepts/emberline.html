@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; form-action 'none'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>Emberline | Fictional Portfolio Concept by actuallycoded</title>
+  <meta name="description" content="A fictional wood-fired kitchen website concept designed and built by actuallycoded for the phone in your hand. This is portfolio work, not a real restaurant.">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#0e0c0a">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Emberline, a fictional portfolio concept">
+  <meta property="og:description" content="A wood-fired kitchen website concept by actuallycoded, built for the phone.">
+  <meta property="og:image" content="https://actuallycoded.com/assets/concepts/emberline/hero.jpg">
+  <link rel="canonical" href="https://actuallycoded.com/concepts/emberline.html">
+  <link rel="preload" as="image" href="../assets/concepts/emberline/hero.webp" type="image/webp" fetchpriority="high">
+  <link rel="preload" as="font" type="font/woff2" href="../fonts/bigshoulders-latin.woff2" crossorigin>
+  <link rel="preload" as="font" type="font/woff2" href="../fonts/newsreader-latin.woff2" crossorigin>
+  <link rel="stylesheet" href="emberline.css">
+  <script src="../vendor/lenis.min.js" defer></script>
+  <script src="concept-motion.js" defer></script>
+  <script src="emberline.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="scroll-progress" aria-hidden="true"></div>
+
+  <aside class="concept-banner" aria-label="Portfolio concept notice">
+    <strong>Portfolio concept only.</strong>
+    <span>A fictional restaurant. Nothing here can be booked.</span>
+    <a href="/">Built by actuallycoded <span aria-hidden="true">&#8599;</span></a>
+  </aside>
+
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="Emberline home">
+      <span class="brand-flame" aria-hidden="true"></span>
+      <span><b>Emberline</b><small>Wood-fired kitchen</small></span>
+    </a>
+
+    <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="site-nav">
+      <span class="sr-only">Open navigation</span>
+      <span></span><span></span><span></span>
+    </button>
+
+    <nav id="site-nav" class="site-nav" aria-label="Primary navigation">
+      <a href="#plates">Plates</a>
+      <a href="#menu">Menu</a>
+      <a href="#room">The room</a>
+      <a href="#fire">The fire</a>
+      <a class="nav-cta" href="#book">Book a table</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <picture class="hero-picture">
+        <source srcset="../assets/concepts/emberline/hero.webp" type="image/webp">
+        <img class="hero-photo" src="../assets/concepts/emberline/hero.jpg" width="1800" height="2497" alt="Two pizzas on the stone floor of a wood-fired oven, flames behind them" fetchpriority="high">
+      </picture>
+      <div class="hero-shade" aria-hidden="true"></div>
+      <div class="hero-content shell">
+        <p class="eyebrow" data-hero>Wood-fired kitchen &middot; Winter Park</p>
+        <h1 id="hero-title" data-hero>Cooked<br>over oak.<br>Nothing else.</h1>
+        <p class="hero-lede" data-hero>One oven, one grill, one fire lit at four. Twelve tables and a counter that faces the flame. The menu is short because the fire decides it.</p>
+        <div class="hero-actions" data-hero>
+          <a class="button button-accent" href="#book">Book a table</a>
+          <a class="text-link" href="#plates">See the plates <span aria-hidden="true">&#8595;</span></a>
+        </div>
+        <p class="qualifier" data-hero>Emberline is a fictional restaurant built as a portfolio concept. The address, hours and prices are illustrative.</p>
+      </div>
+      <div class="hero-scroll" aria-hidden="true"><span></span></div>
+    </section>
+
+    <section class="numbers" aria-label="The kitchen in numbers">
+      <ul class="shell numbers-grid" data-reveal-group>
+        <li data-reveal><b data-count="900">0</b><span>degrees in the oven</span></li>
+        <li data-reveal><b data-count="1">0</b><span>oak fire, lit at four</span></li>
+        <li data-reveal><b data-count="12">0</b><span>tables and a counter</span></li>
+        <li data-reveal><b data-count="0">0</b><span>microwaves, fryers or heat lamps</span></li>
+      </ul>
+    </section>
+
+    <section class="plates section" id="plates" aria-labelledby="plates-title">
+      <div class="shell section-heading" data-reveal>
+        <p class="eyebrow">Tonight</p>
+        <h2 id="plates-title">Four plates the fire does best.</h2>
+        <p>Swipe through. Everything on this strip is on the menu every night the fire is lit.</p>
+      </div>
+
+      <ul class="strip" aria-label="Tonight's plates">
+        <li class="strip-card" data-reveal>
+          <picture>
+            <source srcset="../assets/concepts/emberline/dish-1.webp" type="image/webp">
+            <img src="../assets/concepts/emberline/dish-1.jpg" width="1200" height="1601" loading="lazy" alt="A ribeye on a plate, flames rising behind it">
+          </picture>
+          <div class="strip-copy"><h3>Flamed ribeye</h3><p>Finished in the open fire at the table side of the counter.</p><b>$46</b></div>
+        </li>
+        <li class="strip-card" data-reveal>
+          <picture>
+            <source srcset="../assets/concepts/emberline/dish-2.webp" type="image/webp">
+            <img src="../assets/concepts/emberline/dish-2.jpg" width="1200" height="2134" loading="lazy" alt="A tomahawk steak on a board, seasoned with coarse salt">
+          </picture>
+          <div class="strip-copy"><h3>Tomahawk for two</h3><p>Forty minutes over oak, rested ten, carved at the table.</p><b>$88</b></div>
+        </li>
+        <li class="strip-card" data-reveal>
+          <picture>
+            <source srcset="../assets/concepts/emberline/dish-3.webp" type="image/webp">
+            <img src="../assets/concepts/emberline/dish-3.jpg" width="1200" height="1799" loading="lazy" alt="Sliced steak on a slate plate with a bowl of sauce and greens">
+          </picture>
+          <div class="strip-copy"><h3>Iron plate lamb</h3><p>Shoulder, six hours at the back of the oven, then the hot plate.</p><b>$38</b></div>
+        </li>
+        <li class="strip-card" data-reveal>
+          <picture>
+            <source srcset="../assets/concepts/emberline/dish-4.webp" type="image/webp">
+            <img src="../assets/concepts/emberline/dish-4.jpg" width="1200" height="2133" loading="lazy" alt="Steaks on a grill over open flame with smoke rising">
+          </picture>
+          <div class="strip-copy"><h3>Coal roasted vegetables</h3><p>Whatever the market had that morning, buried in the embers.</p><b>$19</b></div>
+        </li>
+      </ul>
+    </section>
+
+    <section class="section shell" id="menu" aria-labelledby="menu-title">
+      <div class="section-heading split-heading" data-reveal>
+        <div>
+          <p class="eyebrow">The menu</p>
+          <h2 id="menu-title">Fourteen things. Read them in a minute.</h2>
+        </div>
+        <p>Prices include tax. The kitchen closes when the fire does, and the last plate goes on at ten.</p>
+      </div>
+
+      <table class="menu-table" data-reveal>
+        <tbody>
+          <tr class="menu-group"><th scope="rowgroup" colspan="2">From the fire</th></tr>
+          <tr><td><h3>Flamed ribeye</h3><p>Twelve ounces, salt, oak smoke, nothing else.</p></td><td>$46</td></tr>
+          <tr><td><h3>Tomahawk for two</h3><p>Forty minutes over the coals and carved at the table.</p></td><td>$88</td></tr>
+          <tr><td><h3>Iron plate lamb</h3><p>Slow shoulder finished on a plate you should not touch.</p></td><td>$38</td></tr>
+          <tr><td><h3>Whole sea bass</h3><p>Stuffed with lemon and fennel, skin blistered on the grate.</p></td><td>$42</td></tr>
+          <tr class="menu-group"><th scope="rowgroup" colspan="2">From the oven</th></tr>
+          <tr><td><h3>Margherita</h3><p>Ninety seconds on the stone. Tomato, mozzarella, basil.</p></td><td>$17</td></tr>
+          <tr><td><h3>Sausage and broccoli rabe</h3><p>Our own sausage, chilli, a little honey.</p></td><td>$21</td></tr>
+          <tr><td><h3>Mushroom and taleggio</h3><p>Roasted in the embers first, then onto the dough.</p></td><td>$20</td></tr>
+          <tr><td><h3>Oven bread</h3><p>Baked to order, with whipped butter and salt.</p></td><td>$8</td></tr>
+          <tr class="menu-group"><th scope="rowgroup" colspan="2">Sides and sweet</th></tr>
+          <tr><td><h3>Coal roasted vegetables</h3><p>Buried in the embers, dressed with lemon.</p></td><td>$19</td></tr>
+          <tr><td><h3>Potatoes in the ash</h3><p>Crushed, with rosemary and a lot of butter.</p></td><td>$11</td></tr>
+          <tr><td><h3>Bitter leaves</h3><p>Radicchio, pear, walnuts, sharp dressing.</p></td><td>$12</td></tr>
+          <tr><td><h3>Burnt basque cheesecake</h3><p>Baked in the oven as it cools each night.</p></td><td>$12</td></tr>
+          <tr><td><h3>Roasted peach</h3><p>Ember roasted, with mascarpone and honey.</p></td><td>$11</td></tr>
+          <tr><td><h3>Affogato</h3><p>Vanilla gelato, one shot, done.</p></td><td>$9</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="room" id="room" aria-labelledby="room-title">
+      <picture class="room-picture" data-reveal>
+        <source srcset="../assets/concepts/emberline/room.webp" type="image/webp">
+        <img src="../assets/concepts/emberline/room.jpg" width="1800" height="1200" loading="lazy" alt="A dark dining room lit by candles and a low lamp, with people at a table">
+      </picture>
+      <div class="shell room-copy" data-reveal>
+        <p class="eyebrow">The room</p>
+        <h2 id="room-title">Twelve tables and one long counter that faces the fire.</h2>
+        <p>Low light, no music you would notice, and the oven in the room with you. The counter seats are the best seats and they are first come.</p>
+        <span class="photo-note">Illustrative. Emberline is fictional and has no premises.</span>
+      </div>
+    </section>
+
+    <section class="fire section" id="fire" aria-labelledby="fire-title">
+      <div class="shell fire-inner">
+        <div class="fire-photos" data-reveal-group>
+          <figure data-reveal>
+            <picture>
+              <source srcset="../assets/concepts/emberline/fire.webp" type="image/webp">
+              <img src="../assets/concepts/emberline/fire.jpg" width="1800" height="2250" loading="lazy" alt="Flames rising through a grill grate over glowing coals">
+            </picture>
+            <figcaption>The grill at half past four, before the first plate.</figcaption>
+          </figure>
+          <figure data-reveal>
+            <picture>
+              <source srcset="../assets/concepts/emberline/hands.webp" type="image/webp">
+              <img src="../assets/concepts/emberline/hands.jpg" width="1200" height="1030" loading="lazy" alt="A cook stretching pizza dough in the air in a rustic kitchen">
+            </picture>
+            <figcaption>Dough made at noon, stretched to order.</figcaption>
+          </figure>
+        </div>
+
+        <div class="fire-copy" data-reveal>
+          <p class="eyebrow">The fire</p>
+          <h2 id="fire-title">Three things the cook would say if you asked.</h2>
+          <div class="notes" data-reveal-group>
+            <div data-reveal>
+              <h3>We light at four</h3>
+              <p>Oak takes ninety minutes to become the kind of heat that sears without scorching. That is why the first table is at half past five and not a minute before.</p>
+            </div>
+            <div data-reveal>
+              <h3>Oak only</h3>
+              <p>Split and dried for a year. Nothing softwood, nothing treated, nothing from a bag. You can taste the difference and so can we.</p>
+            </div>
+            <div data-reveal>
+              <h3>Nothing waits under a lamp</h3>
+              <p>A plate leaves the pass the moment it is done, which is why tables of six sometimes eat in two waves. Ask and we will tell you which wave you are in.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="book section" id="book" aria-labelledby="book-title">
+      <div class="shell book-inner">
+        <div class="book-copy" data-reveal>
+          <p class="eyebrow">Book a table</p>
+          <h2 id="book-title">Pick a night and a party size. A time comes back by text.</h2>
+          <p>Counter seats are never booked. Walk in and take the next two that free up.</p>
+
+          <div class="book-note">
+            <strong>This is an interactive demo</strong>
+            <span>The form beside this notice belongs to a portfolio concept. It does not send, save, or share anything you type into it.</span>
+          </div>
+
+          <ul class="hours">
+            <li><strong>Wednesday to Saturday</strong><span>5:30pm to 10:00pm</span></li>
+            <li><strong>Sunday</strong><span>4:00pm to 9:00pm</span></li>
+            <li><strong>Monday and Tuesday</strong><span>The fire is out</span></li>
+            <li><strong>Where</strong><span>Orange Avenue, Winter Park, Florida</span></li>
+          </ul>
+        </div>
+
+        <div class="demo-form" id="demo-form" role="form" aria-label="Non-submitting booking demo" aria-describedby="form-disclaimer">
+          <div class="form-row">
+            <label for="name">Name</label>
+            <input id="name" name="name" type="text" autocomplete="name" placeholder="Your name">
+          </div>
+          <div class="form-row">
+            <label for="phone">Phone</label>
+            <input id="phone" name="phone" type="tel" autocomplete="tel" placeholder="The time comes back by text">
+          </div>
+          <div class="form-row form-row-split">
+            <div>
+              <label for="party">Party size</label>
+              <select id="party" name="party">
+                <option value="">Choose</option>
+                <option>Two</option>
+                <option>Three</option>
+                <option>Four</option>
+                <option>Five</option>
+                <option>Six</option>
+                <option>More than six</option>
+              </select>
+            </div>
+            <div>
+              <label for="when">Night and rough time</label>
+              <input id="when" name="when" type="text" placeholder="Friday around eight">
+            </div>
+          </div>
+          <div class="form-row">
+            <label for="notes">Anything the kitchen should know</label>
+            <textarea id="notes" name="notes" rows="3" placeholder="Allergies, a birthday, a seat facing the fire."></textarea>
+          </div>
+          <button class="button button-accent" id="demo-submit" type="button">Try the demo booking</button>
+          <p class="form-disclaimer" id="form-disclaimer">Demo only. Nothing entered here is transmitted or stored.</p>
+          <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section shell" id="questions" aria-labelledby="faq-title">
+      <div class="section-heading" data-reveal>
+        <p class="eyebrow">Before you come in</p>
+        <h2 id="faq-title">Asked most weeks.</h2>
+      </div>
+
+      <div class="faq-grid" data-reveal-group>
+        <details data-reveal>
+          <summary>Do I have to book?</summary>
+          <p>For a table on Friday or Saturday, yes, and a text with the night and party size gets a time back the same day. The counter is never booked. Walk in and take the next seats that free up.</p>
+        </details>
+        <details data-reveal>
+          <summary>Is there anything for someone who does not eat meat?</summary>
+          <p>Half the oven and all of the sides. The mushroom and taleggio, the coal roasted vegetables, the potatoes in the ash and the bitter leaves make a full dinner, and the kitchen will say so without being asked.</p>
+        </details>
+        <details data-reveal>
+          <summary>Why are there no reviews, ratings, or awards on this page?</summary>
+          <p>Because Emberline does not exist. It is a fictional restaurant built by actuallycoded as a portfolio concept, so this page carries no invented testimonials, star ratings, or press. Everything on it is design and copy, shown honestly as such.</p>
+        </details>
+        <details data-reveal>
+          <summary>Can I actually book here?</summary>
+          <p>No. There is no room, no oven, and no fire. The form on this page is a non submitting interaction demo that clears itself and keeps nothing. If you want a real website built this way, that is what <a href="/">actuallycoded</a> does.</p>
+        </details>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-main shell">
+      <a class="brand" href="#top" aria-label="Emberline home">
+        <span class="brand-flame" aria-hidden="true"></span>
+        <span><b>Emberline</b><small>Wood-fired kitchen</small></span>
+      </a>
+      <div>
+        <p class="footer-kicker">Fictional restaurant concept</p>
+        <p>Art direction, copy, interface design, and front end build by <a href="/">actuallycoded</a>.</p>
+      </div>
+      <a class="button button-outline" href="/">Return to actuallycoded</a>
+    </div>
+
+    <div class="footer-legal shell">
+      <p><strong>Portfolio concept only.</strong> Emberline is not a real restaurant, has no premises, and takes no bookings. The address, hours, and prices are illustrative.</p>
+      <p>Photography by <a href="https://www.pexels.com/photo/18126737/" target="_blank" rel="noopener noreferrer">Joshua Plattner</a>, <a href="https://www.pexels.com/photo/16041746/" target="_blank" rel="noopener noreferrer">Darius Haberstock</a>, <a href="https://www.pexels.com/photo/34003513/" target="_blank" rel="noopener noreferrer">Nadin Sh</a>, <a href="https://www.pexels.com/photo/36169144/" target="_blank" rel="noopener noreferrer">Mohamed Olwy</a>, <a href="https://www.pexels.com/photo/31235409/" target="_blank" rel="noopener noreferrer">Valeria Boltneva</a>, <a href="https://www.pexels.com/photo/37307283/" target="_blank" rel="noopener noreferrer">Le Salama</a> and <a href="https://www.pexels.com/photo/38539266/" target="_blank" rel="noopener noreferrer">Prateek Lall</a> on Pexels, used under the Pexels license for art direction only.</p>
+      <p>&copy; <span id="year"></span> actuallycoded portfolio.</p>
+    </div>
+  </footer>
+</body>
+</html>
