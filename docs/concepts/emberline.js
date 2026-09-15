@@ -11,7 +11,7 @@
   if (reduced) return;
 
   /* ---- Hero drift: the photo moves at a third of the scroll speed ---- */
-  var photo = document.querySelector(".hero-photo");
+  var photo = document.querySelector(".hero-video") || document.querySelector(".hero-photo");
   var hero = document.querySelector(".hero");
   if (photo && hero) {
     var drifting = false;

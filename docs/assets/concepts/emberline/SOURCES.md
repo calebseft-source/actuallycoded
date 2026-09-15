@@ -24,5 +24,11 @@ under the Pexels license: https://www.pexels.com/license/
 - `hands.jpg` and `hands.webp`, Prateek Lall:
   https://www.pexels.com/photo/38539266/
 
+- `hero.mp4` and its poster `hero-video.jpg`: a five second clip generated on
+  Higgsfield (a gpt_image_2_5 still, animated with Kling v3) on 2026-09-15 at
+  Caleb's request, then joined to its own reverse so it loops without a cut.
+  Generated imagery, used only on this fictional page; the photograph above
+  remains the fallback when video cannot play.
+
 The repository copies are resized and optimized derivatives, made 2026-09-15.
 Original downloads are kept outside the published site in the session workspace.
