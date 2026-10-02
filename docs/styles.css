@@ -653,7 +653,10 @@ a { color: inherit; }
   background: var(--bg);
 }
 .proof-card:nth-child(2n) { border-right: none; }
-.proof-card:nth-last-child(-n+2) { border-bottom: none; }
+.proof-card:nth-child(odd):nth-last-child(2), .proof-card:last-child { border-bottom: none; }
+/* an odd fifth card takes the whole last row, photo beside the copy, so the grid never leaves a hole */
+.proof-card:nth-child(odd):last-child { grid-column: 1 / -1; flex-direction: row; border-right: none; }
+.proof-card:nth-child(odd):last-child .proof-media { flex: 0 0 50%; aspect-ratio: auto; border-bottom: none; border-right: 1px solid var(--line); }
 .proof-media {
   position: relative;
   display: block;
@@ -899,8 +902,10 @@ html.smooth-active { scroll-behavior: auto; }
   .site-nav a { padding: 0.85rem 0; border-bottom: 1px solid var(--line); }
   .nav-cta { margin-top: 0.8rem; text-align: center; padding: 0.85rem 1.15rem; }
   .proof-grid { grid-template-columns: 1fr; }
-  .proof-card, .proof-card:nth-child(2n), .proof-card:nth-last-child(-n+2) { border-right: none; border-bottom: 1px solid var(--line-bright); }
+  .proof-card, .proof-card:nth-child(2n), .proof-card:nth-child(odd):nth-last-child(2) { border-right: none; border-bottom: 1px solid var(--line-bright); }
   .proof-card:last-child { border-bottom: none; }
+  .proof-card:nth-child(odd):last-child { grid-column: auto; flex-direction: column; }
+  .proof-card:nth-child(odd):last-child .proof-media { flex: none; aspect-ratio: 3 / 2; border-right: none; border-bottom: 1px solid var(--line); }
   .tells-head { display: none; }
   .tells li { grid-template-columns: 2.6rem minmax(0, 1fr); }
   .tells .tell-yes { grid-column: 2; }
