@@ -21,6 +21,7 @@
 
   <nav class="nav">
     <a class="logo" href="#top"><span class="logo-mark">🚗</span> Blackwater <span class="grad">Detailing</span></a>
+    <button class="burger" type="button" aria-label="Menu">&#9776;</button>
     <div class="nav-links">
       <a href="#home">Home</a>
       <a href="#about">About Us</a>
@@ -42,17 +43,21 @@
     <div class="hero-inner">
       <div class="hero-copy">
         <span class="pill">✨ Welcome to Blackwater Detailing ✨</span>
+        <span class="pill pill-timer">⏰ Offer ends in <b>02:59:47</b></span>
         <h1>Elevate Your <span class="grad">Vehicle's Shine</span> to the <em>Next Level!</em> 🚗💎</h1>
         <p>In today's fast-paced world, your vehicle deserves more than a wash — it deserves an experience. Welcome to Blackwater Detailing, where passion meets perfection! We don't just clean cars, we transform them. Experience the difference today and unleash your car's true potential!</p>
         <div class="hero-btns">
-          <a class="btn btn-primary btn-lg" href="#book">Get Started →</a>
+          <a class="btn btn-primary btn-lg" href="#book">Get Started → <span class="tag">🔥 HOT DEAL</span></a>
           <a class="btn btn-secondary btn-lg" href="#services">Learn More</a>
         </div>
         <div class="trust">
-          <span>⭐⭐⭐⭐⭐ 5.0 (2,347 reviews)</span>
-          <span>🏆 #1 Rated in Orlando</span>
-          <span>✅ 100% Satisfaction Guaranteed</span>
+          <span class="rate">⭐ Google <b>5.0</b></span>
+          <span class="rate">⭐ Yelp <b>5.0</b></span>
+          <span class="rate">⭐ Facebook <b>5.0</b></span>
+          <span class="rate">🏆 #1 in Orlando</span>
+          <span class="rate">✅ 100% Guaranteed</span>
         </div>
+        <div class="scroll-cue">Scroll Down ⬇️</div>
       </div>
       <div class="hero-art">
         <div class="hero-img">
@@ -107,10 +112,10 @@
       <p>From basic washes to full ceramic coatings, we've got you covered! 🚿</p>
     </div>
     <div class="cards">
-      <div class="card"><div class="icon">🧽</div><h3>Exterior Detail</h3><p>Our comprehensive exterior detailing service will leave your car looking brand new. Includes wash, wax, and tire shine!</p><a href="#">Learn More →</a></div>
-      <div class="card"><div class="icon">🧴</div><h3>Interior Detail</h3><p>Deep cleaning of all interior surfaces, leather conditioning, and odor elimination for a fresh feel.</p><a href="#">Learn More →</a></div>
+      <div class="card"><span class="tag tag-new">✨ NEW</span><div class="icon">🧽</div><h3>Exterior Detail</h3><p>Our comprehensive exterior detailing service will leave your car looking brand new. Includes wash, wax, and tire shine!</p><a href="#">Learn More →</a></div>
+      <div class="card"><span class="tag">⚡ SAME-DAY</span><div class="icon">🧴</div><h3>Interior Detail</h3><p>Deep cleaning of all interior surfaces, leather conditioning, and odor elimination for a fresh feel.</p><a href="#">Learn More →</a></div>
       <div class="card featured"><div class="badge">Most Popular</div><div class="icon">💎</div><h3>Ceramic Coating</h3><p>Protect your investment with our state-of-the-art ceramic coating technology. Lasts up to 5 years!</p><a href="#">Learn More →</a></div>
-      <div class="card"><div class="icon">✨</div><h3>Paint Correction</h3><p>Remove swirls, scratches, and imperfections to restore that showroom glossy finish.</p><a href="#">Learn More →</a></div>
+      <div class="card"><span class="tag tag-hot">🔥 TRENDING</span><div class="icon">✨</div><h3>Paint Correction</h3><p>Remove swirls, scratches, and imperfections to restore that showroom glossy finish.</p><a href="#">Learn More →</a></div>
       <div class="card"><div class="icon">🚙</div><h3>Mobile Detailing</h3><p>We come to you! Enjoy our premium services from the comfort of your home or office.</p><a href="#">Learn More →</a></div>
       <div class="card"><div class="icon">🛡️</div><h3>Paint Protection Film</h3><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p><a href="#">Learn More →</a></div>
     </div>
@@ -226,7 +231,19 @@
     </div>
   </footer>
 
-  <div class="chat">💬</div>
+  <div class="popup" id="popup">
+    <div class="popup-card">
+      <button class="popup-x" type="button" aria-label="Close">✕</button>
+      <div class="popup-emoji">🎉</div>
+      <h3>WAIT! Don't Miss Out! 🚨</h3>
+      <p>Get <b>25% OFF</b> your first detail when you book in the next <b>10 minutes</b>! ⏰ Only 3 spots left!</p>
+      <a class="btn btn-primary" href="#book">Claim My Discount 🎁</a>
+      <a class="popup-no" href="#">No thanks, I don't want to save money</a>
+    </div>
+  </div>
+  <div class="toast" id="toast">🔔 <div><b>Jessica from Orlando</b> just booked a Premium Detail!<small>2 minutes ago · ✅ Verified</small></div></div>
+  <div class="sticky-bar"><a href="tel:5551234567">📞 Call Now</a><a class="btn btn-primary btn-sm" href="#book">📅 Book Now</a></div>
+  <div class="chat"><span class="chat-bubble">👋 Hi there! Need help?</span>💬</div>
   <a class="back-top" href="#top">↑</a>
 </body>
 </html>
