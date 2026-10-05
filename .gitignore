@@ -3,4 +3,4 @@ __pycache__/
 .DS_Store
 Thumbs.db
 .claude/
-brand/_bigshoulders-700.ttf
+brand/_*.ttf
