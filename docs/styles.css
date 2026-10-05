@@ -323,7 +323,7 @@ a { color: inherit; }
   gap: clamp(1.6rem, 4vw, 3rem) clamp(2.5rem, 6vw, 5rem);
   align-items: end;
 }
-.hero h1 { max-width: 12ch; }
+.hero h1 { max-width: 15ch; }
 .hero-lede {
   font-size: clamp(1.12rem, 1.7vw, 1.38rem);
   color: var(--muted-strong);
@@ -1121,4 +1121,58 @@ html.smooth-active { scroll-behavior: auto; }
   .build-pane .caret, .spec-code .caret, .coded-code .caret { animation: none; display: none; }
   .build-pane { width: 100%; transition: none; }
   [data-build-section].is-building [data-build] { opacity: 1; transform: none; }
+}
+
+/* Week one, 2026-10-05: the first screen sells to the buyer, then the person, then the pane. */
+.hero-price {
+  font-family: var(--display);
+  font-size: clamp(1.35rem, 2.2vw, 1.75rem);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  margin: 0 0 1.5rem;
+}
+.hero-price b { color: var(--accent); font-weight: 700; }
+.assurance {
+  margin-top: 1.1rem;
+  font-size: 0.95rem;
+  color: var(--muted-strong);
+  max-width: 34rem;
+}
+.free-look {
+  margin-top: 0.6rem;
+  font-size: 0.95rem;
+  color: var(--muted-strong);
+  max-width: 34rem;
+}
+.free-look a { color: var(--accent); }
+.person {
+  margin-top: 2.2rem;
+  padding-top: 1.4rem;
+  border-top: 1px solid var(--line);
+  max-width: 34rem;
+}
+.person-name {
+  font-family: var(--display);
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text);
+}
+.person-line { margin-top: 0.4rem; color: var(--muted-strong); }
+.first-site {
+  margin-top: 2.6rem;
+  padding: 1.6rem 1.8rem;
+  border: 1px solid var(--line-bright);
+  display: grid;
+  gap: 0.6rem;
+}
+.first-site h3 { font-family: var(--display); font-size: 1.7rem; font-weight: 700; }
+.first-site p { color: var(--muted-strong); max-width: 50rem; }
+.first-site a { color: var(--accent); }
+.hero-grid .build-pane-wide { order: 3; }
+.hero-right { order: 2; }
+.hero-actions .button-outline { white-space: nowrap; letter-spacing: 0.06em; }
+@media (max-width: 400px) {
+  .hero-actions .button-outline { font-size: 0.92rem; padding-left: 0.6rem; padding-right: 0.6rem; }
 }
