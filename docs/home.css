@@ -357,6 +357,27 @@ p + p { margin-top: 1em; }
 .intake-note { font-size: 0.95rem; color: var(--fg-2); }
 .intake-note a { color: var(--fg); }
 
+/* ---- Questions ---- */
+.faq-grid { display: grid; gap: clamp(1.6rem, 4vw, 3rem); align-items: start; }
+@media (min-width: 900px) { .faq-grid { grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); } }
+.faq-grid h2 { max-width: 12ch; }
+.faq-list { border-top: 1px solid var(--rule); }
+.faq-item { border-bottom: 1px solid var(--rule); }
+.faq-item summary {
+  position: relative; list-style: none; cursor: pointer;
+  padding: 1.1rem 3rem 1.1rem 0;
+  font-family: var(--display); font-variation-settings: "opsz" 40; font-weight: 700; font-size: clamp(1.25rem, 1.05rem + 0.9vw, 1.7rem); letter-spacing: 0.01em; line-height: 1.1; text-transform: uppercase;
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::before, .faq-item summary::after {
+  content: ""; position: absolute; right: 0.6rem; top: 50%; width: 18px; height: 2px; background: var(--fg); translate: 0 -50%;
+  transition: transform 200ms var(--ease-out);
+}
+.faq-item summary::after { transform: rotate(90deg); }
+.faq-item[open] summary::after { transform: rotate(0deg); }
+.faq-item summary:hover { color: var(--fg); }
+.faq-item p { padding: 0 3rem 1.3rem 0; max-width: 36rem; color: var(--fg-2); }
+
 /* ---- Closing ---- */
 .close { position: relative; overflow: hidden; padding: clamp(5rem, 12vw, 11rem) 0 clamp(4rem, 8vw, 7rem); }
 .close h2 { font-size: clamp(3.5rem, 1.9rem + 9vw, 10.5rem); max-width: 10ch; }
