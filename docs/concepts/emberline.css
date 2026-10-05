@@ -279,3 +279,8 @@ details a { color: var(--accent-hover); }
   .fire-photos { margin-bottom: 0; }
   .book-inner { grid-template-columns: 1fr 1fr; gap: 64px; }
 }
+
+@view-transition { navigation: auto; }
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none; }
+}

@@ -1176,3 +1176,97 @@ html.smooth-active { scroll-behavior: auto; }
 @media (max-width: 400px) {
   .hero-actions .button-outline { font-size: 0.92rem; padding-left: 0.6rem; padding-right: 0.6rem; }
 }
+
+/* ============================================================
+   The makeover, 2026-10-05: the home page looks like the pages it sells.
+   A full bleed fire hero, the work as full width tiles, what you get, how
+   to start. Shades are flat layers at an opacity, never a gradient.
+   ============================================================ */
+.hero-fire {
+  position: relative;
+  min-height: max(620px, 100svh);
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  background: var(--bg-deep);
+  padding: 0;
+  border-bottom: 1px solid var(--line);
+}
+.hero-fire .hero-picture { position: absolute; inset: 0; }
+.hero-fire .hero-photo, .hero-fire .hero-video {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; object-position: 50% 42%;
+  translate: 0 var(--drift, 0%);
+  transform: scale(1.08);
+  animation: hero-settle 9s cubic-bezier(0.22, 0.75, 0.25, 1) both;
+}
+.hero-fire .hero-video { z-index: 1; }
+@keyframes hero-settle { to { transform: scale(1); } }
+.hero-fire .hero-shade { position: absolute; inset: 0; z-index: 2; background: rgba(8, 7, 6, 0.38); }
+.hero-fire .hero-shade::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 62%;
+  background: var(--bg-deep); opacity: 0.78;
+  clip-path: polygon(0 22%, 100% 0, 100% 100%, 0 100%);
+}
+.hero-fire .hero-content { position: relative; z-index: 3; padding: 18vh 0 3.2rem; }
+.hero-fire h1 {
+  font-size: clamp(3.6rem, 15vw, 9rem);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -0.015em;
+  line-height: 0.9;
+  max-width: none;
+}
+.hero-fire .hero-lede { margin: 1.4rem 0 1.2rem; max-width: 30rem; color: var(--text); }
+.hero-fire .hero-price { margin-bottom: 1.3rem; }
+.hero-fire .assurance { color: var(--muted-strong); }
+.hero-fire [data-hero] { opacity: 0; transform: translateY(26px); animation: hero-rise 0.9s cubic-bezier(0.22, 0.75, 0.25, 1) both; }
+.hero-fire [data-hero]:nth-child(1) { animation-delay: 0.15s; }
+.hero-fire [data-hero]:nth-child(2) { animation-delay: 0.3s; }
+.hero-fire [data-hero]:nth-child(3) { animation-delay: 0.5s; }
+.hero-fire [data-hero]:nth-child(4) { animation-delay: 0.62s; }
+.hero-fire [data-hero]:nth-child(5) { animation-delay: 0.75s; }
+.hero-fire [data-hero]:nth-child(6) { animation-delay: 0.9s; }
+@keyframes hero-rise { to { opacity: 1; transform: none; } }
+.hero-scroll { position: absolute; right: 1.5rem; bottom: 1.4rem; z-index: 3; width: 1px; height: 56px; background: var(--line-bright); overflow: hidden; }
+.hero-scroll span { position: absolute; left: 0; top: -100%; width: 100%; height: 100%; background: var(--accent); animation: scroll-hint 2.2s cubic-bezier(0.22, 0.75, 0.25, 1) infinite; }
+@keyframes scroll-hint { to { top: 100%; } }
+@media (prefers-reduced-motion: reduce) {
+  .hero-fire .hero-photo, .hero-fire .hero-video, .hero-fire [data-hero] { animation: none; opacity: 1; transform: none; }
+  .hero-fire .hero-video { display: none; }
+}
+
+.work { padding-top: clamp(3rem, 7vw, 5.5rem); }
+.work-head { margin-bottom: 1.8rem; }
+.work-head h2 { max-width: 16ch; }
+.work-head p { margin-top: 1rem; max-width: 40rem; color: var(--muted-strong); }
+.tiles { display: grid; grid-template-columns: repeat(6, 1fr); gap: 2px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.tile { position: relative; display: block; overflow: hidden; background: var(--surface); aspect-ratio: 4 / 5; text-decoration: none; color: var(--text); }
+.tile img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transform: scale(1.02); transition: transform 900ms cubic-bezier(0.22, 0.75, 0.25, 1); }
+.tile:hover img { transform: scale(1.07); }
+.tile::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 46%; background: var(--bg-deep); opacity: 0.74; clip-path: polygon(0 30%, 100% 0, 100% 100%, 0 100%); }
+.tile-label { position: absolute; top: 1rem; left: 1rem; z-index: 2; font-family: var(--display); font-size: 0.78rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text); background: rgba(6, 5, 4, 0.8); padding: 0.4rem 0.6rem; }
+.tile-text { position: absolute; left: 1.2rem; right: 1.2rem; bottom: 1.2rem; z-index: 2; display: grid; gap: 0.2rem; }
+.tile-text .eyebrow { margin: 0; font-size: 0.82rem; }
+.tile-name { font-family: var(--display); font-weight: 700; font-size: clamp(1.7rem, 3.2vw, 2.6rem); line-height: 1; }
+.tile-wide { grid-column: span 6; aspect-ratio: 16 / 9; }
+.tile-half { grid-column: span 3; }
+.tile-third { grid-column: span 2; }
+@media (max-width: 860px) {
+  .tile-wide, .tile-half, .tile-third { grid-column: span 6; aspect-ratio: 4 / 5; }
+  .tile-wide { aspect-ratio: 1 / 1; }
+}
+
+.get-grid { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr); gap: clamp(2rem, 5vw, 4rem); align-items: start; }
+.get-list { list-style: none; margin: 1.6rem 0 0; padding: 0; display: grid; }
+.get-list li { padding: 1rem 0 1rem 1.4rem; border-top: 1px solid var(--line); position: relative; font-size: 1.12rem; }
+.get-list li:last-child { border-bottom: 1px solid var(--line); }
+.get-list li::before { content: ""; position: absolute; left: 0; top: 1.5rem; width: 6px; height: 6px; background: var(--accent); }
+.get .free-look { margin-top: 1.4rem; }
+.get-side { border: 1px solid var(--line-bright); padding: 1.6rem 1.6rem 1.4rem; display: grid; gap: 1.2rem; }
+.get-price { display: grid; gap: 0.3rem; }
+.get-price .display-num { font-size: clamp(4rem, 9vw, 6rem); line-height: 0.9; }
+.get-price small { font-family: var(--display); letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); font-size: 0.9rem; }
+.get-side .person { margin-top: 0; }
+.get-side .tagline { margin-top: 0.4rem; }
+@media (max-width: 1000px) { .get-grid { grid-template-columns: 1fr; } }

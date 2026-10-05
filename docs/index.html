@@ -1,29 +1,34 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; form-action 'none'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests">
   <title>actuallycoded | Custom one page websites in Orlando and Lake County, built in 48 hours</title>
   <meta name="description" content="One page for your business, built for you in 48 hours by a real person in Orlando, Florida. Founding price $495 for the first ten sites, then $850. Yours to keep, no monthly fee. Text or call (407) 480-9032.">
   <meta name="theme-color" content="#0b0a08">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; form-action 'none'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests">
-  <meta name="referrer" content="strict-origin-when-cross-origin">
   <link rel="canonical" href="https://actuallycoded.com/">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="actuallycoded">
   <meta property="og:title" content="actuallycoded | One page for your business, built for you in 48 hours">
   <meta property="og:description" content="Written for your shop by a real person in Orlando, Florida, not pulled from a template. $495 founding price for the first ten sites, then $850. Yours to keep, no monthly fee.">
   <meta property="og:url" content="https://actuallycoded.com/">
-  <!-- MARK: the ac monogram on the cut-corner tile, Caleb's direction 2026-09-08. Alternates on marks.html. -->
+  <meta property="og:image" content="https://actuallycoded.com/assets/hero/hero-poster.jpg">
   <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20100%20100%27%3E%3Cpath%20d%3D%27M0%200H100V68L68%20100H0Z%27%20fill%3D%27%23f5891c%27%2F%3E%3Cg%20fill%3D%27%231b1200%27%3E%3Crect%20x%3D%2218%22%20y%3D%2222%22%20width%3D%2228%22%20height%3D%2212%22%2F%3E%3Crect%20x%3D%2234%22%20y%3D%2222%22%20width%3D%2212%22%20height%3D%2256%22%2F%3E%3Crect%20x%3D%228%22%20y%3D%2244%22%20width%3D%2238%22%20height%3D%2212%22%2F%3E%3Crect%20x%3D%228%22%20y%3D%2244%22%20width%3D%2212%22%20height%3D%2234%22%2F%3E%3Crect%20x%3D%228%22%20y%3D%2266%22%20width%3D%2238%22%20height%3D%2212%22%2F%3E%3Crect%20x%3D%2256%22%20y%3D%2222%22%20width%3D%2230%22%20height%3D%2212%22%2F%3E%3Crect%20x%3D%2256%22%20y%3D%2222%22%20width%3D%2212%22%20height%3D%2256%22%2F%3E%3Crect%20x%3D%2256%22%20y%3D%2266%22%20width%3D%2230%22%20height%3D%2212%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E">
+  <link rel="preload" as="image" href="assets/hero/hero-poster.webp" fetchpriority="high">
   <link rel="preload" as="font" type="font/woff2" href="fonts/bigshoulders-latin.woff2" crossorigin>
   <link rel="preload" as="font" type="font/woff2" href="fonts/newsreader-latin.woff2" crossorigin>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="home.css">
+  <script src="head.js"></script>
+  <script src="vendor/gsap.min.js" defer></script>
+  <script src="vendor/ScrollTrigger.min.js" defer></script>
+  <script src="vendor/SplitText.min.js" defer></script>
+  <script src="vendor/lenis.1.3.26.min.js" defer></script>
+  <script src="home.js" defer></script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"LocalBusiness","name":"actuallycoded","url":"https://actuallycoded.com/","telephone":"+1-407-480-9032","email":"caleb@actuallycoded.com","description":"Custom one page websites for small businesses, built in 48 hours by a real person.","founder":{"@type":"Person","name":"Caleb Pierce"},"address":{"@type":"PostalAddress","addressLocality":"Orlando","addressRegion":"FL","addressCountry":"US"},"areaServed":[{"@type":"City","name":"Orlando"},{"@type":"AdministrativeArea","name":"Lake County, Florida"},{"@type":"AdministrativeArea","name":"Orange County, Florida"}],"priceRange":"$495 to $850"}</script>
 </head>
-<body>
+<body data-theme="dark">
   <a class="skip-link" href="#main">Skip to content</a>
-  <div class="scroll-progress" aria-hidden="true"></div>
 
   <header class="site-header">
     <a class="brand" href="#top" aria-label="actuallycoded home">
@@ -37,364 +42,245 @@
     </button>
 
     <nav id="site-nav" class="site-nav" aria-label="Primary navigation">
-      <a href="#standard">The standard</a>
-      <a href="#proof">Examples</a>
+      <a href="#work">The work</a>
+      <a href="#get">What you get</a>
       <a href="#start">How it works</a>
-      <a class="nav-cta" href="#start">Start your site</a>
+      <a class="nav-cta" href="#start">Start for $495</a>
     </nav>
   </header>
 
   <main id="main">
 
-    <!-- ============================================================
-         1. HERO
-         ============================================================ -->
-    <section class="hero" id="top" aria-labelledby="hero-title">
-      <div class="shell hero-grid">
-
-        <div>
-          <p class="eyebrow">Custom one page websites. Orlando and Lake County.</p>
-          <h1 id="hero-title">One page for your business, built for you in 48 hours.</h1>
-          <p class="hero-lede">Written for your shop by a real person, not pulled from a template. It is yours: no monthly fee, no platform, nothing that can be switched off.</p>
-          <p class="hero-price"><b>$495</b> for the first ten sites, then $850.</p>
-          <div class="hero-actions">
-            <a class="button button-accent" href="#start">Start for $495</a>
-            <a class="button button-outline" href="tel:+14074809032">Text or call (407) 480-9032</a>
+    <section class="hero" id="top" data-theme="dark" aria-labelledby="hero-title">
+      <div class="hero-media" aria-hidden="true">
+        <img class="hero-still" src="assets/hero/hero-poster.webp" width="720" height="1280" alt="" fetchpriority="high" decoding="async">
+        <video class="hero-video" autoplay muted loop playsinline preload="auto" poster="assets/hero/hero-poster.webp" width="720" height="1280" tabindex="-1">
+          <source src="assets/hero/hero-av1.mp4" type="video/mp4; codecs=av01.0.05M.10">
+          <source src="assets/hero/hero-hevc.mp4" type="video/mp4; codecs=hvc1.1.6.L93.B0">
+          <source src="assets/hero/hero-h264.mp4" type="video/mp4; codecs=avc1.64001F">
+        </video>
+      </div>
+      <div class="hero-shade" aria-hidden="true"></div>
+      <div class="hero-content shell">
+        <div class="hero-left">
+          <p class="eyebrow" data-rise>Custom one page websites. Orlando and Lake County.</p>
+          <h1 id="hero-title" data-lines>One page<br>for your<br>business.</h1>
+        </div>
+        <div class="hero-right">
+          <p class="lede" data-rise>Written for your shop by a real person and built in 48 hours. Yours to keep, with no monthly fee.</p>
+          <p class="price-line" data-rise><b>$495</b> for the first ten sites, then $850.</p>
+          <div class="actions" data-rise>
+            <a class="button button-ember" href="#start">Start for $495</a>
+            <a class="button button-ghost" href="tel:+14074809032">Text or call (407) 480-9032</a>
           </div>
-          <p class="assurance">Cancel before work starts for a full refund. If I miss 48 hours, you choose a refund or $100 back.</p>
+          <p class="assurance" data-rise>Cancel before work starts for a full refund. If I miss 48 hours, you choose a refund or $100 back.</p>
+        </div>
+      </div>
+      <button class="video-toggle" type="button" aria-pressed="false"><span class="icon" aria-hidden="true"></span><span class="label">Pause</span><span class="sr-only"> the fire</span></button>
+      <div class="hero-scroll" aria-hidden="true"><span></span></div>
+    </section>
+
+    <div class="marquee" aria-label="One page, built in 48 hours, written for your shop, yours to keep, no monthly fee, $495 founding price, Orlando and Lake County">
+      <div class="marquee-track" aria-hidden="true">
+        <ul><li>One page</li><li>Built in 48 hours</li><li>Written for your shop</li><li>Yours to keep</li><li>No monthly fee</li><li>$495 founding price</li><li>Orlando and Lake County</li></ul>
+        <ul><li>One page</li><li>Built in 48 hours</li><li>Written for your shop</li><li>Yours to keep</li><li>No monthly fee</li><li>$495 founding price</li><li>Orlando and Lake County</li></ul>
+      </div>
+      <button class="marquee-pause" type="button" aria-pressed="false">Pause</button>
+    </div>
+
+    <section class="section work" id="work" data-theme="dark" aria-labelledby="work-title">
+      <div class="shell">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">The work</p>
+            <h2 id="work-title" data-lines>Built to be looked at on a phone.</h2>
+          </div>
+          <p>Six businesses, each written and built as if it were a real client, so you can see the standard before you pay for it. Every one is a fictional business and says so on screen. Open any of them and scroll.</p>
+        </div>
+      </div>
+      <div class="shell">
+        <div class="tiles">
+        <a class="tile tile-wide" href="concepts/emberline.html">
+          <picture>
+            <source type="image/avif" sizes="100vw" srcset="assets/work/emberline-720.avif 720w, assets/work/emberline-1200.avif 1200w, assets/work/emberline-1800.avif 1800w">
+            <img src="assets/work/emberline-1200.jpg" sizes="100vw" srcset="assets/work/emberline-720.jpg 720w, assets/work/emberline-1200.jpg 1200w" width="1800" height="2250" loading="lazy" decoding="async" alt="Flames rising over a grill in a brick kitchen, used in the fictional Emberline concept">
+          </picture>
+          <span class="tile-label">Fictional business</span>
+          <span class="tile-text"><span class="eyebrow">Wood fired kitchen, Winter Park</span><span class="tile-name">Emberline</span></span>
+          <span class="tile-arrow" aria-hidden="true"></span>
+        </a>
+        <a class="tile tile-half" href="concepts/blackwater-detailing.html">
+          <picture>
+            <source type="image/avif" sizes="(min-width: 861px) 50vw, 100vw" srcset="assets/work/blackwater-720.avif 720w, assets/work/blackwater-1200.avif 1200w, assets/work/blackwater-1800.avif 1800w">
+            <img src="assets/work/blackwater-1200.jpg" sizes="(min-width: 861px) 50vw, 100vw" srcset="assets/work/blackwater-720.jpg 720w, assets/work/blackwater-1200.jpg 1200w" width="1600" height="1065" loading="lazy" decoding="async" alt="A black alloy wheel covered in foam with a yellow brake caliper showing through, used in the fictional Blackwater Detailing concept">
+          </picture>
+          <span class="tile-label">Fictional business</span>
+          <span class="tile-text"><span class="eyebrow">Paint correction and ceramic coating, Orlando</span><span class="tile-name">Blackwater Detailing</span></span>
+          <span class="tile-arrow" aria-hidden="true"></span>
+        </a>
+        <a class="tile tile-half" href="concepts/hollis-barbershop.html">
+          <picture>
+            <source type="image/avif" sizes="(min-width: 861px) 50vw, 100vw" srcset="assets/work/hollis-720.avif 720w, assets/work/hollis-1200.avif 1200w, assets/work/hollis-1800.avif 1800w">
+            <img src="assets/work/hollis-1200.jpg" sizes="(min-width: 861px) 50vw, 100vw" srcset="assets/work/hollis-720.jpg 720w, assets/work/hollis-1200.jpg 1200w" width="1800" height="1200" loading="lazy" decoding="async" alt="Green leather barber chairs on a checkerboard floor, used in the fictional Hollis Barbershop concept">
+          </picture>
+          <span class="tile-label">Fictional business</span>
+          <span class="tile-text"><span class="eyebrow">One chair, one barber, Thornton Park</span><span class="tile-name">Hollis Barbershop</span></span>
+          <span class="tile-arrow" aria-hidden="true"></span>
+        </a>
+        <a class="tile tile-third" href="concepts/northline-dental.html">
+          <picture>
+            <source type="image/avif" sizes="(min-width: 861px) 34vw, 100vw" srcset="assets/work/northline-720.avif 720w, assets/work/northline-1200.avif 1200w, assets/work/northline-1800.avif 1800w">
+            <img src="assets/work/northline-1200.jpg" sizes="(min-width: 861px) 34vw, 100vw" srcset="assets/work/northline-720.jpg 720w, assets/work/northline-1200.jpg 1200w" width="1800" height="1200" loading="lazy" decoding="async" alt="Bright dental treatment room used in the fictional Northline Dental concept">
+          </picture>
+          <span class="tile-label">Fictional business</span>
+          <span class="tile-text"><span class="eyebrow">Dental practice, Orlando</span><span class="tile-name">Northline Dental</span></span>
+          <span class="tile-arrow" aria-hidden="true"></span>
+        </a>
+        <a class="tile tile-third" href="concepts/fieldnote-coffee.html">
+          <picture>
+            <source type="image/avif" sizes="(min-width: 861px) 34vw, 100vw" srcset="assets/work/fieldnote-720.avif 720w, assets/work/fieldnote-1200.avif 1200w, assets/work/fieldnote-1800.avif 1800w">
+            <img src="assets/work/fieldnote-1200.jpg" sizes="(min-width: 861px) 34vw, 100vw" srcset="assets/work/fieldnote-720.jpg 720w, assets/work/fieldnote-1200.jpg 1200w" width="1800" height="1200" loading="lazy" decoding="async" alt="Warm plant filled cafe interior used in the fictional Fieldnote Coffee concept">
+          </picture>
+          <span class="tile-label">Fictional business</span>
+          <span class="tile-text"><span class="eyebrow">Coffee bar and roastery, Audubon Park</span><span class="tile-name">Fieldnote Coffee</span></span>
+          <span class="tile-arrow" aria-hidden="true"></span>
+        </a>
+        <a class="tile tile-third" href="concepts/kestrel-electric.html">
+          <picture>
+            <source type="image/avif" sizes="(min-width: 861px) 34vw, 100vw" srcset="assets/work/kestrel-720.avif 720w, assets/work/kestrel-1200.avif 1200w, assets/work/kestrel-1800.avif 1800w">
+            <img src="assets/work/kestrel-1200.jpg" sizes="(min-width: 861px) 34vw, 100vw" srcset="assets/work/kestrel-720.jpg 720w, assets/work/kestrel-1200.jpg 1200w" width="1800" height="1200" loading="lazy" decoding="async" alt="An electrician checking a residential breaker panel, used in the fictional Kestrel Electric concept">
+          </picture>
+          <span class="tile-label">Fictional business</span>
+          <span class="tile-text"><span class="eyebrow">Electrician, Orlando</span><span class="tile-name">Kestrel Electric</span></span>
+          <span class="tile-arrow" aria-hidden="true"></span>
+        </a>
+        </div>
+        <p class="work-foot">The first real business on this page gets its site free. Details below.</p>
+      </div>
+    </section>
+
+    <section class="section get" id="get" data-theme="paper" aria-labelledby="get-title">
+      <div class="shell get-grid">
+        <div data-rise-group>
+          <p class="eyebrow" data-rise>What you get</p>
+          <h2 id="get-title" data-lines>One page. Written for your shop. By a real person.</h2>
+          <ul class="get-list">
+            <li><b>One custom page</b>, designed and written for your business, not adapted from a template.</li>
+            <li><b>Finished in 48 hours</b> from the moment you send the brief and pay.</li>
+            <li><b>One round of changes</b> included. Send them together and they go in.</li>
+            <li><b>Yours to keep.</b> No monthly fee, no platform, nothing that can be switched off.</li>
+          </ul>
           <p class="free-look">Already have a site? <a href="mailto:caleb@actuallycoded.com?subject=Free%20look%20at%20my%20site">Send me the link</a> and I will tell you straight what I would change. Free.</p>
-          <p class="tagline"><b>Actually coded,</b> finished by hand.</p>
+        </div>
+        <div class="offer-card" data-rise>
+          <p class="eyebrow">Founding price</p>
+          <p class="offer-price"><span class="num">$495</span><small>First ten sites, then $850</small></p>
+          <p class="offer-guarantee"><b>Cancel before work starts for a full refund.</b> If I miss 48 hours, you choose a refund or $100 back.</p>
+          <a class="button button-ember" href="#start">Start for $495</a>
           <div class="person">
             <!-- PHOTO: a real photo of the desk or the town goes here when one exists. No face, no stock, no generated image. -->
-            <p class="person-name">Caleb Pierce, Orlando, Florida.</p>
-            <p class="person-line">Every page is my decision, start to finish, and I answer my own phone.</p>
+            <p class="person-name">Caleb Pierce, Orlando, Florida</p>
+            <p class="person-line">Every page is my decision, start to finish, and I answer my own phone. <a href="tel:+14074809032">(407) 480-9032</a></p>
           </div>
-        </div>
-
-        <div class="hero-right">
-          <aside class="offer" aria-label="The offer">
-            <div class="offer-head">
-              <span>The one product</span>
-            </div>
-            <div class="offer-price">
-              <span class="display-num">$495</span>
-              <small>Founding price</small>
-            </div>
-            <p class="offer-then">For the first ten sites. Then <b>$850</b>.</p>
-            <ul class="offer-list">
-              <li>One custom page, designed and coded for your business</li>
-              <li>Delivered in 48 hours from a paid brief</li>
-              <li>One round of changes included</li>
-              <li>Yours to keep. No monthly fee, no platform lock-in</li>
-              <li>Built to the published standard, and measured against it</li>
-            </ul>
-            <a class="button button-accent" href="#start">Start for $495</a>
-          </aside>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ============================================================
-         2. THE STANDARD, SHOWN
-         ============================================================ -->
-    <section class="section shell" id="standard" aria-labelledby="standard-title">
-      <div class="section-heading split-heading" data-reveal>
-        <div>
-          <p class="eyebrow">The standard</p>
-          <h2 id="standard-title">Six things a generated site does. Six things yours will not.</h2>
-        </div>
-        <p>Most small business websites now come out of the same handful of tools, and they share the same tells. You have seen them without knowing their names. Below: the six tells, each one shown beside what you get instead. Then two whole sites you can scroll, one generated and one finished. Then this page measured against the list.</p>
-      </div>
-
-      <div class="tells-head" aria-hidden="true">
-        <span></span>
-        <span>The tell</span>
-        <span>What you get instead</span>
-      </div>
-      <ol class="tells">
-        <li data-row="1">
-          <span class="tell-index">01</span>
-          <div class="tell-not">
-            <figure class="specimen specimen-not"><pre class="spec-code" aria-hidden="true"></pre><img src="assets/tells/01.svg" width="600" height="260" loading="lazy" alt="Pill shaped buttons and a rounded card with a soft shadow"></figure>
-            <h3>Rounded everything</h3>
-            <p>Pill buttons, softened cards, corners rounded because the tool's default was rounded. It is the single fastest way to spot a template.</p>
-          </div>
-          <div class="tell-yes">
-            <div class="specimen specimen-yes spec-btn"><pre class="spec-code" aria-hidden="true"></pre><span class="button button-accent" aria-hidden="true">Request a time</span><span class="button button-outline" aria-hidden="true">See prices</span></div>
-            <h3>Sharp geometry, decided</h3>
-            <p>Square corners on every element, including the favicon in the browser tab. Nothing on the page is a leftover setting.</p>
-          </div>
-        </li>
-        <li data-row="2">
-          <span class="tell-index">02</span>
-          <div class="tell-not">
-            <figure class="specimen specimen-not"><pre class="spec-code" aria-hidden="true"></pre><img src="assets/tells/02.svg" width="600" height="260" loading="lazy" alt="A purple to blue gradient hero with glowing blobs behind the headline"></figure>
-            <h3>Gradients as decoration</h3>
-            <p>Colour fading into other colour behind the headline because the empty space made someone nervous.</p>
-          </div>
-          <div class="tell-yes">
-            <div class="specimen specimen-yes spec-flat"><pre class="spec-code" aria-hidden="true"></pre><span class="spec-bar"></span><span class="spec-flat-title">One colour, one job.</span><span class="spec-flat-sub">Everything else stays quiet.</span></div>
-            <h3>One accent, used on purpose</h3>
-            <p>A single colour that marks what matters: the price, the button, the thing to read next. Everywhere else, restraint.</p>
-          </div>
-        </li>
-        <li data-row="3">
-          <span class="tell-index">03</span>
-          <div class="tell-not">
-            <figure class="specimen specimen-not"><pre class="spec-code" aria-hidden="true"></pre><img src="assets/tells/03.svg" width="600" height="260" loading="lazy" alt="A system font headline with one word in yellow cursive"></figure>
-            <h3>Whatever font the computer had, plus one cursive word</h3>
-            <p>A system font stack is the absence of a decision, so your brand looks different on every phone. Then one word in the headline is set in a script face for personality. That word is the tell.</p>
-          </div>
-          <div class="tell-yes">
-            <div class="specimen specimen-yes spec-type"><pre class="spec-code" aria-hidden="true"></pre><span class="spec-type-head">Transform your smile.</span><span class="spec-type-body">Set in a display face and a reading face, chosen for the practice and served from its own site.</span></div>
-            <h3>A chosen pair of typefaces</h3>
-            <p>A display face and a reading face, picked for the business, served from your own site so nothing is fetched from Google to render your name.</p>
-          </div>
-        </li>
-        <li data-row="4">
-          <span class="tell-index">04</span>
-          <div class="tell-not">
-            <figure class="specimen specimen-not"><pre class="spec-code" aria-hidden="true"></pre><img src="assets/tells/04.svg" width="600" height="260" loading="lazy" alt="Four identical sections stacked: a heading, three cards, repeat"></figure>
-            <h3>The section march</h3>
-            <p>Seven to nine near identical blocks in a row: heading, three cards, button, repeat. Scroll and nothing changes.</p>
-          </div>
-          <div class="tell-yes">
-            <div class="specimen specimen-yes spec-wire"><pre class="spec-code" aria-hidden="true"></pre><div class="w-hero"></div><div class="w-list"><span></span><span></span><span></span></div><div class="w-split"><span></span><span></span></div><div class="w-form"><span></span><span></span></div></div>
-            <h3>Four sections that each say a thing</h3>
-            <p>Fewer, longer, and different from one another. This page has four. Yours will have as many as it needs and not one more.</p>
-          </div>
-        </li>
-        <li data-row="5">
-          <span class="tell-index">05</span>
-          <div class="tell-not">
-            <figure class="specimen specimen-not"><pre class="spec-code" aria-hidden="true"></pre><img src="assets/tells/05.svg" width="600" height="260" loading="lazy" alt="Six floating white cards with drop shadows and no hierarchy"></figure>
-            <h3>Card soup</h3>
-            <p>Every idea in its own floating box with its own drop shadow, so nothing on the page is more important than anything else.</p>
-          </div>
-          <div class="tell-yes">
-            <div class="specimen specimen-yes spec-rules"><pre class="spec-code" aria-hidden="true"></pre><div><b>Cleanings</b><span>from $120</span></div><div><b>Fillings</b><span>from $180</span></div><div><b>Same day pain</b><span>8:00 and 1:15</span></div></div>
-            <h3>Hierarchy you can feel</h3>
-            <p>Rules, borders and type size do the work. When something is in a box on your page, it is because it earned one.</p>
-          </div>
-        </li>
-        <li data-row="6">
-          <span class="tell-index">06</span>
-          <div class="tell-not">
-            <figure class="specimen specimen-not"><pre class="spec-code" aria-hidden="true"></pre><img src="assets/tells/06.svg" width="600" height="260" loading="lazy" alt="Copy that reads: we leverage a client centric approach to deliver seamless innovative solutions"></figure>
-            <h3>Copy that describes a process</h3>
-            <p>"We leverage a client centric approach to deliver solutions." Nobody says that out loud, and nobody reads it.</p>
-          </div>
-          <div class="tell-yes">
-            <div class="specimen specimen-yes spec-copy"><pre class="spec-code" aria-hidden="true"></pre><span class="spec-copy-head">Two slots held every weekday for pain that cannot wait.</span><span class="spec-copy-sub">Price in writing before treatment starts. One dentist, first visit to last.</span></div>
-            <h3>Words a customer would actually say</h3>
-            <p>Your prices, your town, your hours, the question people ring you with. Specific is the whole difference, and it cannot be templated.</p>
-          </div>
-        </li>
-      </ol>
-
-      <div class="compare">
-        <div class="compare-pick" data-coded="slow">
-          <span class="compare-kicker">Pick a business</span>
-          <div class="compare-switch" role="group" aria-label="Choose a business to compare" data-pair>
-            <button type="button" class="is-active" aria-pressed="true" data-slop="exhibit/dental.html" data-slop-title="Exhibit: Northline Dental as a template would build it, scrollable" data-clean="concepts/northline-dental.html" data-clean-title="Northline Dental, the finished concept, scrollable">Dental</button>
-            <button type="button" aria-pressed="false" data-slop="exhibit/barber.html" data-slop-title="Exhibit: Hollis Barbershop as a template would build it, scrollable" data-clean="concepts/hollis-barbershop.html" data-clean-title="Hollis Barbershop, the finished concept, scrollable">Barber</button>
-          </div>
-          <p>Both windows change together: the same fictional business, the default on the left and the finished page on the right.</p>
-        </div>
-        <div class="compare-pane compare-left">
-          <div class="compare-head" data-coded="slow">
-            <span class="compare-kicker">Scroll inside it</span>
-            <h3>The default</h3>
-            <p>What a template does with the brief. Every tell left in, built as an exhibit in its own document.</p>
-          </div>
-          <div class="compare-frame" data-coded="slow">
-            <iframe id="compare-slop" src="exhibit/dental.html" title="Exhibit: Northline Dental as a template would build it, scrollable" loading="lazy"></iframe>
-          </div>
-        </div>
-        <div class="compare-pane">
-          <div class="compare-head" data-coded="slow">
-            <span class="compare-kicker">Scroll inside it</span>
-            <h3>Built to the list</h3>
-            <p>What a person does with the same brief, finished to this standard.</p>
-          </div>
-          <div class="compare-frame" data-coded="slow">
-            <iframe id="compare-clean" src="concepts/northline-dental.html" title="Northline Dental, the finished concept, scrollable" loading="lazy"></iframe>
-          </div>
-        </div>
-        <p class="compare-foot" data-coded="slow">Every business here is fictional. The defaults are separate documents built to show the tells, so nothing in them enters the code of this page, which is what the counts below measure.</p>
-      </div>
-
-      <div class="receipt">
-        <div class="receipt-copy" data-coded data-after=".compare">
-          <h3>This page, measured against its own list.</h3>
-          <p>The counts come from this page's own code. The specimens in the list are images and the default above is its own document, so neither enters them. Open the source and check. If you buy a site, the same receipt comes with it.</p>
-        </div>
-        <div class="receipt-grid" role="list" aria-label="Measurements of this page">
-          <div role="listitem" data-coded data-after=".compare"><span class="display-num">0</span><small>Rounded corners</small></div>
-          <div role="listitem" data-coded data-after=".compare"><span class="display-num">0</span><small>Gradients</small></div>
-          <div role="listitem" data-coded data-after=".compare"><span class="display-num">0</span><small>Third party scripts</small></div>
-          <div role="listitem" data-coded data-after=".compare"><span class="display-num">0</span><small>Tracking cookies</small></div>
-          <div role="listitem" data-coded data-after=".compare"><span class="display-num">2</span><small>Typefaces, self hosted</small></div>
-          <div role="listitem" data-coded data-after=".compare"><span class="display-num">4</span><small>Sections</small></div>
+          <p class="tagline"><b>Actually coded,</b> finished by hand.</p>
         </div>
       </div>
     </section>
 
-    <!-- ============================================================
-         3. PROOF, HONESTLY LABELED
-         ============================================================ -->
-    <section class="proof section" id="proof" aria-labelledby="proof-title">
+    <section class="section start" id="start" data-theme="paper" aria-labelledby="start-title">
       <div class="shell">
-        <div class="section-heading split-heading">
+        <div class="section-head">
           <div>
-            <p class="eyebrow">Examples</p>
-            <h2 id="proof-title">Five pages, built to the list above.</h2>
+            <p class="eyebrow">How it works</p>
+            <h2 id="start-title" data-lines>Answer four questions. Pay once. 48 hours later, your page.</h2>
           </div>
-          <div class="heading-right">
-            <p>A dental practice, a coffee bar, an electrician, a barbershop and a detailing studio, each taken from a blank file to a finished page against the same six tells, then measured. All five are demonstration concepts for fictional businesses and say so on screen, which is the point: nothing in them is inherited from a template or borrowed from anyone. Open any of them and count.</p>
+          <p>Questions first? Text or call <a href="tel:+14074809032">(407) 480-9032</a>, or ask in the email when you send the brief. Payment starts the 48 hours, and you can cancel for a full refund before work starts.</p>
+        </div>
+
+        <ol class="steps" aria-label="The four steps">
+          <li class="step">
+            <span class="step-num" aria-hidden="true">01</span>
+            <h3>Send the brief</h3>
+            <p>Four questions about your business, below. The button opens an email in your own mail app with your answers already in it. <b>Nothing is sent until you press send.</b></p>
+          </li>
+          <li class="step">
+            <span class="step-num" aria-hidden="true">02</span>
+            <h3>Pay once</h3>
+            <p>Checkout is on Stripe's own page, so this site never sees your card. <b>Payment starts the 48 hours.</b> Cancel before work starts and every dollar comes back.</p>
+          </li>
+          <li class="step">
+            <span class="step-num" aria-hidden="true">03</span>
+            <h3>48 hours later, a link</h3>
+            <p>A finished page on a private address, written and built for your shop by me. <b>If I miss the 48 hours, you choose a refund or $100 back.</b></p>
+          </li>
+          <li class="step">
+            <span class="step-num" aria-hidden="true">04</span>
+            <h3>One round of changes</h3>
+            <p>Send them together. They go in, and the finished page is <b>yours to keep</b>, with no monthly fee and nothing you are locked into.</p>
+          </li>
+        </ol>
+
+        <div class="start-grid">
+          <div class="start-copy">
+            <h3 data-lines>Start here.</h3>
+            <p>Plain words beat polished ones. If a question does not fit your business, skip it and say so in the email.</p>
+            <div class="first-site">
+              <h3>The first one is free.</h3>
+              <p>The first Lake County or Orlando business to take this gets its page built free, for a Google review and a line on this page. <a href="tel:+14074809032">Text or call (407) 480-9032</a> to claim it.</p>
+            </div>
           </div>
-        </div>
-
-        <div class="proof-grid">
-          <article class="proof-card">
-            <a class="proof-media" href="concepts/northline-dental.html" aria-label="Open the Northline Dental concept page">
-              <img src="assets/concepts/northline-dental/hero.jpg" width="1800" height="1200" loading="lazy" alt="Bright dental treatment room used in the fictional Northline Dental concept">
-              <span>Fictional business</span>
-            </a>
-            <div class="proof-body">
-              <p class="eyebrow">Dental practice &middot; Light</p>
-              <h3>Northline Dental</h3>
-              <p>A practice page built around the two things that keep people out of the chair: not knowing what happens next and not knowing the price. A printed plan walkthrough and a comfort section that reads like a person wrote it.</p>
-              <a class="text-link" href="concepts/northline-dental.html">Open the page <span aria-hidden="true">&#8594;</span></a>
-            </div>
-          </article>
-
-          <article class="proof-card">
-            <a class="proof-media" href="concepts/fieldnote-coffee.html" aria-label="Open the Fieldnote Coffee concept page">
-              <img src="assets/concepts/fieldnote-coffee/hero.jpg" width="1800" height="1200" loading="lazy" alt="Warm plant filled cafe interior used in the fictional Fieldnote Coffee concept">
-              <span>Fictional business</span>
-            </a>
-            <div class="proof-body">
-              <p class="eyebrow">Coffee bar &middot; Dark</p>
-              <h3>Fieldnote Coffee</h3>
-              <p>A dark editorial page for a neighbourhood cafe. The menu set as a list rather than a grid of cards, and a room section that answers what customers actually ask: outlets, wifi, dogs, and where it is quiet.</p>
-              <a class="text-link" href="concepts/fieldnote-coffee.html">Open the page <span aria-hidden="true">&#8594;</span></a>
-            </div>
-          </article>
-
-          <article class="proof-card">
-            <a class="proof-media" href="concepts/kestrel-electric.html" aria-label="Open the Kestrel Electric concept page">
-              <img src="assets/concepts/kestrel-electric/hero.jpg" width="1800" height="1200" loading="lazy" alt="An electrician checking a residential breaker panel, used in the fictional Kestrel Electric concept">
-              <span>Fictional business</span>
-            </a>
-            <div class="proof-body">
-              <p class="eyebrow">Electrician &middot; Light</p>
-              <h3>Kestrel Electric</h3>
-              <p>A trade page for a one van residential electrician. The quote before the wall is opened, a marquee of the real towns served, and four kinds of job laid out so a homeowner knows which one they have.</p>
-              <a class="text-link" href="concepts/kestrel-electric.html">Open the page <span aria-hidden="true">&#8594;</span></a>
-            </div>
-          </article>
-
-          <article class="proof-card">
-            <a class="proof-media" href="concepts/hollis-barbershop.html" aria-label="Open the Hollis Barbershop concept page">
-              <img src="assets/concepts/hollis-barbershop/hero.jpg" width="1800" height="1200" loading="lazy" alt="Green leather barber chairs on a checkerboard floor, used in the fictional Hollis Barbershop concept">
-              <span>Fictional business</span>
-            </a>
-            <div class="proof-body">
-              <p class="eyebrow">Barbershop &middot; Dark</p>
-              <h3>Hollis Barbershop</h3>
-              <p>A one chair shop with the prices set as a table, timed honestly, and house rules written the way the barber would say them. Dark ground, cream type, one oxblood accent.</p>
-              <a class="text-link" href="concepts/hollis-barbershop.html">Open the page <span aria-hidden="true">&#8594;</span></a>
-            </div>
-          </article>
-
-          <article class="proof-card">
-            <a class="proof-media" href="concepts/blackwater-detailing.html" aria-label="Open the Blackwater Detailing concept page">
-              <img src="assets/concepts/blackwater-detailing/wheel.jpg" width="1600" height="1065" loading="lazy" alt="A black alloy wheel covered in foam with a yellow brake caliper showing through, used in the fictional Blackwater Detailing concept">
-              <span>Fictional business</span>
-            </a>
-            <div class="proof-body">
-              <p class="eyebrow">Detailing &middot; Dark</p>
-              <h3>Blackwater Detailing</h3>
-              <p>A paint correction studio with the footage doing the talking: a hand on black paint behind a headline the size of the screen, three jobs priced before the car moves, and a coating section shot through water. Near black ground, cream type, one cold accent.</p>
-              <a class="text-link" href="concepts/blackwater-detailing.html">Open the page <span aria-hidden="true">&#8594;</span></a>
-            </div>
-          </article>
-        </div>
-
-      </div>
-          <div class="shell first-site">
-        <h3>The first one is free.</h3>
-        <p>The first Lake County or Orlando business to take this gets its page built free, for a Google review and a line on this page. <a href="tel:+14074809032">Text or call (407) 480-9032</a> to claim it.</p>
-      </div>
-    </section>
-
-    <!-- ============================================================
-         4. START: THE BRIEF AND THE PAYMENT
-         ============================================================ -->
-    <section class="section shell" id="start" aria-labelledby="start-title">
-      <div class="start-grid">
-        <div class="start-copy">
-          <p class="eyebrow">How it works</p>
-          <h2 id="start-title">Answer four questions. Pay once. 48 hours later, your page.</h2>
-          <p>Questions first? Text or call <a href="tel:+14074809032">(407) 480-9032</a>, or ask in the email when you send the brief. The brief is short on purpose: the four things a page needs to be about you rather than about websites. Payment starts the 48 hours, and you can cancel for a full refund before work starts.</p>
-
-          <ol class="next-steps">
-            <li><b>Send the brief.</b> The button opens an email in your own mail app with your answers already in it. Nothing is sent until you press send.</li>
-            <li><b>Pay the founding price.</b> Checkout is on Stripe's own page. This site never sees your card.</li>
-            <li><b>48 hours later, a link.</b> A finished page on a private address, with the receipt of measurements beside it.</li>
-            <li><b>One round of changes.</b> Send them together. They go in, and the finished page is yours to keep, with no monthly fee and nothing you are locked into.</li>
-          </ol>
-        </div>
-
-        <div class="start-right">
 
           <div class="intake" id="intake" aria-label="Site brief">
-          <div class="intake-head">
-            <span>The brief</span>
-            <span>Four questions</span>
+            <div class="intake-head">
+              <h3>The brief</h3>
+              <p class="eyebrow">Four questions</p>
+            </div>
+            <div class="field">
+              <label for="business">The business, in a sentence or two <small>What you do, where, and for whom.</small></label>
+              <textarea id="business" name="business" rows="3" placeholder="Mobile dog grooming in Winter Park and Maitland. Mostly regulars, mostly anxious dogs."></textarea>
+            </div>
+            <div class="field">
+              <label for="visitor">Who the page is for <small>The person you most want reading it. Be narrow.</small></label>
+              <input id="visitor" name="visitor" type="text" placeholder="A dog owner who just moved to the area and is searching on their phone">
+            </div>
+            <div class="field">
+              <label for="action">The one thing it must make them do <small>Call, book, email, visit, order. Pick one.</small></label>
+              <input id="action" name="action" type="text" placeholder="Text the number to book a first groom">
+            </div>
+            <div class="field">
+              <label for="links">Links to anything that already exists <small>A current site, a Google listing, Instagram, a menu PDF, photos. Anything.</small></label>
+              <textarea id="links" name="links" rows="2" placeholder="https://"></textarea>
+            </div>
+            <div class="field">
+              <label for="reply">Your email <small>So the finished link has somewhere to go.</small></label>
+              <input id="reply" name="reply" type="email" autocomplete="email" placeholder="you@yourbusiness.com">
+            </div>
+            <div class="intake-actions">
+              <button class="button button-ember" id="send-brief" type="button">Send the brief</button>
+              <!-- Stripe Payment Link plink_1UDtE15yrxexwnwnIdWutKOY: limited to ten payments, then shows the sold out message. Swap for the $850 link after the tenth. -->
+              <a class="button button-ghost" id="pay-link" href="https://buy.stripe.com/28E9AM9gbdr3a2L1SL4sE00" target="_blank" rel="noopener noreferrer">Pay $495 on Stripe</a>
+            </div>
+            <p class="intake-status" id="intake-status" role="status" aria-live="polite"></p>
+            <p class="intake-note">Cancel before work starts for a full refund. The brief goes through your own email app and the payment through Stripe. This page loads no third party script and stores nothing you type. Prefer to write it yourself? <a href="mailto:caleb@actuallycoded.com?subject=Site%20brief">caleb@actuallycoded.com</a>.</p>
           </div>
-
-          <div class="field">
-            <label for="business">The business, in a sentence or two</label>
-            <small>What you do, where, and for whom. Plain words beat polished ones.</small>
-            <textarea id="business" name="business" rows="3" placeholder="Mobile dog grooming in Winter Park and Maitland. Mostly regulars, mostly anxious dogs."></textarea>
-          </div>
-
-          <div class="field">
-            <label for="visitor">Who the page is for</label>
-            <small>The person you most want reading it. Be narrow.</small>
-            <input id="visitor" name="visitor" type="text" placeholder="A dog owner who just moved to the area and is searching on their phone">
-          </div>
-
-          <div class="field">
-            <label for="action">The one thing it must make them do</label>
-            <small>Call, book, email, visit, order. Pick one.</small>
-            <input id="action" name="action" type="text" placeholder="Text the number to book a first groom">
-          </div>
-
-          <div class="field">
-            <label for="links">Links to anything that already exists</label>
-            <small>A current site, a Google listing, Instagram, a menu PDF, photos. Anything.</small>
-            <textarea id="links" name="links" rows="2" placeholder="https://"></textarea>
-          </div>
-
-          <div class="field">
-            <label for="reply">Your email</label>
-            <small>So the finished link has somewhere to go.</small>
-            <input id="reply" name="reply" type="email" autocomplete="email" placeholder="you@yourbusiness.com">
-          </div>
-
-          <div class="intake-actions">
-            <button class="button button-accent" id="send-brief" type="button">Send the brief</button>
-            <!-- Stripe Payment Link plink_1UDtE15yrxexwnwnIdWutKOY: limited to ten payments, then shows the sold out message. Swap for the $850 link after the tenth. -->
-            <a class="button button-outline" id="pay-link" href="https://buy.stripe.com/28E9AM9gbdr3a2L1SL4sE00" target="_blank" rel="noopener noreferrer">Pay the founding price, $495</a>
-          <p class="assurance">Cancel before work starts for a full refund. If I miss 48 hours, you choose a refund or $100 back.</p>
-          </div>
-          <p class="intake-status" id="intake-status" role="status" aria-live="polite"></p>
-          <p class="intake-note">The brief goes through your own email app and the payment through Stripe. This page loads no third party script and stores nothing you type. Prefer to write it yourself? <a href="mailto:caleb@actuallycoded.com?subject=Site%20brief">caleb@actuallycoded.com</a>.</p>
         </div>
+      </div>
+    </section>
+
+    <section class="close" id="close" data-theme="dark" aria-labelledby="close-title">
+      <div class="shell">
+        <p class="eyebrow">Ready?</p>
+        <h2 id="close-title" data-lines>Your page, <b>48 hours</b> from now.</h2>
+        <div class="close-row">
+          <div class="close-contact" data-rise-group>
+            <a class="big-tel" href="tel:+14074809032" data-rise>(407) 480-9032</a>
+            <a href="mailto:caleb@actuallycoded.com" data-rise>caleb@actuallycoded.com</a>
+            <p class="muted" data-rise>Text, call or email. I answer my own phone.</p>
+          </div>
+          <div class="close-actions" data-rise>
+            <a class="button button-ember" href="#start">Start for $495</a>
+            <a class="button button-ghost" href="standard.html">The standard</a>
+          </div>
         </div>
       </div>
     </section>
@@ -403,15 +289,16 @@
   <footer class="site-footer">
     <div class="footer-main shell">
       <a class="brand" href="#top" aria-label="actuallycoded home">
-        <svg class="brand-mark" viewBox="0 0 100 100" aria-hidden="true"><path class="mark-tile" d="M0 0H100V68L68 100H0Z"/><defs><pattern id="ac-grain-2" patternUnits="userSpaceOnUse" width="20" height="20"><rect x="2" y="3" width="4" height="4" fill="#fff3d0" fill-opacity=".45"/><rect x="13" y="1" width="2" height="2" fill="#fff3d0" fill-opacity=".55"/><rect x="15" y="9" width="4" height="4" fill="#7a3400" fill-opacity=".2"/><rect x="7" y="14" width="2" height="2" fill="#7a3400" fill-opacity=".3"/><rect x="10" y="8" width="3" height="3" fill="#ffd48a" fill-opacity=".4"/><rect x="3" y="16" width="3" height="3" fill="#ffe1a6" fill-opacity=".3"/></pattern></defs><path d="M0 0H100V68L68 100H0Z" fill="url(#ac-grain-2)"/><polygon points="0,0 100,0 100,16 0,44" fill="#ffffff" fill-opacity=".09"/><g class="mark-glyphs"><rect x="18" y="22" width="28" height="12"/><rect x="34" y="22" width="12" height="56"/><rect x="8" y="44" width="38" height="12"/><rect x="8" y="44" width="12" height="34"/><rect x="8" y="66" width="38" height="12"/><rect x="56" y="22" width="30" height="12"/><rect x="56" y="22" width="12" height="56"/><rect x="56" y="66" width="30" height="12"/></g></svg>
-        <span class="brand-word">actually<b>.coded</b></span>
-      </a>
+      <svg class="brand-mark" viewBox="0 0 100 100" aria-hidden="true"><path class="mark-tile" d="M0 0H100V68L68 100H0Z"/><defs><pattern id="ac-grain-1" patternUnits="userSpaceOnUse" width="20" height="20"><rect x="2" y="3" width="4" height="4" fill="#fff3d0" fill-opacity=".45"/><rect x="13" y="1" width="2" height="2" fill="#fff3d0" fill-opacity=".55"/><rect x="15" y="9" width="4" height="4" fill="#7a3400" fill-opacity=".2"/><rect x="7" y="14" width="2" height="2" fill="#7a3400" fill-opacity=".3"/><rect x="10" y="8" width="3" height="3" fill="#ffd48a" fill-opacity=".4"/><rect x="3" y="16" width="3" height="3" fill="#ffe1a6" fill-opacity=".3"/></pattern></defs><path d="M0 0H100V68L68 100H0Z" fill="url(#ac-grain-1)"/><polygon points="0,0 100,0 100,16 0,44" fill="#ffffff" fill-opacity=".09"/><g class="mark-glyphs"><rect x="18" y="22" width="28" height="12"/><rect x="34" y="22" width="12" height="56"/><rect x="8" y="44" width="38" height="12"/><rect x="8" y="44" width="12" height="34"/><rect x="8" y="66" width="38" height="12"/><rect x="56" y="22" width="30" height="12"/><rect x="56" y="22" width="12" height="56"/><rect x="56" y="66" width="30" height="12"/></g></svg>
+      <span class="brand-word">actually<b>.coded</b></span>
+    </a>
       <div class="footer-contact">
         <a href="mailto:caleb@actuallycoded.com">caleb@actuallycoded.com</a><br>
         <a href="tel:+14074809032">(407) 480-9032</a><br>
         Orlando, Florida
       </div>
       <nav class="footer-links" aria-label="Legal">
+        <a href="standard.html">The standard</a>
         <a href="privacy.html">Privacy</a>
         <a href="terms.html">Terms</a>
         <a href="accessibility.html">Accessibility</a>
@@ -422,8 +309,5 @@
       <p>&copy; <span id="year"></span> actuallycoded. The concept pages linked above are fictional businesses built to demonstrate the standard, and say so on every screen.</p>
     </div>
   </footer>
-
-  <script src="vendor/lenis.min.js"></script>
-  <script src="script.js"></script>
 </body>
 </html>

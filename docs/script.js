@@ -918,3 +918,21 @@
     if (items.every(function (it) { return it.isDone(); })) window.clearInterval(poll);
   }, 600);
 })();
+
+/* The fire hero drifts at a third of the scroll speed, as on the Emberline page. */
+(function () {
+  "use strict";
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  var hero = document.querySelector(".hero-fire");
+  var photo = hero && (hero.querySelector(".hero-video") || hero.querySelector(".hero-photo"));
+  if (!hero || !photo) return;
+  var drifting = false;
+  var drift = function () {
+    var y = window.scrollY || 0;
+    var t = Math.min(1, Math.max(0, y / (hero.offsetHeight || 1)));
+    photo.style.setProperty("--drift", (t * 18).toFixed(2) + "%");
+    drifting = false;
+  };
+  window.addEventListener("scroll", function () { if (drifting) return; drifting = true; window.requestAnimationFrame(drift); }, { passive: true });
+  drift();
+})();
