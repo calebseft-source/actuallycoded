@@ -51,17 +51,6 @@
     spied.forEach(function (s) { spy.observe(s); });
   }
 
-  /* ---- Chapter colour: the body takes the theme of the section under the middle of the screen ---- */
-  var chapters = document.querySelectorAll("[data-theme]");
-  if (chapters.length && "IntersectionObserver" in window) {
-    var chapterWatch = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) document.body.setAttribute("data-theme", entry.target.getAttribute("data-theme"));
-      });
-    }, { rootMargin: "-40% 0px -58% 0px" });
-    chapters.forEach(function (c) { chapterWatch.observe(c); });
-  }
-
   /* ---- The fire: play when it can, stop when off screen, and a real pause control ---- */
   var hero = document.querySelector(".hero");
   var video = document.querySelector(".hero-video");
@@ -178,9 +167,10 @@
   /* The fire settles in over nine seconds and drifts at a third of the scroll. */
   var media = document.querySelector(".hero-media");
   if (media) {
-    gsap.fromTo(media, { scale: 1.08 }, { scale: 1, duration: 9, ease: "power2.out" });
+    var mediaInner = media.querySelectorAll(".hero-still, .hero-video");
+    gsap.fromTo(mediaInner, { scale: 1.04 }, { scale: 1, duration: 9, ease: "power2.out" });
     gsap.to(media, {
-      yPercent: 16, ease: "none",
+      yPercent: finePointer ? 8 : 14, ease: "none",
       scrollTrigger: { trigger: hero, start: "top top", end: "bottom top", scrub: true }
     });
   }
