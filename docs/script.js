@@ -327,7 +327,7 @@
   var SPECS = [
     { id: "hero", rate: 2.0, pause: [20, 40], failsafe: 14000, tail: 9, atLoad: true, after: [
         { lang: "css", lines: [
-          "/* styles.css */", ":root {", "  --bg: #0b0a08;", "  --text: #f1ebe0;", "  --accent: #f5891c;",
+          "/* styles.css */", ":root {", "  --bg: #0b0b0b;", "  --text: #f5f5f5;", "  --accent: #f5f5f5;",
           "  --display: \"Big Shoulders\";", "  --font: \"Newsreader\";", "}",
           ".button { border-radius: 0; background: var(--accent); }", "* { border-radius: 0; }",
           "em, i { font-style: normal; }", "@font-face { font-family: \"Newsreader\"; src: url(fonts/newsreader-latin.woff2); }"

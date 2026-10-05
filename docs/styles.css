@@ -47,18 +47,19 @@
 }
 
 :root {
-  --bg: #0b0a08;
-  --bg-deep: #060504;
-  --surface: #12100c;
-  --surface-2: #191610;
-  --line: #2b2720;
-  --line-bright: #47402f;
-  --text: #f1ebe0;
-  --muted: #a69d8c;
-  --muted-strong: #cdc4b3;
-  --accent: #f5891c;
-  --accent-hover: #ff9c3a;
-  --accent-ink: #1b1200;
+  /* Monochrome since 2026-10-05, matching home.css: the accent slots carry white. */
+  --bg: #0b0b0b;
+  --bg-deep: #060606;
+  --surface: #141414;
+  --surface-2: #1d1d1d;
+  --line: #262626;
+  --line-bright: #3f3f3f;
+  --text: #f5f5f5;
+  --muted: #9a9a9a;
+  --muted-strong: #c9c9c9;
+  --accent: #f5f5f5;
+  --accent-hover: #ffffff;
+  --accent-ink: #0b0b0b;
   --display: "Big Shoulders", "Arial Narrow", Impact, sans-serif;
   --font: "Newsreader", Georgia, "Times New Roman", serif;
   --shell: 1160px;
@@ -205,6 +206,7 @@ a { color: inherit; }
 }
 .brand-mark .mark-tile { fill: var(--accent); }
 .brand-mark .mark-glyphs { fill: var(--accent-ink); }
+.brand-mark path:not(.mark-tile), .brand-mark polygon { display: none; }
 .brand-word {
   font-family: var(--display);
   font-size: 1.62rem;

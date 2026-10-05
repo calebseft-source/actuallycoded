@@ -23,3 +23,14 @@ at weight 700 and letter spacing minus 0.02em, the header's exact styling. The i
 the profile picture are tile only and did not change. The Facebook cover uploaded
 earlier on 2026-09-09 carries the old wordmark and needs replacing with this one.
 - `youtube-banner-2048x1152.png` the wordmark centred inside the 1235 by 338 safe area. YouTube channel banner.
+
+## Re rendered 2026-10-05: monochrome
+
+The site went black and white on Caleb's call, so every file here was re rendered by
+`brand/render.py` (Pillow plus fontTools, the face unpacked from the repo's woff2 at weight
+700 and optical size 24): a white tile `#f5f5f5` with black glyphs on the `#0b0b0b` ground,
+no grain, no sheen, `actually` in grey `#c9c9c9` and `.coded` in white. Run `python brand/render.py`
+from the repo root to regenerate. Still to upload from a logged in machine: the Stripe
+checkout icon and logo (and the brand colour `#0b0b0b` with accent `#f5f5f5` in Stripe's
+branding settings), the Facebook and Instagram profile pictures, the Facebook cover, the
+YouTube banner, and the TikTok profile picture.
