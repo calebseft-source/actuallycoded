@@ -95,17 +95,6 @@
     }
   }
 
-  /* ---- Marquee pause (WCAG 2.2.2) ---- */
-  var marquee = document.querySelector(".marquee");
-  var marqueePause = document.querySelector(".marquee-pause");
-  if (marquee && marqueePause) {
-    marqueePause.addEventListener("click", function () {
-      var paused = marquee.classList.toggle("is-paused");
-      marqueePause.setAttribute("aria-pressed", String(paused));
-      marqueePause.textContent = paused ? "Play" : "Pause";
-    });
-  }
-
   /* ---- The brief: a mailto built from the four answers. Nothing leaves
      this page until the visitor presses send in their own mail app. ---- */
   var sendButton = document.querySelector("#send-brief");

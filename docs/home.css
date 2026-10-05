@@ -238,19 +238,6 @@ p + p { margin-top: 1em; }
   .hero-scroll { display: none; }
 }
 
-/* ---- Marquee ---- */
-.marquee { position: relative; overflow: hidden; border-top: 1px solid var(--line-dark); border-bottom: 1px solid var(--line-dark); background: var(--ground); color: var(--bone); }
-.marquee-track { display: flex; width: max-content; animation: marquee 38s linear infinite; }
-.marquee.is-paused .marquee-track { animation-play-state: paused; }
-@media (hover: hover) and (pointer: fine) { .marquee:hover .marquee-track { animation-play-state: paused; } }
-.marquee-track ul { display: flex; gap: 0; margin: 0; padding: 0; list-style: none; }
-.marquee-track li { display: flex; align-items: center; gap: 1.4rem; padding: 0.95rem 0.7rem 0.95rem 1.4rem; font-family: var(--display); font-variation-settings: "opsz" 40; font-weight: 700; font-size: clamp(1.3rem, 1.1rem + 1vw, 1.9rem); letter-spacing: 0.02em; text-transform: uppercase; white-space: nowrap; }
-.marquee-track li::after { content: ""; width: 8px; height: 8px; background: var(--ember); }
-@keyframes marquee { to { transform: translateX(-50%); } }
-.marquee-pause { position: absolute; right: 0; top: 0; bottom: 0; z-index: 2; padding: 0 0.9rem; background: var(--ground); color: var(--bone-3); border: 0; border-left: 1px solid var(--line-dark); cursor: pointer; font-family: var(--display); font-variation-settings: "opsz" 12; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; }
-.marquee-pause:hover { color: var(--bone); }
-@media (prefers-reduced-motion: reduce) { .marquee-track { animation: none; } .marquee-pause { display: none; } }
-
 /* ---- Sections ---- */
 .section { padding: clamp(4.5rem, 10vw, 9rem) 0; }
 .section-head { display: grid; gap: 1.2rem; margin-bottom: clamp(2rem, 5vw, 3.6rem); }
@@ -404,7 +391,7 @@ p + p { margin-top: 1em; }
 html.motion [data-rise], html.motion [data-lines] { visibility: hidden; }
 html.motion .tile img { opacity: 0; }
 @media (prefers-reduced-motion: reduce) {
-  .hero-scroll span, .marquee-track { animation: none; }
+  .hero-scroll span { animation: none; }
   .tile img { transition: none; }
   body { transition: none; }
 }
